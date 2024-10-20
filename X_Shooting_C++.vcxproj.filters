@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{799e92ab-b625-4fe9-9c41-fed1821518f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Schoollib">
+      <UniqueIdentifier>{69866ab7-94b9-41c1-8bbb-5373629f5bb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameManager">
+      <UniqueIdentifier>{22ecf098-5bd7-462d-89ab-ec1c97a0ee6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\InputManager">
+      <UniqueIdentifier>{063944f5-18c3-4933-b3ef-4646dd190eae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース">
+      <UniqueIdentifier>{a67decee-1dc1-4916-832e-15be78f6e028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="学校のソース">
+      <UniqueIdentifier>{c1e40ec4-054b-4648-b9dc-ed460360ab7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Status">
+      <UniqueIdentifier>{a5c157a6-84cf-4eb0-b62b-f81d5c07efc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Geometry">
+      <UniqueIdentifier>{ef913158-ce32-48aa-ba6c-dad3e49a2b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Diコンテナ">
+      <UniqueIdentifier>{56c9ba8c-5027-4036-bf77-d5121d995026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapManager">
+      <UniqueIdentifier>{4fbaadfa-9bd1-4f9b-9cdc-80aa4fdcf744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\ResouceManager">
+      <UniqueIdentifier>{373e5ff8-0158-4dda-b254-3afc41f5019d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース\TestScene">
+      <UniqueIdentifier>{99a84222-210d-46eb-ac52-5f37fbc2ff8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース\TestInput">
+      <UniqueIdentifier>{2d416e48-5816-4ca3-9b53-79cf433cf171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース\TestGameManager">
+      <UniqueIdentifier>{ac8b4fad-dda3-456d-a98f-8e9869b266e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\GameScene">
+      <UniqueIdentifier>{f9c409df-8f22-4457-ad2f-d6c214be7df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\TitleScene">
+      <UniqueIdentifier>{6cd62552-b3f2-4192-93f2-0adc0b91b20c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\gameTexture">
+      <UniqueIdentifier>{35048e9e-25aa-4cb9-b0f5-8e836794c9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\TextureData">
+      <UniqueIdentifier>{3e7ed0e7-5480-4803-bd6d-000866139d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\CSVData">
+      <UniqueIdentifier>{d7195718-0d20-4d87-a1b4-3580002be99e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース\TestMapManager">
+      <UniqueIdentifier>{e9ce3ecb-22d8-4411-bbb4-59ec8b01e17c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity">
+      <UniqueIdentifier>{07bd6078-e2eb-4d71-89a2-c3cc6a7184c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys">
+      <UniqueIdentifier>{ebcb6a3b-7baf-4646-a787-7b875266f919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\EnemysManager">
+      <UniqueIdentifier>{fcc4db49-2ab7-4257-a947-0fe152145029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\BaseClass">
+      <UniqueIdentifier>{f10206f7-14a6-4437-998f-597b1c96afe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys">
+      <UniqueIdentifier>{1a5137b8-2728-467d-b2fb-6967fae46bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\GroundEnemys">
+      <UniqueIdentifier>{66240d23-6c64-4e71-97ec-f0dd4b6d0beb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneBase.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>ソース ファイル\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager\IInputManager.h">
+      <Filter>ソース ファイル\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager\InputManager.h">
+      <Filter>ソース ファイル\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SchooLlibrary\conioex.h">
+      <Filter>学校のソース</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>ソース ファイル\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\IGameManager.h">
+      <Filter>ソース ファイル\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestInputManager.h">
+      <Filter>TESTソース\TestInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestGameManager.h">
+      <Filter>TESTソース\TestGameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\CsvDataManager.h">
+      <Filter>リソース ファイル\CSVData</Filter>
+    </ClInclude>
+    <ClInclude Include="DIContainer\DIContainer.h">
+      <Filter>Diコンテナ</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\TextureDataManager.h">
+      <Filter>リソース ファイル\TextureData</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager\MapManager.h">
+      <Filter>ソース ファイル\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager\IMapManager.h">
+      <Filter>ソース ファイル\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>リソース ファイル\ResouceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestScene.h">
+      <Filter>TESTソース\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>ソース ファイル\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>ソース ファイル\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Texture\GameTextureManager.h">
+      <Filter>ソース ファイル\gameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Texture\GameTexture.h">
+      <Filter>ソース ファイル\gameTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestMapManager.h">
+      <Filter>TESTソース\TestMapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\IEnemysManager.h">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\EnemysManager.h">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\EnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>ソース ファイル\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager\InputManager.cpp">
+      <Filter>ソース ファイル\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SchooLlibrary\conioex.cpp">
+      <Filter>学校のソース</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="X_Shooting_C++\Geometry.cpp">
+      <Filter>ソース ファイル\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestInputManager.cpp">
+      <Filter>TESTソース\TestInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestGameManager.cpp">
+      <Filter>TESTソース\TestGameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\CsvDataManager.cpp">
+      <Filter>リソース ファイル\CSVData</Filter>
+    </ClCompile>
+    <ClCompile Include="DIContainer\DIContainer.cpp">
+      <Filter>Diコンテナ</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\TextureDataManager.cpp">
+      <Filter>リソース ファイル\TextureData</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager\MapManager.cpp">
+      <Filter>ソース ファイル\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>リソース ファイル\ResouceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestScene.cpp">
+      <Filter>TESTソース\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>ソース ファイル\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>ソース ファイル\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Texture\GameTextureManager.cpp">
+      <Filter>ソース ファイル\gameTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestMapManager.cpp">
+      <Filter>TESTソース\TestMapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\EnemysManager.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
