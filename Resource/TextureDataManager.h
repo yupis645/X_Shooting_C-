@@ -12,25 +12,29 @@ public:
     TextureDataManager() {
     }
 
-    bool LoadTextureData(TextureType type, const UseTextureDataConfig& config) {
-        // マップに存在するかチェック
-      //  if (pngdata_.find(type) != pngdata_.end()) {
-            pngdata_[type] = config;  // データを更新
-            return true;  // 成功
-     //   }
-        //else {
-        //    return false;  // 失敗: typeが存在しない
-        //}
+    void SetTexConfig(TextureType type, const TextureConfig& config) {
+        texdatacongfig[type] = config;  // データを更新
+    }
+    const TextureConfig& GetTextureConfig(TextureType type) const {
+        return texdatacongfig.at(type);
     }
 
-    // テクスチャデータの取得
-    const UseTextureDataConfig& GetTextureData(TextureType type) const {
-        return pngdata_.at(type);  // 存在しない場合は例外をスロー
+    void SetTexPath(TextureType type, const std::wstring& path) {
+        texturepath[type] = path;  // データを更新
+    }
+    const std::wstring& GetTexturePath(TextureType type) const {
+        return texturepath.at(type);
+    }
+
+
+    const wchar_t* WStringToConstWChar(const std::wstring& str) {
+        return str.c_str();
     }
 
 private:
-    std::map<TextureType, UseTextureDataConfig> pngdata_;
+    std::map<TextureType, TextureConfig> texdatacongfig;
+    std::map<TextureType, std::wstring> texturepath;
 };
 
-#endif //TEXTUREMANAGER_H
 
+#endif //TEXTUREMANAGER_H

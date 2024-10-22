@@ -3,10 +3,10 @@
 //=======================================================================================
 //pngデータとサイズなどの情報を受けとり、画像をスライスしてメンバ変数に格納する
 //=======================================================================================
-bool GameTextureManager::TextureInport( TextureType type , UseTextureDataConfig config) {
+bool GameTextureManager::CreateGameTexture( TextureType type, const std::wstring& path ,TextureConfig config) {
     // textures_ に type に対応する GameTexture が存在しない場合、新たに作成して追加する
     if (textures_.find(type) == textures_.end()) {
-        textures_[type] = std::make_shared<GameTexture>(config);
+        textures_[type] = std::make_shared<GameTexture>(path,config);        //画像データをインスタンス化し、データを渡す
         return false;    // 成功
     }
 
@@ -14,9 +14,8 @@ bool GameTextureManager::TextureInport( TextureType type , UseTextureDataConfig 
 }
 
 //=======================================================================================
-// 任意の GameTexture を描画する共通関数
+// TextureTypeをキーに任意の画像を保存しているGameTextureを返す
 //=======================================================================================
-
 std::shared_ptr<GameTexture> GameTextureManager::GetTexture(TextureType type) {
     // まず指定されたキーをmapから探す
     auto it = textures_.find(type);
@@ -30,20 +29,4 @@ std::shared_ptr<GameTexture> GameTextureManager::GetTexture(TextureType type) {
     }
 }
 
-//===============================================================================================
-//画像のロード
-//===============================================================================================
-bool GameTextureManager::TextureLoad(TextureType type, UseTextureDataConfig config)
-{
-    textures_.at(type)->Load(config);
 
-    return false;
-}
-
-//===============================================================================================
-// 指定したインデックスの画像を描画
-//===============================================================================================
-void GameTextureManager::TextureDraw(TextureType type, int index, int x, int y)
-{
-    textures_.at(type)->Draw(index,x,y);
-}

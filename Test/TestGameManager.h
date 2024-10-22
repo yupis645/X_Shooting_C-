@@ -1,55 +1,41 @@
 #ifndef TESTGAMEMANAGER_H
 #define TESTGAMEMANAGER_H
 
-#include "Game.h"
-#include "di.hpp"
+//----------------------------------------------------------------------------------------------------
+//                              テスト用GameManager
+// 
+// ゲーム全体を管理するクラスのテストクラス
+// init(初期化),input(入力),update(更新),draw(描画)のライフサイクルを管理する
+//----------------------------------------------------------------------------------------------------
+
 #include "IGameManager.h"
 #include "SceneBase.h"
-#include "TitleScene.h"
-#include "GameScene.h"
 #include "IInputManager.h"
 #include "DIContainer.h"
 #include "ResourceManager.h"
-#include "common.h"
+#include "RendererManager.h"
+#include "SceneManager.h"
 
-#include "TestScene.h"
 
 class TestGameManager : public IGameManager{
 public:
-    TestGameManager(std::shared_ptr<DIContainer> con)
-        : container_(con),
-        scenestatus_(con->Create<Scenestatus>()),
-        gamestatus_(con->Create<GameStatus>()),
-        resoucemanager_(con->Create<ResourceManager>()),
-        inputmanager_(con->Create<IInputManager>())
-    {
-        currentscene_ = std::make_shared<TestScene>(con,scenestatus_, gamestatus_, resoucemanager_,inputmanager_);
-    }
+    TestGameManager(std::shared_ptr<DIContainer> con);      //コンストラクタ 
 
-    int Init()override;
+    int Init()override;         //初期化
+    int Input()override;        //入力
+    int GameLoop() override;      //更新
 
-    int Input()override;
+    int End()override;          //終了処理
 
-    // シーンの更新と描画
-    int Update() override;
-
-    int Draw()override;
-
-    // シーンの終了処理
-    int End()override;
-
-    //デストラクタ
-    ~TestGameManager() {}
+    ~TestGameManager() {}       //デストラクタ
 
 private:
-    std::shared_ptr<SceneBase> currentscene_;  // 現在のシーン
-    std::shared_ptr<GameStatus> gamestatus_;  // 現在のシーン
-    std::shared_ptr<Scenestatus> scenestatus_;  // 現在のシーン
-    std::shared_ptr<ResourceManager> resoucemanager_;  // 現在のシーン
-    std::shared_ptr<IInputManager> inputmanager_;  // 現在のシーン
-    std::shared_ptr<DIContainer> container_;  // DIContainer のメンバ変数
-
-    //int ChangeScene(std::shared_ptr<SceneBase> newScene);
+    std::shared_ptr<SceneManager> scenemanager_;           // 現在の使用中のシーン
+    std::shared_ptr<GameStatus> gamestatus_;            // ゲームのスコアなどゲーム全体で管理するデータ
+    std::shared_ptr<ResourceManager> resoucemanager_;   // 描画に使う画像やCsvなどを保管する食らうs
+    std::shared_ptr<IInputManager> inputmanager_;       // 入力を管理するクラス
+    std::shared_ptr<RendererManager> renderermanager_;       // 入力を管理するクラス
+    std::shared_ptr<DIContainer> container_;            // DIContainer のメンバ変数
 };
 
 #endif ///ESTGAMEMANAGER_H

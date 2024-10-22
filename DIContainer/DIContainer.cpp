@@ -1,54 +1,37 @@
+
+//----------------------------------------------------------------------------------------------------
+//                              DIコンテナ
+// 
+// 依存性を解消するためのDIコンテナ
+// コンストラクタで登録とバインドを行う
+//IGameManager,IInputManager,IMapManager の3つのクラスをテストクラスに変更が可能
+// MapManagerのみスコープが di::unique(範囲を限定) に設定。その他は di::singleton(全体を通して一つ) に設定
+//----------------------------------------------------------------------------------------------------
+
 #include "DIContainer.h"
-
-class GameManager;
-class ResourceManager;
-class MapManager;
-class InputManager;
-
-class TestGameManager;
-class TestInputManager;
-
 #include "di.hpp"
 
 #include "GameManager.h"
-#include "InputManager.h"
 #include "MapManager.h"
+#include "InputManager.h"
 
 
 // コンストラクタで DI コンテナを生成して保持
-/*DIContainer() {
-injector = std::make_shared < di::injector < std::shared_ptr<Scenestatus>, std::shared_ptr<GameStatus>,
-std::shared_ptr<IPlayer>, std::shared_ptr<IEnemysManager>, std::shared_ptr<IBulletManager>, std::shared_ptr<IMapManager>,
-std::shared_ptr<IInputManager>>>(
-di::make_injector(
-di::bind<Scenestatus>().to(std::make_shared<Scenestatus>()),
-di::bind<GameStatus>().to(std::make_shared<GameStatus>()),
-di::bind<IPlayer>().to<Player>(),
-di::bind<IEnemysManager>().to<EnemysManager>(),
-di::bind<IBulletManager>().to<BulletsManager>(),
-di::bind<IMapManager>().to<MapManager>(),
-di::bind<IInputManager>().to<InputManager>()
-)
-);
-}*/
-
 DIContainer::DIContainer() {
     injector = std::make_shared <di::injector<
         std::shared_ptr<IGameManager>,
-        std::shared_ptr<Scenestatus>,
         std::shared_ptr<GameStatus>,
-        std::shared_ptr<ResourceManager>, 
-        std::shared_ptr<IMapManager>, 
+        std::shared_ptr<ResourceManager>,
+        std::shared_ptr<IMapManager>,
+        std::shared_ptr<RendererManager>,
         std::shared_ptr<IInputManager>>>(
             di::make_injector(
-                di::bind<IGameManager>().to<GameManager>().in(di::singleton),
-                di::bind<Scenestatus>().to(std::make_shared<Scenestatus>()).in(di::singleton),
-                di::bind<GameStatus>().to(std::make_shared<GameStatus>()).in(di::singleton),
-                di::bind<ResourceManager>().to(std::make_shared<ResourceManager>()).in(di::singleton),
-                di::bind<IMapManager>().to<MapManager>().in(di::unique),
-                di::bind<IInputManager>().to<InputManager>().in(di::singleton)
+                di::bind<IGameManager>().in(di::singleton).to<GameManager>(),
+                di::bind<GameStatus>().in(di::singleton).to<GameStatus>(),
+                di::bind<ResourceManager>().in(di::singleton).to<ResourceManager>(),
+                di::bind<IMapManager>().in(di::unique).to<MapManager>(),
+                di::bind<RendererManager>().in(di::singleton).to<RendererManager>(),
+                di::bind<IInputManager>().in(di::singleton).to<InputManager>()
             )
         );
-
-
 }

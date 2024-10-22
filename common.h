@@ -60,6 +60,11 @@ enum SceneID {
 	APP_EXIT = 999 // アプリ終了
 };
 
+namespace SceneConfig {
+	constexpr int FRAME_COUNT_VALUE = 1;		//フレームカウントする際に1フレームで加算する値
+
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -74,6 +79,39 @@ namespace MapConfig {
 	constexpr int CHIP_SIZE = 32;			//マップチップのサイズ(正方形)
 	constexpr int SCROLL_SPEED = 1;		//スクロールのスピード
 	constexpr int MAX_STAGE = 3;		//ステージ数
+}
+//==============================================================
+//					PNGデータ関連
+// 
+//==============================================================
+struct TextureConfig {
+	int width;   // 1つのスライスの横幅
+	int height;  // 1つのスライスの縦幅
+	int rows;    // 行数
+	int columns; // 列数
+};
+
+namespace TextureConfigs {
+	constexpr TextureConfig TITLE{ 198, 58, 1, 1 };
+	constexpr TextureConfig PLAYER{ 32, 32, 6, 2 };
+	constexpr TextureConfig BULLET{ 16, 16, 3, 1 };
+	constexpr TextureConfig BOSS{ 32, 32, 11, 11 };
+	constexpr TextureConfig BOSSSUB{ 32, 32, 5, 1 };
+	constexpr TextureConfig PLAYERBOMBER{ 47, 47, 6, 1 };
+	constexpr TextureConfig ENEMYBOMBER{ 47, 47, 6, 1 };
+	constexpr TextureConfig MAP{ 32, 32, 12, 10 };
+}
+
+namespace EnemyTextureConfig {
+	constexpr int S_SIZE_SLICE_WIDTH = 32;      // 1つのスライスの横幅
+	constexpr int S_SIZE_SLICE_HEIGHT = 32;     // 1つのスライスの縦幅
+	constexpr int M_SIZE_SLICE_WIDTH = 48;      // 1つのスライスの横幅
+	constexpr int M_SIZE_SLICE_HEIGHT = 48;     // 1つのスライスの縦幅
+	constexpr int L_SIZE_SLICE_WIDTH = 64;      // 1つのスライスの横幅
+	constexpr int L_SIZE_SLICE_HEIGHT = 64;     // 1つのスライスの縦幅
+	constexpr int AIR_ENEMY_SLICE_ROWS_MAX = 8;          // 行数
+	constexpr int GROUND_ENEMY_SLICE_ROWS_MAX = 4;          // 行数
+	constexpr int SLICE_COLUMNS = 1;       // 列数
 }
 //==============================================================
 //					数学
@@ -102,49 +140,6 @@ void Clamp(T & num, T min, T max) {
 //}
 //
 
-
-//==============================================================
-//					シーン構造体
-//			各画面で使う変数を定義する
-// 
-//==============================================================
-class Scenestatus {
-public :
-
-	void FrameCountUpdate(int value) {
-		framecount += value;
-		if (framecount > 10000) framecount = 0;
-	}
-
-	void framecountReset() { framecount = 0; }
-	int Getframecount() const { return framecount; }
-
-	POINT Getcarsor()const { return carsor; }
-	void movecarsor_x(LONG value, int min, int max) { carsor.x = carsorclamp(carsor.x + value,min , max); }
-	void movecarsor_y(LONG value, int min, int max) { carsor.y = carsorclamp(carsor.y + value, min, max); }
-
-	LONG carsorclamp(LONG value, int min, int max) {
-		if (value < min) { return max; }
-		else if (value > max) { return min; }
-
-		return value;
-	}
-
-	bool SceneChangeSignal() { return currentsceneID != nextsceneID; }
-
-	int Getcurrentscene()const { return currentsceneID; }
-	void Setnextscene(int value) { nextsceneID = value; }
-	int Getnextscene() { return nextsceneID; }
-	
-	
-	
-private:
-	int framecount;
-	int currentsceneID;
-	int	nextsceneID;		//次の遷移先の画面ID
-	POINT carsor;		//カーソルの位置
-
-};
 
 
 

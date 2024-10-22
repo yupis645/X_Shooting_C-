@@ -1,34 +1,28 @@
 #ifndef DICONTAINER_H
 #define DICONTAINER_H
 
+//----------------------------------------------------------------------------------------------------
+//                              DIコンテナ
+// 
+// 依存性を解消するためのDIコンテナ
+// 現在はIGameManager,IInputManager,IMapManager の3つのクラスをテストクラスに変更が可能
+// MapManagerのみスコープが di::unique(範囲を限定) に設定。その他は di::singleton(全体を通して一つ) に設定
+//----------------------------------------------------------------------------------------------------
+
 #include "di.hpp"
 
 #include "IGameManager.h"
 #include "ResourceManager.h"
 #include "IInputManager.h"
 #include "IMapManager.h"
-
+#include "GameSceneFactory.h"
+#include "RendererManager.h"
 
 namespace di = boost::di;
 
 class DIContainer {
 public:
     // コンストラクタで DI コンテナを生成して保持
-    /*DIContainer() {
-        injector = std::make_shared < di::injector < std::shared_ptr<Scenestatus>, std::shared_ptr<GameStatus>,
-            std::shared_ptr<IPlayer>, std::shared_ptr<IEnemysManager>, std::shared_ptr<IBulletManager>, std::shared_ptr<IMapManager>,
-            std::shared_ptr<IInputManager>>>(
-                di::make_injector(
-                    di::bind<Scenestatus>().to(std::make_shared<Scenestatus>()),
-                    di::bind<GameStatus>().to(std::make_shared<GameStatus>()),
-                    di::bind<IPlayer>().to<Player>(),
-                    di::bind<IEnemysManager>().to<EnemysManager>(),
-                    di::bind<IBulletManager>().to<BulletsManager>(),
-                    di::bind<IMapManager>().to<MapManager>(),
-                    di::bind<IInputManager>().to<InputManager>()
-                )
-            );
-    }*/
     DIContainer();
 
     // 任意の型の依存オブジェクトを生成
@@ -41,13 +35,13 @@ private:
     std::shared_ptr<
         di::injector<
         std::shared_ptr<IGameManager>,
-        std::shared_ptr<Scenestatus>,
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
         std::shared_ptr<IMapManager>,
+        std::shared_ptr<RendererManager>,
         std::shared_ptr<IInputManager>
         >
-    > injector;  // injector をスマートポインタで保持
+    > injector;  
 };
 
 #endif // DICONTAINER_H

@@ -26,7 +26,6 @@ namespace {
 //=======================================================================================
 int MapManager::Init()
 {
-
     currentpartition = 0;                       //ステージの最初からになるようにcurrentpartitionを0にする
     MapDataUpdate(primarymap, DRAWMAP_HIGH);    //スタート時はmap全てが描画されいる状態にするため、y座標を調整する
     MapDataUpdate(secondarymap, 0);             //スタート時でも普段通り画面の上から描写を開始する
@@ -81,8 +80,8 @@ int MapManager::Draw()
             int counter = r2 + (r * MAP_W);
             int x = r2 * CHIP_SIZE;
             int y = INIT_Y_OFFSET + r * CHIP_SIZE;
-            mapchip->Draw(primarymap.data[counter], x, primarymap.y + y);
-            mapchip->Draw(secondarymap.data[counter], x, secondarymap.y + y);
+            renderermanager_->DrawFromTopLeftPos(mapchip, primarymap.data[counter], x, primarymap.y + y);
+            renderermanager_->DrawFromTopLeftPos(mapchip, secondarymap.data[counter], x, secondarymap.y + y);
         }
     }
 

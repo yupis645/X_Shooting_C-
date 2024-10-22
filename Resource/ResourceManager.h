@@ -18,29 +18,23 @@ class ResourceManager {
 public:
 	ResourceManager();
 
-	bool InitTexture(TextureType type, const UseTextureDataConfig& config);
-	bool SetUpTexture(TextureType type);
+	bool InitTextureLoad(TextureType type, const std::wstring&);
+	bool SliceTexturebytype(TextureType type,TextureConfig);
+
+
+	std::shared_ptr<GameTexture> GetTexture(TextureType type);
+
+	std::shared_ptr<GameTextureManager>& GetTextureManager() {	return gametextures;	}
+
 
 	bool LoadMapCsvFile(const std::string& frontcsvfile, const std::string& baclcsvfile);
 
-
-	//=======================================================================================
-	// ”CˆÓ‚Ì GameTexture ‚ð•`‰æ‚·‚éŠÖ”
-	//=======================================================================================
-	void GameTextureDraw(TextureType type, int index = 0, int x = 0, int y = 0) {
-		gametextures->TextureDraw(type,index, x, y);
-	}
-
-	std::vector<int> ConvertDrawMapCsv_Vector() {
-		return ConvertCsv_VectorReverse(csvdata->GetDrawmapcsv());
-	}
-
-	std::shared_ptr<GameTextureManager>& GetTextureManager() {
-		return gametextures;
-	}
-
+	std::vector<int> ConvertDrawMapCsv_Vector();
 	//std::string GetDrawMapCsv() { return csvdata->Getfrontmapcsv(); }
 	std::string GetGroundEnemyslayoutCsv(){	return csvdata->Getbackmapcsv();}
+
+
+	
 
 	~ResourceManager() {}
 

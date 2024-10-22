@@ -5,7 +5,9 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <stdexcept>  // for std::invalid_argument, std::out_of_range
+#include <stdexcept>  
+#include <fstream>
+#include "GameTexture.h"
 
 //.cpp内でのみ使用する定義をまとめる
 namespace  {
@@ -43,14 +45,23 @@ namespace  {
         file.close();
         return data;
     }
-    bool Init_SetUpTexture(ResourceManager& manager, TextureType type, const UseTextureDataConfig& config) {
+
+    //===============================================================================================
+    //                  初期化 & セットアップ
+    // 
+    // 1.管理するクラスのインスタンスをスマートポインタで生成する
+    // 2.ゲーム中に使用するテクスチャをTextureDataManagerに保存し、
+    //      GameTextureManagerにて画像をゲームで使えるようにスライスする
+    // 3.csvファイルを読み込み、ファイルをCsvDataManagerに保存する
+    //===============================================================================================
+    bool Init_SetUpTexture(ResourceManager& manager, TextureType type, const std::wstring& path, const TextureConfig& config) {
         // InitTextureとSetUpTextureを順に呼び出す
-        if (!manager.InitTexture(type, config)) {
+        if (!manager.InitTextureLoad(type, path)) {
             std::cerr << "Error: Failed to initialize texture for type: " << static_cast<int>(type) << std::endl;
             return false;
         }
 
-        if (!manager.SetUpTexture(type)) {
+        if (!manager.SliceTexturebytype(type,config)) {
             std::cerr << "Error: Failed to set up texture for type: " << static_cast<int>(type) << std::endl;
             return false;
         }
@@ -78,14 +89,14 @@ ResourceManager::ResourceManager()
     gametextures = std::make_shared<GameTextureManager>();
 
     // 2.テクスチャをゲーム中でも使えるようにロードする
-    Init_SetUpTexture(*this,TextureType::Title, { L"res/Title.png",198, 58, 1, 1 });       //タイトルロゴ
-    Init_SetUpTexture(*this,TextureType::Player, { L"res/Player_Sight.png",32, 32, 6, 2 });
-    Init_SetUpTexture(*this,TextureType::Bullet, { L"res/Bullet.png",16, 16, 3, 1 });
-    Init_SetUpTexture(*this,TextureType::Boss, { L"res/Boss.png",32, 32, 11, 11 });
-    Init_SetUpTexture(*this,TextureType::BossSub, { L"res/Bossparts.png",32, 32, 5, 1 });
-    Init_SetUpTexture(*this,TextureType::PlayerBomber, { L"res/Bomber.png",47, 47, 6, 1 });
-    Init_SetUpTexture(*this,TextureType::EnemyBomber, { L"res/Bomber.png",47, 47, 6, 1 });
-    Init_SetUpTexture(*this,TextureType::Map, { L"res/MapChip.png",32, 32,12, 10 });
+  Init_SetUpTexture(*this,TextureType::Title, L"res/Title.png", TextureConfigs::TITLE);       //タイトルロゴ
+  Init_SetUpTexture(*this,TextureType::Player,  L"res/Player_Sight.png",TextureConfigs::PLAYER);
+  Init_SetUpTexture(*this,TextureType::Bullet,  L"res/Bullet.png",TextureConfigs::BULLET);
+  Init_SetUpTexture(*this,TextureType::Boss,  L"res/Boss.png",TextureConfigs::BOSS);
+  Init_SetUpTexture(*this,TextureType::BossSub,  L"res/Bossparts.png",TextureConfigs::BOSSSUB);
+  Init_SetUpTexture(*this,TextureType::PlayerBomber,  L"res/Bomber.png",TextureConfigs::PLAYERBOMBER);
+  Init_SetUpTexture(*this,TextureType::EnemyBomber,  L"res/Bomber.png",TextureConfigs::ENEMYBOMBER);
+  Init_SetUpTexture(*this,TextureType::Map,  L"res/MapChip.png",TextureConfigs::MAP);
 
     //3.CSVファイルを取得する
     LoadMapCsvFile("res/Map/Stage1_Front.csv", "res/Map/Stage1_Back.csv");
@@ -93,33 +104,73 @@ ResourceManager::ResourceManager()
     //LoadMapCsvFile("res/Map/Stage3_Front.csv", "res/Map/Stage3_Back.csv");
 }
 
+//////////////////////////////////////////////// /* Texture関連 */ /////////////////////////////////////////////////////////////////////
 
 //===============================================================================================
-//                  初期化 & セットアップ
+//                  テクスチャの読み込み
 // 
-// 1.管理するクラスのインスタンスをスマートポインタで生成する
-// 2.ゲーム中に使用するテクスチャをTextureDataManagerに保存し、
-//      GameTextureManagerにて画像をゲームで使えるようにスライスする
-// 3.csvファイルを読み込み、ファイルをCsvDataManagerに保存する
+// テクスチャファイルや画像のサイズ、スライスする枚数などのデータを保存する
 //===============================================================================================
-bool ResourceManager::InitTexture(TextureType type, const UseTextureDataConfig& config) {
-    return texturedata->LoadTextureData(type, config);
+bool ResourceManager::InitTextureLoad(TextureType type, const std::wstring& path) {
+    // ファイルストリームを開いて存在チェック
+    std::wifstream file(path);
+    if (!file) {
+        std::wcerr << L"Error: Texture file not found at path: " << path << std::endl;
+        return false;
+    }
+
+    texturedata->SetTexPath(type, path);
+
+    return true;
 }
+
+
 
 //===============================================================================================
 //                  テクスチャのセットアップ
 // 
 // Textruetypeで指定されたキーにpngと付随情報を入れる
 //===============================================================================================
-bool ResourceManager::SetUpTexture(TextureType type) {
-    return gametextures->TextureInport(type, texturedata->GetTextureData(type));
+bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
+{
+    
+    gametextures->CreateGameTexture(type,texturedata->GetTexturePath(type),config);
+    return false;
 }
 
+//===============================================================================================
+//                  テクスチャの取得
+// 
+// インスタンス化されているテクスチャを取り出す
+//===============================================================================================
+inline std::shared_ptr<GameTexture> ResourceManager::GetTexture(TextureType type) {
+    auto tex = gametextures->GetTexture(type);
+    // テクスチャが有効かどうかを確認する
+    if (tex == nullptr) {
+        std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
+        return nullptr;  // 失敗を示す
+    }
+
+    // 正常に読み込まれた場合
+    return tex;        // 成功を示す
+}
+
+//////////////////////////////////////////////// /* Csv関連 */ /////////////////////////////////////////////////////////////////////
+
+//===============================================================================================
+// csvをファイルから読みだす
+//===============================================================================================
 bool ResourceManager::LoadMapCsvFile(const std::string& frontcsvfile, const std::string& baclcsvfile) {
 
     csvdata->LoadMapData(frontcsvfile, baclcsvfile);
 
     return false;
+}
+//===============================================================================================
+// csvファイルをint配列に変換する
+//===============================================================================================
+inline std::vector<int> ResourceManager::ConvertDrawMapCsv_Vector() {
+    return ConvertCsv_VectorReverse(csvdata->GetDrawmapcsv());
 }
 
 //===============================================================================================

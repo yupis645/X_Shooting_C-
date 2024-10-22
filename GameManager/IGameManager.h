@@ -1,25 +1,25 @@
-#pragma once
 
 #ifndef IGAMEMANAGER_H
 #define IGAMEMANAGER_H
 
+//----------------------------------------------------------------------------------------------------
+//                         ゲーム全体を管理するクラス(インターフェース)
+// 
+// ゲーム全体を管理するクラスのインターフェース。
+// 基本的なライフサイクルを定義している
+//----------------------------------------------------------------------------------------------------
 
 class IGameManager {
 public:
     IGameManager() {};
     ~IGameManager() = default;
 
-    virtual int Init() = 0;
+    virtual int Init() = 0;     //初期化
 
-    virtual int Input() = 0;
+    virtual int Input() = 0;    //入力
+    virtual int GameLoop() = 0;   //更新
 
-    // シーンの更新と描画
-    virtual int Update() = 0;
-
-    virtual int Draw() = 0;
-
-    // シーンの終了処理
-    virtual int End() = 0;
+    virtual int End() = 0;      //終了処理
 
 };
 

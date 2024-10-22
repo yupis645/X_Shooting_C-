@@ -1,4 +1,13 @@
 
+//----------------------------------------------------------------------------------------------------
+//                              入力を管理するクラス
+// 
+// 入力を管理するクラス
+// 方向キー、Zキー、Xキー、Enterキー、ESCキーなどの入力に応じてフラグをON/OFFする
+// GameManagerでInputReception関数を一度動かせば、その時の入力に応じてフラグが切り替わる。
+//		そのため、他のクラスはIsFlagSetで確認したいフラグを指定してboolの返り値で入力の有無がわかる
+//----------------------------------------------------------------------------------------------------
+
 #include "InputManager.h"
 #include "conioex.h"
 #include "Geometry.h"
@@ -40,7 +49,7 @@ int InputManager::InputReception()
 
 	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f,1);
 
-	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01, 1);
+	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f, 1);
 
 	//テストモード有効時のみ作用
 #if TestMode
@@ -88,6 +97,13 @@ Vector2 InputManager::Dirctionkeyinput(InputMode mode)
 
 	return vec;
 }
+
+
+//==============================================================================================================
+//						方向キーの入力を0～1の間をfloat値で管理する
+//  
+// 第三引数が1フレームに増加する値で、入力を検知したら入力方向によってその値を増減させる
+//==============================================================================================================
 Vector2 InputManager::DirctionkeyinputAxis(float x_value, float y_value, float maxspeed) {
 	// 初期化：キー入力に基づく方向ベクトル
 	Vector2 empty = directionkeyaxis;
@@ -279,6 +295,15 @@ inline bool InputManager::FlagsCompare(int a, int b, InputFlag flag) {
 	return ((a & static_cast<int>(flag)) != 0) == ((b & static_cast<int>(flag)) != 0);
 }
 
+
+//==============================================================================================================
+//				一つのキーに対して押し続ける、押した瞬間、離した瞬間、トグルのフラグを管理する
+// 
+// 押した瞬間（pushdown)  : 入力が 1 で前回のフラグが 0 だった
+// 離した瞬間（pushup）	  : 入力が 0 で前回のフラグが 1 だった
+// トグル（toggle）		  : 入力と前回のフラグが違うなら
+// 押されている間（press) : 入力が 1 である限り
+//==============================================================================================================
 void InputManager::InputFlagsControl(InputFlag flag, bool inputley)
 {
 	bool toggle = inputley != IsFlagSet(flag, InputMode::press);	//pressを前回の入力として使い、現在の入力と比較する

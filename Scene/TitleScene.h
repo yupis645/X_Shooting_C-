@@ -3,7 +3,6 @@
 #include <array>
 #include "di.hpp"
 
-class Scenestatus;
 class GameStatus;
 class IInputManager;
 struct StringText;
@@ -15,30 +14,31 @@ struct StringText;
 
 class TitleScene : public SceneBase {
 public:
-    TitleScene(std::shared_ptr<DIContainer> con, 
-        std::shared_ptr<Scenestatus> ss, 
-        std::shared_ptr<GameStatus> gs,
-        std::shared_ptr<IInputManager> im,
-        std::shared_ptr<ResourceManager> rm);
-  
+    TitleScene(std::shared_ptr<DIContainer> con);
+
+
     // 初期化処理
     int Init() override;
 
     // 更新処理
-    int Update() override;
+    int Update()override;
 
     // 描画処理
     int Draw() override;
 
     ~TitleScene() override;
 
-//private :
+private :
     std::shared_ptr<DIContainer> container_;  // Player クラスへの依存
-    std::shared_ptr<Scenestatus> scenestatus_;  // Player クラスへの依存
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<IInputManager>inputmanager_;
     std::shared_ptr<ResourceManager>resourcemanager_;
+    std::shared_ptr<RendererManager>renderermanager_;
+
+    std::shared_ptr<GameTexture> titlenameplate;       //マップチップの画像を保管しておく変数
     std::array<StringText , 3> menu;
+
+
 };
 
 

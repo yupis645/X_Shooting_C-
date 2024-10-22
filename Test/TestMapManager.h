@@ -10,6 +10,8 @@ class GameTexture;
 
 #include "GameTexture.h" 
 #include "IMapManager.h"
+#include "ResourceManager.h"
+#include "RendererManager.h"
 
 
 class TestMapManager: public IMapManager {
@@ -17,11 +19,15 @@ public:
     //=============================================================================================
     //                              コンストラクタ
     //=============================================================================================
-    TestMapManager() : currentnumber(0), currentpartition(0),
+    TestMapManager(std::shared_ptr<ResourceManager> rm) : currentnumber(0), currentpartition(0),
         mapchip(0), mapdata({}),  backmap({}),
         primarymap({ false, {}, 0, 0 }),
         secondarymap({ false, {},0,0 })
-     {}		                    
+     {
+        mapchip = rm->GetTexture(TextureType::Map);
+       // LoadMapChipTexture(rm->GetTextureManager()->GetTexture(TextureType::Map));     //マップチップのロード
+        SetDrawMapData(rm->ConvertDrawMapCsv_Vector());
+    }		                    
 
     //=============================================================================================
     //                              デストラクタ
@@ -66,6 +72,8 @@ private:
     
     MapStatus primarymap;
     MapStatus secondarymap;
+
+    std::shared_ptr< RendererManager> renderermanager_;
 
     void MapDataUpdate(MapStatus& map,int startprogress);       //描写するマップの配列を更新する
 };

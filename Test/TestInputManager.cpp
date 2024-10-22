@@ -1,30 +1,35 @@
+
+//----------------------------------------------------------------------------------------------------
+//                              テスト用InputManager
+// 
+// 入力を管理するクラス
+// 方向キー、Zキー、Xキー、Enterキー、ESCキーなどの入力に応じてフラグをON/OFFする
+// InputPritfでpress,pushdown,pushup,triggerなどのフラグ状態を確認できる
+// GameManagerでInputReception関数を一度動かせば、その時の入力に応じてフラグが切り替わる。
+//		そのため、他のクラスはIsFlagSetで確認したいフラグを指定してboolの返り値で入力の有無がわかる
+//----------------------------------------------------------------------------------------------------
+
 #include "TestInputManager.h"
 #include "conioex.h"
 #include "Geometry.h"
 #include "common.h"
 
+//=======================================================
+//		キーの入力状態を画面に表示する
+//=======================================================
 void TestInputManager::InputPritf()
 {
-	/*printf("left   = %s \n ", IsFlagSet(InputFlag::left) ? "true" : "false");
-	printf("right  = %s \n ", IsFlagSet(InputFlag::right) ? "true" : "false");
-	printf("down   = %s \n ", IsFlagSet(InputFlag::down) ? "true" : "false");
-	printf("up     = %s \n ", IsFlagSet(InputFlag::up) ? "true" : "false");
-	printf("select = %s \n ", IsFlagSet(InputFlag::select) ? "true" : "false");
-	printf("cancel = %s \n ", IsFlagSet(InputFlag::cancel) ? "true" : "false");
-	printf("pose   = %s \n ", IsFlagSet(InputFlag::pose) ? "true" : "false");
-	printf("shot   = %s \n ", IsFlagSet(InputFlag::shot) ? "true" : "false");
-	printf("bom	   = %s \n ", IsFlagSet(InputFlag::bom) ? "true" : "false");
-	printf("esc    = %s \n ", IsFlagSet(InputFlag::esc) ? "true" : "false");*/
-
 	auto is = [this](InputFlag flag,InputMode mode) { return IsFlagSet(flag, mode); };
 	auto f = [this, is](InputFlag flag, InputMode mode) {return is(flag, mode) ? "true" : "false";};
 
-
+	//方向キーをfloat値で0～1を取得する
 	WriteTextFA(0, ScreenConfig::SRN_H - (ScreenConfig::WORD_H * 28), 0,
 		"		GetAxis ( %f , %f )", this->GetAxis().x, this->GetAxis().y);
+	//各ビットフラグの状態の目次。下に同じカテゴリが続く
 	WriteTextFA(0, ScreenConfig::SRN_H - (ScreenConfig::WORD_H * 25), 0, 
 		"Input Flags Bit = press:%d , pushdown:%d , pushup:%d , toggle:%d ,  ", GetFlags(InputMode::press), GetFlags(InputMode::pushdown), GetFlags(InputMode::pushup), GetFlags(InputMode::toggle));
 
+	
 	WriteTextFA(0, ScreenConfig::SRN_H - (ScreenConfig::WORD_H * 22), 0, "left   = %5s ,%5s ,%5s ,%5s \n ",
 		f(InputFlag::left,InputMode::press),f(InputFlag::left,InputMode::pushdown),f(InputFlag::left,InputMode::pushup),f(InputFlag::left,InputMode::toggle));
 	WriteTextFA(0, ScreenConfig::SRN_H - (ScreenConfig::WORD_H * 20), 0, "right  = %5s ,%5s ,%5s ,%5s \n ",
@@ -63,7 +68,6 @@ void TestInputManager::GetKeySetup()
 //=======================================================
 int TestInputManager::InputReception()
 {
-	//ClearAll();						//inputflagsを初期化する
 	if (active == false) return 1;		//もしactiveがfalseなら入力を受け付けず終了する
 
 	GetKeySetup();	//キー入力の準備
@@ -82,7 +86,7 @@ int TestInputManager::InputReception()
 
 
 	InputPritf();
-	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01, 1);
+	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f, 1);
 
 	//テストモード有効時のみ作用
 
@@ -116,6 +120,12 @@ Vector2 TestInputManager::Dirctionkeyinput(InputMode mode)
 	return vec;
 }
 
+
+//==============================================================================================================
+//						方向キーの入力を0～1の間をfloat値で管理する
+//  
+// 第三引数が1フレームに増加する値で、入力を検知したら入力方向によってその値を増減させる
+//==============================================================================================================
 Vector2 TestInputManager::DirctionkeyinputAxis(float x_value, float y_value, float maxspeed) {
 	// 初期化：キー入力に基づく方向ベクトル
 	Vector2 empty = directionkeyaxis;
@@ -123,6 +133,7 @@ Vector2 TestInputManager::DirctionkeyinputAxis(float x_value, float y_value, flo
 	// 減速処理ラムダ：指定の閾値以下なら0に補正
 	auto zerooffset = [](float value, float minvalue) { return (std::abs(value) < minvalue) ? 0.0f : value * 0.9f; };
 
+	//方向キーの入力を取得する
 	bool left = IsFlagSet(InputFlag::left, InputMode::press);
 	bool right = IsFlagSet(InputFlag::right, InputMode::press);
 	bool up = IsFlagSet(InputFlag::up, InputMode::press);
@@ -307,6 +318,15 @@ inline bool TestInputManager::FlagsCompare(int a, int b, InputFlag flag) {
 	return ((a & static_cast<int>(flag)) != 0) == ((b & static_cast<int>(flag)) != 0);
 }
 
+
+//==============================================================================================================
+//				一つのキーに対して押し続ける、押した瞬間、離した瞬間、トグルのフラグを管理する
+// 
+// 押した瞬間（pushdown)  : 入力が 1 で前回のフラグが 0 だった
+// 離した瞬間（pushup）	  : 入力が 0 で前回のフラグが 1 だった
+// トグル（toggle）		  : 入力と前回のフラグが違うなら
+// 押されている間（press) : 入力が 1 である限り
+//==============================================================================================================
 void TestInputManager::InputFlagsControl(InputFlag flag, bool inputley)
 {
 	bool toggle = inputley != IsFlagSet(flag, InputMode::press);	//pressを前回の入力として使い、現在の入力と比較する
@@ -321,7 +341,7 @@ void TestInputManager::InputFlagsControl(InputFlag flag, bool inputley)
 	else					ClearFlag(flag, InputMode::pushup);
 
 	// トグル（toggle）
-	if (!inputley && toggle) {  // 離したときにトグルを切り替え
+	if (toggle) {  // 離したときにトグルを切り替え
 		ToggleFlag(flag);
 	}
 

@@ -1,48 +1,69 @@
-#include "TestGameManager.h"
 
+//----------------------------------------------------------------------------------------------------
+//                              テスト用GameManager
+// 
+// ゲーム全体を管理するクラスのテストクラス
+// init(初期化),input(入力),update(更新),draw(描画)のライフサイクルを管理する
+//----------------------------------------------------------------------------------------------------
+
+#include "TestGameManager.h"
 #include "TestScene.h"
 
-using InputFlag = IInputManager::InputFlag;
-using InputMode = IInputManager::InputMode;
 
+//==================================================================
+//						コンストラクタ
+// 
+// diコンテナより、gameStatus,ResouceManager,InputManagerのインスタンスを取得する
+// currnetscene_には最初に使用するシーンを指定する
+//==================================================================
+inline TestGameManager::TestGameManager(std::shared_ptr<DIContainer> con)
+	: container_(con),
+	gamestatus_(con->Create<GameStatus>()),
+	resoucemanager_(con->Create<ResourceManager>()),
+	inputmanager_(con->Create<IInputManager>()),
+	renderermanager_(con->Create<RendererManager>())
+{
+}
+
+//==================================================================
+//						初期化
+//==================================================================
 int TestGameManager::Init() {
-	currentscene_->Init();
-
+	scenemanager_->SwitchToScene<TestScene>();
 
 	return 0;
 }
 
+//==================================================================
+//						入力
+//==================================================================
 int TestGameManager::Input()
 {
 	return 0;
 }
 
-// シーンの更新と描画
-int TestGameManager::Update() {
+
+//==================================================================
+//						更新
+//==================================================================
+int TestGameManager::GameLoop() {
+
+	scenemanager_->Init();
+	scenemanager_->Update();
+	scenemanager_->Draw();
 
 	
-	currentscene_->Update();
 
 
 
 	return 0;
 }
 
-int TestGameManager::Draw()
-{
-	ClearScreen(0x10, 0x10, 0x10);	//画面消去：R,G,Bの指定色で塗りつぶす
-	//▼▼▼ここから
-	inputmanager_->InputReception();
-	currentscene_->Draw();
-	//▲▲▲ここまで
-	PrintFrameBuffer();	//画面バッファを転送
-	RenderScreen();		//画面をレンダリング
-	FrameSync();		//１フレームの同期    
 
-	return 0;
-}
 
-// シーンの終了処理
+//==================================================================
+//						終了処理
+//==================================================================
 int TestGameManager::End() {
 
 	return 99;

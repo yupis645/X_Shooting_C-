@@ -91,6 +91,18 @@
     <Filter Include="ソース ファイル\Entity\Enemys\GroundEnemys">
       <UniqueIdentifier>{66240d23-6c64-4e71-97ec-f0dd4b6d0beb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Entity\Player">
+      <UniqueIdentifier>{efb3f384-421c-4d98-9337-e1fae026645d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\FactoryClass">
+      <UniqueIdentifier>{7a637fbf-ef51-4c00-b142-fca32c6cd2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneManager">
+      <UniqueIdentifier>{62b73cd8-3f60-4824-9fd1-b265ddafa8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Renderer">
+      <UniqueIdentifier>{0e281812-293d-42c2-a59f-4474cef3c124}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -165,20 +177,20 @@
     <ClInclude Include="Test\TestMapManager.h">
       <Filter>TESTソース\TestMapManager</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\IEnemysManager.h">
-      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    <ClInclude Include="Entity\Player\IPlayer.h">
+      <Filter>ソース ファイル\Entity\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\EnemysManager.h">
-      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    <ClInclude Include="Entity\Player\Player.h">
+      <Filter>ソース ファイル\Entity\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\EnemyBase.h">
-      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    <ClInclude Include="FactoryClass\GameSceneFactory.h">
+      <Filter>ソース ファイル\FactoryClass</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h">
-      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h">
-      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    <ClInclude Include="Renderer\RendererManager.h">
+      <Filter>ソース ファイル\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,9 +205,6 @@
     </ClCompile>
     <ClCompile Include="SchooLlibrary\conioex.cpp">
       <Filter>学校のソース</Filter>
-    </ClCompile>
-    <ClCompile Include="common.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="X_Shooting_C++\Geometry.cpp">
       <Filter>ソース ファイル\Geometry</Filter>
@@ -236,8 +245,14 @@
     <ClCompile Include="Test\TestMapManager.cpp">
       <Filter>TESTソース\TestMapManager</Filter>
     </ClCompile>
-    <ClCompile Include="Entity\Enemy\EnemysManager.cpp">
-      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    <ClCompile Include="Entity\Player\Player.cpp">
+      <Filter>ソース ファイル\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RendererManager.cpp">
+      <Filter>ソース ファイル\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Entity/Enemy/AirEnemys;Entity/Enemy/GroundEnemys;Entity/Enemy;Resource/Csv;res/Map;MapManager;Resource/Texture;Resource;GameManager;Test;$(SolutionDir);InputManager;DIContainer;include/boost;Scene;SchooLlibrary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Renderer;FactoryClass;Entity/Player;Entity/Enemy/AirEnemys;Entity/Enemy/GroundEnemys;Entity/Enemy;Resource/Csv;res/Map;MapManager;Resource/Texture;Resource;GameManager;Test;$(SolutionDir);InputManager;DIContainer;include/boost;Scene;SchooLlibrary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,21 +132,13 @@
     <ClInclude Include="DIContainer\DIContainer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h">
+    <ClInclude Include="Entity\Player\IPlayer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\EnemyBase.h">
+    <ClInclude Include="Entity\Player\Player.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\EnemysManager.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\IEnemysManager.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="FactoryClass\GameSceneFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameManager\IGameManager.h" />
@@ -159,6 +151,7 @@
     </ClInclude>
     <ClInclude Include="MapManager\IMapManager.h" />
     <ClInclude Include="MapManager\MapManager.h" />
+    <ClInclude Include="Renderer\RendererManager.h" />
     <ClInclude Include="Resource\TextureDataManager.h" />
     <ClInclude Include="Resource\CsvDataManager.h" />
     <ClInclude Include="Resource\ResourceManager.h" />
@@ -170,6 +163,7 @@
     <ClInclude Include="Scene\SceneBase.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -181,9 +175,8 @@
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common.cpp" />
     <ClCompile Include="DIContainer\DIContainer.cpp" />
-    <ClCompile Include="Entity\Enemy\EnemysManager.cpp">
+    <ClCompile Include="Entity\Player\Player.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
@@ -194,6 +187,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager\MapManager.cpp" />
+    <ClCompile Include="Renderer\RendererManager.cpp" />
     <ClCompile Include="Resource\TextureDataManager.cpp" />
     <ClCompile Include="Resource\CsvDataManager.cpp" />
     <ClCompile Include="Resource\ResourceManager.cpp" />
@@ -201,6 +195,7 @@
     <ClCompile Include="Scene\GameScene.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
