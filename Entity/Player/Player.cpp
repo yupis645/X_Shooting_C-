@@ -7,21 +7,19 @@ using namespace ScreenConfig;
 //===============================================================
 //					コンストラクタ
 //===============================================================
-Player::Player(std::shared_ptr<ResourceManager> rm) : anim(0),  pat(0) ,shootdown(false)          
+//===============================================================
+//					コンストラクタ
+//===============================================================
+Player::Player(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer> rendermanager)
+	: anim(0), pat(0), shootdown(false), ownframecount(0), render_(rendermanager),
+	texture(nullptr) // 必要なら初期化
 {
-	//texture = rm->GetTextureManager()->GetTexture(TextureType::Player);     //マップチップのロード
-	Create();
-	// 必要な初期化処理があればここに記述
+	// Targetsightのインスタンスを動的に作成
+	targetsight = std::make_unique<Targetsight>(*this, rm);
 }
 
 
 
-//===============================================================
-//				 デストラクタ
-//===============================================================
-Player::~Player() {
-	// 必要ならリソース解放などを行う
-}
 
 //===============================================================
 //					プレイヤーの情報初期化
@@ -30,7 +28,7 @@ Player::~Player() {
 //===============================================================
 int Player::Init() {
 	GameObject::InitClear();
-	sight.Init();
+	targetsight->Init();
 	anim = 0;
 	pat = 0;
 	shootdown = false;
@@ -54,7 +52,7 @@ int Player::Create() {
 	hitbox.CenterPositionSync(position, PLAYER_HITBOX_SIZE);
 
 	/*照準の当たり判定の更新*/
-	sight.Init();
+	targetsight->Init();
 
 	
 
@@ -181,7 +179,7 @@ int Player::Sync_PositionAndHitbox()
 	hitbox.CenterPositionSync(position, PLAYER_HITBOX_SIZE);
 
 	/////*照準の当たり判定の更新*/
-	sight.hitboxsync(position);
+	targetsight->hitboxsync(position);
 
 	return 0;
 }
@@ -203,46 +201,3 @@ int Player::AnimationUpdate(){
 
 	return 0;
 }
-//
-//int Player::AirEnemyCollision()
-//{
-//	return 0;
-//}
-//
-//int Player::EnemyBulletCollision(std::shared_ptr<
-// > EB)
-//{
-//	for (int i = 0; i < EB->EnemyshotSize(); i++)
-//	{
-//		shootdown = hitbox.BoxCollision(EB->GetEnemyShotArray(i).GetHitbox());
-//	}
-//
-//	return 0;
-//}
-//
-////===============================================================
-////				ショットの描画
-//// 
-//// フラグが建っているショットを描写する。見た目上は二つ弾があるが判定は一つだけ
-//// ・左の弾の描写
-//// ・右の弾の描写
-////===============================================================
-//void Shot_Draw(P_SHOT_ST _s[], Bmp _bmpR, Bmp _bmpL) {
-//	for (int r = 0; r < MAX_SHOT; r++) {
-//		if (_s[r].F == true) {
-//			DrawBmp(_s[r].hitbox.left - BULLET_SIZE, _s[r].hitbox.top, &_bmpL);		//ショット(左)の描写
-//			DrawBmp(_s[r].hitbox.right, _s[r].hitbox.top, &_bmpR);		//ショット(右)の描写
-//		}
-//	}
-//}
-////===============================================================
-////				ボムの描写
-//// 
-//// フラグが建っている間のみボムを描写する。攻撃判定を出している間はなにも表示しない
-//// ・ボムの描写
-////===============================================================
-//void Bom_Draw(P_BOM_ST* _b, Bmp _bmp) {
-//	if (_b->F == true) {
-//		DrawBmp(_b->center_x - BULLET_SIZE, _b->center_y - BULLET_SIZE, &_bmp);		//ボムの描写
-//	}
-//}

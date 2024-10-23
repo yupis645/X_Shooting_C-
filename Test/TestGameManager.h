@@ -13,7 +13,7 @@
 #include "IInputManager.h"
 #include "DIContainer.h"
 #include "ResourceManager.h"
-#include "RendererManager.h"
+#include "SpriteRenderer.h"
 #include "SceneManager.h"
 
 
@@ -34,7 +34,7 @@ private:
     std::shared_ptr<GameStatus> gamestatus_;            // ゲームのスコアなどゲーム全体で管理するデータ
     std::shared_ptr<ResourceManager> resoucemanager_;   // 描画に使う画像やCsvなどを保管する食らうs
     std::shared_ptr<IInputManager> inputmanager_;       // 入力を管理するクラス
-    std::shared_ptr<RendererManager> renderermanager_;       // 入力を管理するクラス
+    std::shared_ptr<SpriteRenderer> render_;       // 入力を管理するクラス
     std::shared_ptr<DIContainer> container_;            // DIContainer のメンバ変数
 };
 

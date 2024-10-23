@@ -21,7 +21,7 @@ inline TestGameManager::TestGameManager(std::shared_ptr<DIContainer> con)
 	gamestatus_(con->Create<GameStatus>()),
 	resoucemanager_(con->Create<ResourceManager>()),
 	inputmanager_(con->Create<IInputManager>()),
-	renderermanager_(con->Create<RendererManager>())
+	render_(con->Create<SpriteRenderer>())
 {
 }
 

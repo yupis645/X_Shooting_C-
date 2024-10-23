@@ -6,7 +6,7 @@
 #include "DIContainer.h"
 #include "ResourceManager.h"
 #include "IMapManager.h"
-#include "RendererManager.h"
+#include "SpriteRenderer.h"
 
 #include "common.h"
 
@@ -28,7 +28,7 @@ private:
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<ResourceManager> resourcemanager_;
     std::shared_ptr<IMapManager> mapmanager_;  // Player クラスへの依存
-    std::shared_ptr<RendererManager> renderermanager_;  // Player クラスへの依存
+    std::shared_ptr<SpriteRenderer> render_;  // Player クラスへの依存
     std::shared_ptr<IInputManager>inputmanager_;
 
 };

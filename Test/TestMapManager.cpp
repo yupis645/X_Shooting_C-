@@ -80,8 +80,8 @@ int TestMapManager::Draw()
             int counter = r2 + (r * MAP_W);
             int x = r2 * CHIP_SIZE;
             int y = INIT_Y_OFFSET + r * CHIP_SIZE;
-            renderermanager_->DrawFromTopLeftPos(mapchip, primarymap.data[counter], x, primarymap.y + y);
-            renderermanager_->DrawFromTopLeftPos(mapchip, secondarymap.data[counter], x, secondarymap.y + y);
+            render_->DrawFromTopLeftPos(mapchip, primarymap.data[counter], x, primarymap.y + y);
+            render_->DrawFromTopLeftPos(mapchip, secondarymap.data[counter], x, secondarymap.y + y);
         }
     }
 

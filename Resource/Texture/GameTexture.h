@@ -22,9 +22,9 @@
 
 class GameTexture {
 public:
-    GameTexture(const std::wstring&, TextureConfig cof) { SliceTexture(path, cof); }
+    GameTexture(const std::wstring& path, TextureConfig cof) { SliceTexture(path, cof); }
     
-    bool SliceTexture(const std::wstring&, TextureConfig cof);      //画像のロード inline関数
+    bool SliceTexture(const std::wstring& path, TextureConfig cof);     //画像のロード inline関数
 
     std::vector<std::unique_ptr<Bmp>> GetTexturesInRange(int startIndex, int count) const; // 新しい関数
 
@@ -58,27 +58,32 @@ private:
 // 引数で受けった情報をもとに画像をスライスする。
 // UseTextureDataConfigには[画像のファイルパス、スライスする画像サイズ、行数、列数]がパックされている
 //===============================================================================================
-inline bool GameTexture::SliceTexture(const std::wstring&, TextureConfig cof) {
-    size_t totalImages = cof.rows * cof.columns;     //行 * 列 で画像の数を取得
-    textures_.resize(totalImages);                       // 必要な分だけポインタ配列をリサイズ
+inline bool GameTexture::SliceTexture(const std::wstring& path, TextureConfig cof) {
+    size_t totalImages = cof.rows * cof.columns;     // 行 * 列 で画像の数を取得
+    if (cof.indexcount > totalImages) {
+        std::cerr << "Error: Invalid range specified (startIdx + count exceeds total images)." << std::endl;
+        return false;
+    }
+
+    textures_.resize(cof.indexcount);  // 必要な分だけポインタ配列をリサイズ
 
     // Bmp* 配列を作成
-    Bmp** s = new Bmp * [totalImages];      //LoadDivBmpで使うために空の配列を作成
+    Bmp** emptyBmp = new Bmp * [totalImages];  // LoadDivBmpで使うために空の配列を作成
 
-    if (!LoadDivBmp(path.c_str(), 0, 0, config.width, config.height, config.rows, config.columns, s)) {
-        //ロードに失敗した場合
-        std::cerr << "Error: Failed to load texture: " << path.c_str() << std::endl;  //エラーコードを出す
-        delete[] s;  // メモリリークを防ぐために配列を解放
-        return false;       //失敗
+    if (!LoadDivBmp(path.c_str(), 0, 0, cof.width, cof.height, cof.rows, cof.columns, emptyBmp)) {
+        // ロードに失敗した場合
+        std::cerr << "Error: Failed to load texture: " << path.c_str() << std::endl;  // エラーコードを出す
+        delete[] emptyBmp;  // メモリリークを防ぐために配列を解放
+        return false;       // 失敗
     }
 
-    // s の内容を textures_ に移動
-    for (size_t i = 0; i < totalImages; ++i) {
-        textures_[i] = std::unique_ptr<Bmp>(s[i]);  // 生ポインタを unique_ptr に変換して格納
+    // 指定された範囲の内容を textures_ に移動
+    for (int i = 0; i < cof.indexcount; ++i) {
+        textures_[i] = std::unique_ptr<Bmp>(emptyBmp[cof.startindex+ i]);  // 生ポインタを unique_ptr に変換して格納
     }
 
-    // s 配列自体を解放
-    delete[] s;
+    // emptyBmp 配列自体を解放
+    delete[] emptyBmp;
 
     return true;
 }

@@ -1,14 +1,18 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
+class GameSceneFactory;
 class DIContainer;
+
 
 #include "Game.h"
 #include "DIContainer.h"
-#include "di.hpp"
 #include "SceneBase.h"
+#include "IMapManager.h"
 #include "IInputManager.h"
 #include "ResourceManager.h"
+#include "GameSceneFactory.h"
+#include "IPlayer.h"
 
 
 class GameScene : public SceneBase {
@@ -28,11 +32,13 @@ public:
         // 終了処理（リソース解放など）
     }
 private:
+    std::shared_ptr<IPlayer> player_;  // Player クラスへの依存
     std::shared_ptr<DIContainer> container_;  // Player クラスへの依存
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<IMapManager>mapmanager_;
     std::shared_ptr<IInputManager>inputmanager_;
     std::shared_ptr<ResourceManager>resourcemanager_;
+    std::shared_ptr<GameSceneFactory>instanceFactory_;
 
 
 };

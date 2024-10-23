@@ -10,7 +10,7 @@ class CsvDataManager {
 public:
 	CsvDataManager() {}
 
-	bool LoadMapData(const std::string& drawFile, const std::string& backFile) {
+	bool LoadMapFile(const std::string& drawFile, const std::string& backFile) {
 		if (!IsFileAccessible(drawFile) || !IsFileAccessible(backFile)) {
 			std::cerr << "Failed to load map data: "
 				<< drawFile << " or " << backFile << " not found." << std::endl;

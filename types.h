@@ -25,17 +25,50 @@ struct UseTextureDataConfig
 };
 
 //===========================================================
-// クラス内で enum class を宣言
+// 画像を管理するmapで識別するためのキーに使う定数
 //===========================================================
 enum class TextureType {
     Title,
     Player,
+    Targetsight,
     Bullet,
-    Boss,
-    BossSub,
+    Bom,
+    Map,
+    Bomber,
     PlayerBomber,
-    EnemyBomber,
-    Map
+    BomBomber,
+    Air_EnemyBomber,
+    Ground_EnemyBomber,
+
+    AirEnemy,
+    Toroid,
+    Torkan,
+    Giddospario,
+    Zoshi,
+    Jara,
+    Kapi,
+    Terrazi,
+    Zakato,
+    Bragzakato,
+    Garuzakato,
+    Bacura,
+
+    GroundEnemy,
+    Barra,
+    Zolbak,
+    Logram,
+    Domogram,
+    Derota,
+    Grobda,
+    Bozalogram,
+    Sol,
+    Garubarra,
+    Garuderota,
+    Boss,
+    BossParts,
+    Algo,
+    Ad_core,
+    Spflag
 };
 
 

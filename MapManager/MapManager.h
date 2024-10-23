@@ -21,7 +21,7 @@
 #include "ResourceManager.h" 
 #include "GameTexture.h" 
 #include "IMapManager.h"
-#include "RendererManager.h"
+#include "SpriteRenderer.h"
 
 
 class MapManager : public IMapManager {
@@ -87,7 +87,7 @@ private:
     MapStatus primarymap;       //分割したマップデータを保持しておく変数
     MapStatus secondarymap;     //分割したマップデータを保持しておく変数
      
-    std::shared_ptr<RendererManager> renderermanager_;
+    std::shared_ptr<SpriteRenderer> render_;
 
     void MapDataUpdate(MapStatus& map, int startprogress);       //描写するマップの配列を更新する
 };

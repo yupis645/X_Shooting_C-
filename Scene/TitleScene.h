@@ -11,6 +11,7 @@ struct StringText;
 #include "SceneBase.h"
 #include "IInputManager.h"
 #include "DIContainer.h"
+#include "SpriteRenderer.h"
 
 class TitleScene : public SceneBase {
 public:
@@ -33,7 +34,7 @@ private :
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<IInputManager>inputmanager_;
     std::shared_ptr<ResourceManager>resourcemanager_;
-    std::shared_ptr<RendererManager>renderermanager_;
+    std::shared_ptr<SpriteRenderer>render_;
 
     std::shared_ptr<GameTexture> titlenameplate;       //マップチップの画像を保管しておく変数
     std::array<StringText , 3> menu;

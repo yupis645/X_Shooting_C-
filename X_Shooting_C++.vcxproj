@@ -133,10 +133,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Entity\Player\IPlayer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Entity\Player\Player.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="FactoryClass\GameSceneFactory.h" />
     <ClInclude Include="Game.h" />
@@ -151,7 +151,7 @@
     </ClInclude>
     <ClInclude Include="MapManager\IMapManager.h" />
     <ClInclude Include="MapManager\MapManager.h" />
-    <ClInclude Include="Renderer\RendererManager.h" />
+    <ClInclude Include="Renderer\SpriteRenderer.h" />
     <ClInclude Include="Resource\TextureDataManager.h" />
     <ClInclude Include="Resource\CsvDataManager.h" />
     <ClInclude Include="Resource\ResourceManager.h" />
@@ -177,7 +177,7 @@
   <ItemGroup>
     <ClCompile Include="DIContainer\DIContainer.cpp" />
     <ClCompile Include="Entity\Player\Player.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -187,7 +187,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager\MapManager.cpp" />
-    <ClCompile Include="Renderer\RendererManager.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer.cpp" />
     <ClCompile Include="Resource\TextureDataManager.cpp" />
     <ClCompile Include="Resource\CsvDataManager.cpp" />
     <ClCompile Include="Resource\ResourceManager.cpp" />

@@ -98,7 +98,7 @@ int TitleScene::Draw()
 	auto SelectTextOffset = [](int i = 1) { return 30 - (i * 30); };
 
 	//resourcemanager_->GameTextureDraw(TextureType::Title, 0, SRN_W / 2 - 99, 100);		//タイトルの表示
-	renderermanager_->DrawFromTopLeftPos(titlenameplate, 0, SRN_W / 2 - 99, 100);
+	render_->DrawFromTopLeftPos(titlenameplate, 0, SRN_W / 2 - 99, 100);
 
 	switch (state) {
 	case PUSH_START_WAIT_STATE:

@@ -16,7 +16,7 @@
 #include "IInputManager.h"
 #include "IMapManager.h"
 #include "GameSceneFactory.h"
-#include "RendererManager.h"
+#include "SpriteRenderer.h"
 
 namespace di = boost::di;
 
@@ -38,7 +38,7 @@ private:
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
         std::shared_ptr<IMapManager>,
-        std::shared_ptr<RendererManager>,
+        std::shared_ptr<SpriteRenderer>,
         std::shared_ptr<IInputManager>
         >
     > injector;  

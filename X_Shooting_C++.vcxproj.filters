@@ -100,7 +100,7 @@
     <Filter Include="ソース ファイル\Scene\SceneManager">
       <UniqueIdentifier>{62b73cd8-3f60-4824-9fd1-b265ddafa8ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Renderer">
+    <Filter Include="ソース ファイル\SpriteRenderer">
       <UniqueIdentifier>{0e281812-293d-42c2-a59f-4474cef3c124}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -189,8 +189,8 @@
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\RendererManager.h">
-      <Filter>ソース ファイル\Renderer</Filter>
+    <ClInclude Include="Renderer\SpriteRenderer.h">
+      <Filter>ソース ファイル\SpriteRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,8 +251,8 @@
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\RendererManager.cpp">
-      <Filter>ソース ファイル\Renderer</Filter>
+    <ClCompile Include="Renderer\SpriteRenderer.cpp">
+      <Filter>ソース ファイル\SpriteRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

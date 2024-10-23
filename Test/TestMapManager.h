@@ -11,7 +11,7 @@ class GameTexture;
 #include "GameTexture.h" 
 #include "IMapManager.h"
 #include "ResourceManager.h"
-#include "RendererManager.h"
+#include "SpriteRenderer.h"
 
 
 class TestMapManager: public IMapManager {
@@ -73,7 +73,7 @@ private:
     MapStatus primarymap;
     MapStatus secondarymap;
 
-    std::shared_ptr< RendererManager> renderermanager_;
+    std::shared_ptr< SpriteRenderer> render_;
 
     void MapDataUpdate(MapStatus& map,int startprogress);       //描写するマップの配列を更新する
 };

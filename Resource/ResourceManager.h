@@ -4,10 +4,6 @@
 #include <iostream>
 #include <array>
 
-class CsvDataManager;
-class TextureDataManager;
-class GameTextureManager;
-
 #include "types.h"
 #include "CsvDataManager.h"
 #include "TextureDataManager.h"
@@ -36,17 +32,18 @@ public:
 
 	
 
-	~ResourceManager() {}
+	~ResourceManager() = default;
 
 private:
+	std::vector<int> ConvertCsv_Vector(const std::string& filename);
+
+	// 逆順でデータを読み込む関数
+	std::vector<int> ConvertCsv_VectorReverse(const std::string& filename);
+
 	std::shared_ptr<TextureDataManager> texturedata;
 	std::shared_ptr<CsvDataManager> csvdata;
 	std::shared_ptr<GameTextureManager> gametextures;
 
-	std::vector<int> ConvertCsv_Vector(const std::string& filename);
-
-    // 逆順でデータを読み込む関数
-	std::vector<int> ConvertCsv_VectorReverse(const std::string& filename);
 
 };
 

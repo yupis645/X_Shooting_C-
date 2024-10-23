@@ -5,9 +5,10 @@ GameScene::GameScene(std::shared_ptr<DIContainer> con)
     gamestatus_(con->Create<GameStatus>()),
     inputmanager_(con->Create<IInputManager>()),
     resourcemanager_(con->Create<ResourceManager>()),
+    instanceFactory_ (std::make_shared<GameSceneFactory>(resourcemanager_,con->Create<SpriteRenderer>())),
     mapmanager_(con->Create<IMapManager>())
 {
-
+    player_ = instanceFactory_->CreatePlayer();
 }
 
 int GameScene::Init()

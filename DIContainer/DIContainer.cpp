@@ -23,14 +23,14 @@ DIContainer::DIContainer() {
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
         std::shared_ptr<IMapManager>,
-        std::shared_ptr<RendererManager>,
+        std::shared_ptr<SpriteRenderer>,
         std::shared_ptr<IInputManager>>>(
             di::make_injector(
                 di::bind<IGameManager>().in(di::singleton).to<GameManager>(),
                 di::bind<GameStatus>().in(di::singleton).to<GameStatus>(),
                 di::bind<ResourceManager>().in(di::singleton).to<ResourceManager>(),
                 di::bind<IMapManager>().in(di::unique).to<MapManager>(),
-                di::bind<RendererManager>().in(di::singleton).to<RendererManager>(),
+                di::bind<SpriteRenderer>().in(di::singleton).to<SpriteRenderer>(),
                 di::bind<IInputManager>().in(di::singleton).to<InputManager>()
             )
         );

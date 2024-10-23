@@ -1,78 +1,14 @@
 ﻿  DIContainer.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'DIContainer/DIContainer.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
   GameManager.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'GameManager.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
-  InputManager.cpp
-  main.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'main.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
-  MapManager.cpp
-  RendererManager.cpp
-  TextureDataManager.cpp
-  CsvDataManager.cpp
-  ResourceManager.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\ResourceManager.cpp(32,53): warning C4101: 'e': ローカル変数は 1 度も使われていません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\ResourceManager.cpp(36,49): warning C4101: 'e': ローカル変数は 1 度も使われていません。
-  GameTextureManager.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTextureManager.cpp(48,25): error C2039: 'DrawFromTopLeftPos': 'GameTexture' のメンバーではありません
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
   GameScene.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'Scene/GameScene.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
   SceneManager.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'Scene/SceneManager.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
   TitleScene.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'Scene/TitleScene.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Scene\TitleScene.cpp(105,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Scene\TitleScene.cpp(109,45): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Scene\TitleScene.cpp(111,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  conioex.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2655,79): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2655,72): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2655,63): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2655,52): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2679,79): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2679,72): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2679,63): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\SchooLlibrary\conioex.cpp(2679,52): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(105,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(109,45): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(111,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
   TestGameManager.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'Test/TestGameManager.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
-  TestInputManager.cpp
-  TestMapManager.cpp
   TestScene.cpp
-C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Entity\Player\Player.h(36,18): error C2039: 'DrawFromCenterPos': 'GameTexture' のメンバーではありません
-  (ソース ファイル 'Test/TestScene.cpp' をコンパイルしています)
-      C:\Users\user\Desktop\就活\作成フォルダ\藤岡祐明_作品1\X_Shooting_C++\Resource\Texture\GameTexture.h(22,7):
-      'GameTexture' の宣言を確認してください
-  
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
-  Geometry.cpp
+  main.cpp
   コードを生成中...
+  X_Shooting_C++.vcxproj -> C:\制作\DirectXプロジェクト\X_Shooting_C++\x64\Debug\X_Shooting_C++.exe
