@@ -80,6 +80,14 @@ struct MapStatus {
     int y;
 };
 
+//===========================================================
+// float‚ðƒLƒƒƒXƒg‚·‚é
+//===========================================================
+namespace util {
+    inline int toInt(float value) {
+        return static_cast<int>(value);
+    }
+}
 
 
 #endif //TYPES_H

@@ -1,10 +1,10 @@
 #include "TestScene.h"
 
-#include <filesystem>
-#include "common.h"
-#include "Geometry.h"
-#include "conioex.h"
-#include "GameTextureManager.h"
+#include "DIContainer.h"
+#include "Game.h"
+#include "InputManager.h"
+#include  "ResourceManager.h"
+#include "IMapManager.h"
 #include "SpriteRenderer.h"
 
 using namespace ScreenConfig;
@@ -14,7 +14,7 @@ using InputMode = IInputManager::InputMode;
 TestScene::TestScene(std::shared_ptr<DIContainer> con) :
     gamestatus_(con->Create<GameStatus>()),
     resourcemanager_(con->Create<ResourceManager>()),
-    mapmanager_(con->Create<IMapManager>()),
+  //  mapmanager_(con->Create<IMapManager>()),
     inputmanager_(con->Create<IInputManager>()),
     render_(con->Create<SpriteRenderer>())
 {
@@ -23,21 +23,21 @@ TestScene::TestScene(std::shared_ptr<DIContainer> con) :
 
 int TestScene::Init() {
     int r = SceneBase::Init();
-    int s = mapmanager_->Init();
+  //  int s = mapmanager_->Init();
 
     return 0;
 }
 
 
 int TestScene::Update() {
-    mapmanager_->Update();
+    //mapmanager_->Update();
     return 0; 
 }
 
 int TestScene::Draw() {
 
     inputmanager_->InputReception();
-    mapmanager_->Draw();
+   // mapmanager_->Draw();
 
     //resourcemanager_->GameTextureDraw(TextureType::Title, 0, SRN_W / 2 - 99, 100);  // タイトルの描画
     //resourcemanager_->GameTextureDraw(TextureType::Player, 2, 100, 100);         // プレイヤーの描画

@@ -103,6 +103,18 @@
     <Filter Include="ソース ファイル\SpriteRenderer">
       <UniqueIdentifier>{0e281812-293d-42c2-a59f-4474cef3c124}</UniqueIdentifier>
     </Filter>
+    <Filter Include="デバックソース">
+      <UniqueIdentifier>{61f439a4-14ad-488c-8bfa-e483b9fbad43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="デバックソース\inputdebug">
+      <UniqueIdentifier>{31d72385-577b-4721-a511-f576cde46c0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="デバックソース\playerdebug">
+      <UniqueIdentifier>{315e0ff9-b61e-4e4c-8d17-39a34e57ff18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TESTソース\TestPlayer">
+      <UniqueIdentifier>{418bd8e3-5cc6-46f3-9710-52c5fa808007}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -192,6 +204,18 @@
     <ClInclude Include="Renderer\SpriteRenderer.h">
       <Filter>ソース ファイル\SpriteRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="DebugCode\DebugInput.h">
+      <Filter>デバックソース\inputdebug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCode\DebugManager.h">
+      <Filter>デバックソース</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCode\DebugPlayer.h">
+      <Filter>デバックソース\playerdebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestPlayer.h">
+      <Filter>TESTソース\TestPlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -253,6 +277,18 @@
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer.cpp">
       <Filter>ソース ファイル\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCode\DebugInput.cpp">
+      <Filter>デバックソース\inputdebug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>デバックソース</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCode\DebugPlayer.cpp">
+      <Filter>デバックソース\playerdebug</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestPlayer.cpp">
+      <Filter>TESTソース\TestPlayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

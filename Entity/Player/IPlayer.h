@@ -8,7 +8,6 @@ public:
     virtual ~IPlayer() = default;       //デストラクタ
 
     virtual int Init() = 0;                                // 初期化
-    virtual int Create() = 0;                              // プレイヤーを作成
     virtual int Update(int framecount,Vector2 moveinput) = 0; // 更新処理
     virtual int Draw() = 0;
 

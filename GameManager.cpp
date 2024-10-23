@@ -9,8 +9,12 @@
 #include "GameManager.h"
 #include "GameScene.h" 
 #include "TitleScene.h" 
-
-#include "conioex.h"
+#include "DIContainer.h"
+#include "SceneManager.h"
+#include "Game.h"
+#include "IInputManager.h"
+#include "ResourceManager.h"
+#include "SceneBase.h"
 
 using InputFlag = IInputManager::InputFlag;
 using InputMode = IInputManager::InputMode;

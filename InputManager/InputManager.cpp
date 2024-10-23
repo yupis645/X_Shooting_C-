@@ -49,7 +49,6 @@ int InputManager::InputReception()
 
 	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f,1);
 
-	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f, 1);
 
 	//テストモード有効時のみ作用
 #if TestMode
@@ -71,29 +70,34 @@ int InputManager::InputReception()
 Vector2 InputManager::Dirctionkeyinput(InputMode mode)
 {
 	Vector2 vec = Vector2::zero;
-	
-	if (IsFlagSet(InputFlag::left, InputMode::press))  vec.x -= 1;
-	if (IsFlagSet(InputFlag::right, InputMode::press)) vec.x += 1;
-	if (IsFlagSet(InputFlag::up, InputMode::press))    vec.y -= 1;
-	if (IsFlagSet(InputFlag::down, InputMode::press))  vec.y += 1;
 
-	if (IsFlagSet(InputFlag::left, InputMode::pushdown))  vec.x -= 1;
-	if (IsFlagSet(InputFlag::right, InputMode::pushdown)) vec.x += 1;
-	if (IsFlagSet(InputFlag::up, InputMode::pushdown))    vec.y -= 1;
-	if (IsFlagSet(InputFlag::down, InputMode::pushdown))  vec.y += 1;
+	switch (mode) {
+	case InputMode::press:
+		if (IsFlagSet(InputFlag::left, InputMode::press))  vec.x -= 1;
+		if (IsFlagSet(InputFlag::right, InputMode::press)) vec.x += 1;
+		if (IsFlagSet(InputFlag::up, InputMode::press))    vec.y -= 1;
+		if (IsFlagSet(InputFlag::down, InputMode::press))  vec.y += 1;
+		break;
+	case InputMode::pushdown:
+		if (IsFlagSet(InputFlag::left, InputMode::pushdown))  vec.x -= 1;
+		if (IsFlagSet(InputFlag::right, InputMode::pushdown)) vec.x += 1;
+		if (IsFlagSet(InputFlag::up, InputMode::pushdown))    vec.y -= 1;
+		if (IsFlagSet(InputFlag::down, InputMode::pushdown))  vec.y += 1;
+		break;
+	case InputMode::pushup:
+		if (IsFlagSet(InputFlag::left, InputMode::pushup))  vec.x -= 1;
+		if (IsFlagSet(InputFlag::right, InputMode::pushup)) vec.x += 1;
+		if (IsFlagSet(InputFlag::up, InputMode::pushup))    vec.y -= 1;
+		if (IsFlagSet(InputFlag::down, InputMode::pushup))  vec.y += 1;
+		break;
+	case InputMode::toggle:
+		if (IsFlagSet(InputFlag::left, InputMode::toggle))  vec.x -= 1;
+		if (IsFlagSet(InputFlag::right, InputMode::toggle)) vec.x += 1;
+		if (IsFlagSet(InputFlag::up, InputMode::toggle))    vec.y -= 1;
+		if (IsFlagSet(InputFlag::down, InputMode::toggle))  vec.y += 1;
+		break;
 
-	if (IsFlagSet(InputFlag::left, InputMode::pushup))  vec.x -= 1;
-	if (IsFlagSet(InputFlag::right, InputMode::pushup)) vec.x += 1;
-	if (IsFlagSet(InputFlag::up, InputMode::pushup))    vec.y -= 1;
-	if (IsFlagSet(InputFlag::down, InputMode::pushup))  vec.y += 1;
-
-	if (IsFlagSet(InputFlag::left, InputMode::toggle))  vec.x -= 1;
-	if (IsFlagSet(InputFlag::right, InputMode::toggle)) vec.x += 1;
-	if (IsFlagSet(InputFlag::up, InputMode::toggle))    vec.y -= 1;
-	if (IsFlagSet(InputFlag::down, InputMode::toggle))  vec.y += 1;
-
-
-	
+	}
 
 	return vec;
 }

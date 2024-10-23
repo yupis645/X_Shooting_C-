@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Renderer;FactoryClass;Entity/Player;Entity/Enemy/AirEnemys;Entity/Enemy/GroundEnemys;Entity/Enemy;Resource/Csv;res/Map;MapManager;Resource/Texture;Resource;GameManager;Test;$(SolutionDir);InputManager;DIContainer;include/boost;Scene;SchooLlibrary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>DebugCode;Renderer;FactoryClass;Entity/Player;Entity/Enemy/AirEnemys;Entity/Enemy/GroundEnemys;Entity/Enemy;Resource/Csv;res/Map;MapManager;Resource/Texture;Resource;GameManager;Test;$(SolutionDir);InputManager;DIContainer;include/boost;Scene;SchooLlibrary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +129,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
+    <ClInclude Include="DebugCode\DebugManager.h" />
+    <ClInclude Include="DebugCode\DebugInput.h" />
+    <ClInclude Include="DebugCode\DebugPlayer.h" />
     <ClInclude Include="DIContainer\DIContainer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -171,10 +174,14 @@
     <ClInclude Include="Test\TestGameManager.h" />
     <ClInclude Include="Test\TestInputManager.h" />
     <ClInclude Include="Test\TestMapManager.h" />
+    <ClInclude Include="Test\TestPlayer.h" />
     <ClInclude Include="Test\TestScene.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DebugCode\DebugInput.cpp" />
+    <ClCompile Include="DebugCode\DebugPlayer.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DIContainer\DIContainer.cpp" />
     <ClCompile Include="Entity\Player\Player.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -203,6 +210,7 @@
     <ClCompile Include="Test\TestGameManager.cpp" />
     <ClCompile Include="Test\TestInputManager.cpp" />
     <ClCompile Include="Test\TestMapManager.cpp" />
+    <ClCompile Include="Test\TestPlayer.cpp" />
     <ClCompile Include="Test\TestScene.cpp" />
     <ClCompile Include="X_Shooting_C++\Geometry.cpp" />
   </ItemGroup>

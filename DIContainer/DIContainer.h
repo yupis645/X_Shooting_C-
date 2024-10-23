@@ -9,14 +9,14 @@
 // MapManagerのみスコープが di::unique(範囲を限定) に設定。その他は di::singleton(全体を通して一つ) に設定
 //----------------------------------------------------------------------------------------------------
 
-#include "di.hpp"
+class IGameManager;
+class GameStatus;
+class ResourceManager;
+class SpriteRenderer;
+class IInputManager;
+class DebugManager;
 
-#include "IGameManager.h"
-#include "ResourceManager.h"
-#include "IInputManager.h"
-#include "IMapManager.h"
-#include "GameSceneFactory.h"
-#include "SpriteRenderer.h"
+#include "di.hpp"
 
 namespace di = boost::di;
 
@@ -37,9 +37,10 @@ private:
         std::shared_ptr<IGameManager>,
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
-        std::shared_ptr<IMapManager>,
         std::shared_ptr<SpriteRenderer>,
-        std::shared_ptr<IInputManager>
+        std::shared_ptr<IInputManager>,
+
+        std::shared_ptr<DebugManager>
         >
     > injector;  
 };

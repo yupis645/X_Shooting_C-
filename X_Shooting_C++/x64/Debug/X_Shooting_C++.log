@@ -1,14 +1,3 @@
-﻿  DIContainer.cpp
-  GameManager.cpp
-  GameScene.cpp
-  SceneManager.cpp
-  TitleScene.cpp
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(105,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(109,45): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(111,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  TestGameManager.cpp
-  TestScene.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
-  main.cpp
-  コードを生成中...
+﻿  SpriteRenderer.cpp
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Renderer\SpriteRenderer.cpp(53,1): warning C4715: 'SpriteRenderer::DrawFromCenterPos': 値を返さないコントロール パスがあります。
   X_Shooting_C++.vcxproj -> C:\制作\DirectXプロジェクト\X_Shooting_C++\x64\Debug\X_Shooting_C++.exe

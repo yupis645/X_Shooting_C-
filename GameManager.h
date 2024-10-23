@@ -9,16 +9,15 @@
 // init(初期化),input(入力),update(更新),draw(描画)のライフサイクルを管理する
 //----------------------------------------------------------------------------------------------------
 
-#include "Game.h"
-#include "di.hpp"
+class DIContainer;
+class SceneManager;            
+class GameStatus;          
+class IInputManager;       
+class ResourceManager;
+class SceneBase;
+
+#include <iostream>
 #include "IGameManager.h"
-#include "SceneBase.h"
-#include "TitleScene.h"
-#include "GameScene.h"
-#include "IInputManager.h"
-#include "ResourceManager.h"
-#include "DIContainer.h"
-#include "SceneManager.h"
 
 
 class GameManager :public IGameManager {

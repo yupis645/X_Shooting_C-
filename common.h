@@ -65,6 +65,7 @@ namespace SceneConfig {
 
 }
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -95,7 +96,7 @@ struct TextureConfig {
 
 namespace TextureConfigs {
 	constexpr TextureConfig TITLE			{ 198, 58,  1,  1, 0, 1};
-	constexpr TextureConfig PLAYER			{  32, 32,  6,  2, 2, 6};
+	constexpr TextureConfig PLAYER			{  32, 32,  6,  2, 2, 3};
 	constexpr TextureConfig TARGETSIGHT		{  32, 32,  6,  2, 0, 2};
 	constexpr TextureConfig BULLET			{  16, 16,  3,  1, 0, 2};
 	constexpr TextureConfig BOM				{  16, 16,  3,  1, 2, 1};

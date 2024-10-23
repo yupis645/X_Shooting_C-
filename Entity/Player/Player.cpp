@@ -1,6 +1,10 @@
 
 #include "Player.h"
 
+#include "InputManager.h"
+#include "GameTexture.h"
+#include "types.h"
+
 using namespace PlayerConfig;
 using namespace ScreenConfig;
 
@@ -10,9 +14,9 @@ using namespace ScreenConfig;
 //===============================================================
 //					コンストラクタ
 //===============================================================
-Player::Player(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer> rendermanager)
-	: anim(0), pat(0), shootdown(false), ownframecount(0), render_(rendermanager),
-	texture(nullptr) // 必要なら初期化
+Player::Player(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer> render, std::shared_ptr<IInputManager> input)
+	: anim(0), pat(0), shootdown(false), ownframecount(0), render_(render),input_(input),
+	texture(rm->GetTexture(TextureType::Player)) // 必要なら初期化
 {
 	// Targetsightのインスタンスを動的に作成
 	targetsight = std::make_unique<Targetsight>(*this, rm);
@@ -27,7 +31,8 @@ Player::Player(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRender
 // 座標などの情報を初期化する
 //===============================================================
 int Player::Init() {
-	GameObject::InitClear();
+	position = Vector2(CENTER_X, CENTER_Y);
+	hitbox.CenterPositionSync(position, PLAYER_HITBOX_SIZE);
 	targetsight->Init();
 	anim = 0;
 	pat = 0;
@@ -36,34 +41,6 @@ int Player::Init() {
 	return 0;
 }
 
-//===============================================================
-//					プレイヤーの作成
-// 
-// 仮に作ったPLAYERに必要なデータをセットして返す
-// ・中心座標から画像と当たり判定の左上座標を求める
-// ・照準器の左右をプレイヤーの左右と揃える
-// ・自機、ショット&ボム、照準器の画像を取得する
-//===============================================================
-int Player::Create() {
-
-	Init();
-
-
-	hitbox.CenterPositionSync(position, PLAYER_HITBOX_SIZE);
-
-	/*照準の当たり判定の更新*/
-	targetsight->Init();
-
-	
-
-
-	///*プレイヤー画像読み込み*/
-	//LoadDivBmp(PngData.Player, 0, 0, PLAYER_PIC_SIZE, PLAYER_PIC_SIZE, 6, 2,pic);		//自機 or 照準の画像ロード
-	//LoadDivBmp(PngData.Shot, 0, 0, BULLET_SIZE, BULLET_SIZE, 3, 1, bullet);			//ザッパー or ブラスターの画像ロード	
-
-	return 0;
-
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -119,12 +96,14 @@ int Player::Move(Vector2 move) {
 //  ※TestMode true & DebugEnable trueの場合は被弾処理を無効化
 //===============================================================
 int Player::Update( int framecount, Vector2 moveinput) {
-
+	
 	//独自のframecountを進める
 	ownframecount++;
 
 	//プレイヤーと照準器のboxcolliderの移動
 	Sync_PositionAndHitbox();
+
+	targetsight->Update();
 
 	////*自機のアニメーション番号の進行*/
 	int s = AnimationUpdate();
@@ -154,22 +133,25 @@ int Player::Update( int framecount, Vector2 moveinput) {
 int Player::Draw() {
 
 
-	//Vector2 pic = LeftTopPos(position, PLAYER_PIC_SIZE);
-	///* プレイヤー or 照準の描写 */
-	//if (!shootdown) {
-	//	// ImageManager からプレイヤー画像を取得して描画
-	//	DrawBmp(pic.x, pic.y, ImageManager::player[anim]);               // 自機の描写
-	//	//DrawBmp(pic_x, pic_y - BOM_ST, ImageManager::player[sight_anim]); // 照準の描写（ボムの射程距離分離す）
-	//	sight.Draw();
-	//}
+	/* プレイヤー or 照準の描写 */
+	if (!shootdown) {
+		render_->DrawFromCenterPos(texture,anim, position.x,position.y, PLAYER_PIC_SIZE);
+		targetsight->Draw();
 
-	///* プレイヤーが撃破された場合 */
-	//else if (shootdown && anim < 6) {  // 爆発アニメーションの描画（anim <= 6は爆発アニメーションが6フレーム）
-	//	DrawBmp(pic.x, pic.y, ImageManager::PlayerBomber[anim]);  // 自機の描写
-	//	
+		
+	}
+
+	/* プレイヤーが撃破された場合 */
+	else if (shootdown && anim < 6) {  // 爆発アニメーションの描画（anim <= 6は爆発アニメーションが6フレーム）
+		render_->DrawBomberFromCenterPos(SpriteRenderer::BomberType::bomber,anim, position.x, position.y);
+		//DrawBmp(pic.x, pic.y, ImageManager::PlayerBomber[anim]);  // 自機の描写
+		//render_->DrawFromCenterPos(texture, anim, position.x, position.y, PLAYER_PIC_SIZE);
+
 
 		return 0;
-	//}
+	}
+
+	return 0;
 }
 
 
@@ -191,11 +173,19 @@ int Player::AnimationUpdate(){
 	if (shootdown == false) {
 		if (ownframecount % 12 == 0) {
 			anim++;		//アニメーション番号を進める
-			Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
+			//Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
+			if(anim >= TextureConfigs::PLAYER.indexcount) anim = 0;
 			ownframecount = 0;
 		}
 	}
+
 	else {
+		if (ownframecount % 12 == 0) {
+			anim++;		//アニメーション番号を進める
+			//Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
+			if (anim >= 5) anim = 0;
+			ownframecount = 0;
+		}
 		if (ownframecount % 20 == 0)	return 2;
 	}
 

@@ -10,10 +10,15 @@
 
 #include "DIContainer.h"
 #include "di.hpp"
-
 #include "GameManager.h"
-#include "MapManager.h"
+
+#include "Game.h"
+#include "ResourceManager.h"
+#include "SpriteRenderer.h"
 #include "InputManager.h"
+#include "DebugManager.h"
+
+
 
 
 // コンストラクタで DI コンテナを生成して保持
@@ -22,16 +27,16 @@ DIContainer::DIContainer() {
         std::shared_ptr<IGameManager>,
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
-        std::shared_ptr<IMapManager>,
         std::shared_ptr<SpriteRenderer>,
-        std::shared_ptr<IInputManager>>>(
+        std::shared_ptr<IInputManager>,
+        std::shared_ptr<DebugManager>>>(
             di::make_injector(
                 di::bind<IGameManager>().in(di::singleton).to<GameManager>(),
                 di::bind<GameStatus>().in(di::singleton).to<GameStatus>(),
                 di::bind<ResourceManager>().in(di::singleton).to<ResourceManager>(),
-                di::bind<IMapManager>().in(di::unique).to<MapManager>(),
                 di::bind<SpriteRenderer>().in(di::singleton).to<SpriteRenderer>(),
-                di::bind<IInputManager>().in(di::singleton).to<InputManager>()
+                di::bind<IInputManager>().in(di::singleton).to<InputManager>(),
+                di::bind<DebugManager>().in(di::singleton).to<DebugManager>()
             )
         );
 }

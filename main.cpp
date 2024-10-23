@@ -3,6 +3,7 @@
 #include "di.hpp"
 #include "GameManager.h"
 #include "DIContainer.h"
+#include "DebugManager.h"
 
 
 // デバックモードの初期状態。デバックモードが有効なら最初からtrue
@@ -32,12 +33,13 @@ int main(void)
 	GM->Init();
 
 
+
 /////////////////////////////////////////メインループ//////////////////////////////////////////////////////
 	while (1) {
-		GM->Input();
+		int input_ = GM->Input();
 		int state = GM->GameLoop();
 
-		if (state == APP_EXIT) {
+		if (state + input_ >= APP_EXIT) {
 			break;
 		}
 	}

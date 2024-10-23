@@ -1,4 +1,3 @@
-#include "TestMapManager.h"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 //                                              描写するマップを管理するクラス(テストクラス)
@@ -6,6 +5,14 @@
 // マップチップを並べたint配列を元にマップの座標を管理しつつ、描画する
 // 描画できるスクリーンのサイズと同じ大きさを持ったint配列のprimarymapとsecondarymapを交互に描画することでスクロールする
 //---------------------------------------------------------------------------------------------------------------------------------------------
+
+#include "TestMapManager.h"
+#include "common.h"
+#include "ResourceManager.h"
+#include "SpriteRenderer.h"
+#include "GameTexture.h"
+
+
 
 using namespace MapConfig;      //mapサイズやチップサイズなどが定義されている定数の集まり
 
@@ -17,6 +24,15 @@ namespace {
     constexpr int DRAWMAP_RANGE = DRAWMAP_HIGH * 2;      //一つのマップが描画する距離(フレームインからフレームアウトまで)
     constexpr int PARTITION_MAX = 4;                     //マップの分割数
     constexpr int INIT_Y_OFFSET = -DRAWMAP_HIGH;      //マップが描画範囲に入る前のy座標の補正値(描画は一番後ろのインデックスから始まるので左上座標はDRAWMAP_HIGH分引く必要がある)
+}
+
+TestMapManager::TestMapManager(std::shared_ptr<ResourceManager> rm) : currentnumber(0), currentpartition(0),
+mapchip(0), mapdata({}), backmap({}),
+primarymap({ false, {}, 0, 0 }),
+secondarymap({ false, {},0,0 })
+{
+    mapchip = rm->GetTexture(TextureType::Map);
+    SetDrawMapData(rm->ConvertDrawMapCsv_Vector());
 }
 
 //=======================================================================================
@@ -86,4 +102,20 @@ int TestMapManager::Draw()
     }
 
     return 0;
+}
+
+//=============================================================================================
+//                              マップチップ画像のロード
+//=============================================================================================
+
+inline bool TestMapManager::LoadMapChipTexture(std::shared_ptr<GameTexture> tex) {
+    // テクスチャが有効かどうかを確認する
+    if (!tex) {
+        std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
+        return false;  // 失敗を示す
+    }
+
+    // 正常に読み込まれた場合
+    mapchip = tex;
+    return true;        // 成功を示す
 }

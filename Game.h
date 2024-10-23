@@ -27,8 +27,8 @@ namespace PlayerConfig {
 	constexpr int PLAYER_HITBOX_SIZE = 16;		//画像のサイズ
 	constexpr int PLAYER_PIC_SIZE = 32;		//画像のサイズ
 
-	constexpr int SIGHT_HITBOX_SIZE = 16;		//画像のサイズ
-	constexpr int SIGHT_PIC_SIZE = 16;		//画像のサイズ
+	constexpr int SIGHT_HITBOX_SIZE = 32;		//画像のサイズ
+	constexpr int SIGHT_PIC_SIZE = 32;			//画像のサイズ
 
 	constexpr int MAX_SHOT = 3;		//画面内に表示できるショットの数
 	constexpr int SHOT_SPEED = 20;	//ショットの弾速
@@ -58,6 +58,8 @@ namespace EnemyShotConfig {
 
 }
 constexpr int MAX_LEVEL	= 64;			//敵の出現レベルの上限
+
+constexpr int BOMBER_PIC_SIZE = 47;			//敵の出現レベルの上限
 
 
 //============================================
@@ -184,7 +186,6 @@ public:
 	virtual void InitClear() {
 		 position = Vector2::zero;
 		 hitbox = Boxcollider::zero;
-		 active = false;
 	}
 
 	virtual Vector2 GetPosition()const {	return position;	}

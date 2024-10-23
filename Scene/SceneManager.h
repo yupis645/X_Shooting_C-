@@ -1,9 +1,10 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 
+class SceneBase;
+class DIContainer;
+
 #include <iostream>
-#include "SceneBase.h"
-#include "DIContainer.h"
 
 class SceneManager{
 public :

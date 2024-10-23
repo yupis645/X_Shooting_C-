@@ -9,6 +9,16 @@
 #include "TestGameManager.h"
 #include "TestScene.h"
 
+#include "GameManager.h"
+#include "GameScene.h" 
+#include "TitleScene.h" 
+#include "DIContainer.h"
+#include "SceneManager.h"
+#include "Game.h"
+#include "IInputManager.h"
+#include "ResourceManager.h"
+#include "SceneBase.h"
+
 
 //==================================================================
 //						コンストラクタ
@@ -16,7 +26,7 @@
 // diコンテナより、gameStatus,ResouceManager,InputManagerのインスタンスを取得する
 // currnetscene_には最初に使用するシーンを指定する
 //==================================================================
-inline TestGameManager::TestGameManager(std::shared_ptr<DIContainer> con)
+TestGameManager::TestGameManager(std::shared_ptr<DIContainer> con)
 	: container_(con),
 	gamestatus_(con->Create<GameStatus>()),
 	resoucemanager_(con->Create<ResourceManager>()),

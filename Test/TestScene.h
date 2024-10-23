@@ -1,14 +1,15 @@
 #ifndef TESTSCENE_H
 #define TESTSCENE_H
 
-#include "SceneBase.h"
-#include "IInputManager.h"
-#include "DIContainer.h"
-#include "ResourceManager.h"
-#include "IMapManager.h"
-#include "SpriteRenderer.h"
+class DIContainer;
+class GameStatus;
+class IInputManager;
+class ResourceManager;
+class SpriteRenderer;
+class IMapManager;
 
-#include "common.h"
+#include "SceneBase.h"
+
 
 class TestScene : public SceneBase {
 public:
@@ -27,7 +28,7 @@ public:
 private:
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<ResourceManager> resourcemanager_;
-    std::shared_ptr<IMapManager> mapmanager_;  // Player クラスへの依存
+   // std::shared_ptr<IMapManager> mapmanager_;  // Player クラスへの依存
     std::shared_ptr<SpriteRenderer> render_;  // Player クラスへの依存
     std::shared_ptr<IInputManager>inputmanager_;
 

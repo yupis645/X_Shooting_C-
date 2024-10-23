@@ -3,36 +3,20 @@
 #define TESTMAPMANAGER_H
 
 class GameTexture;
+class ResourceManager;
+class SpriteRenderer;
+
 #include <iostream>
 #include <vector>
-#include <string>
-#include "types.h"
-
-#include "GameTexture.h" 
 #include "IMapManager.h"
-#include "ResourceManager.h"
-#include "SpriteRenderer.h"
+#include "types.h"
 
 
 class TestMapManager: public IMapManager {
 public:
-    //=============================================================================================
-    //                              コンストラクタ
-    //=============================================================================================
-    TestMapManager(std::shared_ptr<ResourceManager> rm) : currentnumber(0), currentpartition(0),
-        mapchip(0), mapdata({}),  backmap({}),
-        primarymap({ false, {}, 0, 0 }),
-        secondarymap({ false, {},0,0 })
-     {
-        mapchip = rm->GetTexture(TextureType::Map);
-       // LoadMapChipTexture(rm->GetTextureManager()->GetTexture(TextureType::Map));     //マップチップのロード
-        SetDrawMapData(rm->ConvertDrawMapCsv_Vector());
-    }		                    
+    // コンストラクタ
+    TestMapManager(std::shared_ptr<ResourceManager> rm);
 
-    //=============================================================================================
-    //                              デストラクタ
-    //=============================================================================================
-    ~TestMapManager() = default;
    //=============================================================================================
    //                              ライフサイクル関数
    //=============================================================================================
@@ -43,17 +27,7 @@ public:
   //=============================================================================================
   //                              マップチップ画像のロード
   //=============================================================================================
-    bool LoadMapChipTexture(std::shared_ptr<GameTexture> tex)override {
-        // テクスチャが有効かどうかを確認する
-        if (!tex) {
-            std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
-            return false;  // 失敗を示す
-        }
-
-        // 正常に読み込まれた場合
-        mapchip = tex;
-        return true;        // 成功を示す
-    }
+    bool LoadMapChipTexture(std::shared_ptr<GameTexture> tex)override;
 
   //=============================================================================================
   //                              Getter / Setter
@@ -62,6 +36,10 @@ public:
     void SetDrawMapData(std::vector<int> copyvector) { mapdata = copyvector; }  //マップチップのint配列のsetter
 
 
+    //=============================================================================================
+    //                              デストラクタ
+    //=============================================================================================
+    ~TestMapManager() = default;
 private:
     int currentnumber;			    //現在のステージ番号を記憶する
     int currentpartition;			//ステージを分割した中で現在は何番目かを示す

@@ -1,11 +1,18 @@
 
+#include "TitleScene.h"
+
 #include "common.h"
 #include "Geometry.h"
-#include "TitleScene.h"
-#include "Game.h"
+#include "DIContainer.h"
+#include "IInputManager.h"
+#include "ResourceManager.h"
+#include "SpriteRenderer.h"
+#include "GameTexture.h"
 #include "conioex.h"
+#include "InputManager.h"
+#include "ResourceManager.h"
 
-using namespace ScreenConfig; 
+using namespace ScreenConfig;
 using InputFlag = IInputManager::InputFlag;
 using InputMode = IInputManager::InputMode;
 namespace {

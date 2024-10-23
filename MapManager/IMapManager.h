@@ -1,6 +1,7 @@
 #ifndef IMAPMANAGER_H
 #define IMAPMANAGER_H
 
+class GameTexture;
 
 class IMapManager {
 public :

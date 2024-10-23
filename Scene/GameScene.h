@@ -36,7 +36,7 @@ private:
     std::shared_ptr<DIContainer> container_;  // Player クラスへの依存
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
     std::shared_ptr<IMapManager>mapmanager_;
-    std::shared_ptr<IInputManager>inputmanager_;
+    std::shared_ptr<IInputManager>input_;
     std::shared_ptr<ResourceManager>resourcemanager_;
     std::shared_ptr<GameSceneFactory>instanceFactory_;
 

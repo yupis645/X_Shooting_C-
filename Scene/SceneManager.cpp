@@ -1,4 +1,3 @@
-#include "SceneManager.h"
 
 
 //----------------------------------------------------------------------------------------------------
@@ -8,8 +7,16 @@
 // diコンテナではシングルトンでバインドされているので、create関数で常に同じインスタンスが取得できる
 // init(初期化),input(入力),update(更新),draw(描画)のライフサイクルを管理する
 //----------------------------------------------------------------------------------------------------
+#include "SceneManager.h"
+
+#include "SceneBase.h"
 #include "GameScene.h" 
 #include "TitleScene.h" 
+
+#include "DIContainer.h"
+#include "DebugManager.h" 
+
+
 
 #include "conioex.h"
 
@@ -92,6 +99,8 @@ int SceneManager::Draw()
 	ClearScreen(0x10, 0x10, 0x10);	//画面消去：R,G,Bの指定色で塗りつぶす
 
 	currentscene_->Draw();
+
+	//container_->Create<DebugManager>()->DrawInputFrag();
 
 	PrintFrameBuffer();	//画面バッファを転送
 	RenderScreen();		//画面をレンダリング

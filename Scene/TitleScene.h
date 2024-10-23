@@ -1,17 +1,17 @@
 #ifndef TITLESCENE_H
 #define TITLESCENE_H
-#include <array>
-#include "di.hpp"
 
+// ‘O•ûéŒ¾
+class DIContainer;
 class GameStatus;
 class IInputManager;
-struct StringText;
+class ResourceManager;
+class SpriteRenderer;
+class GameTexture;
 
-#include "Geometry.h"
+#include <array>
 #include "SceneBase.h"
-#include "IInputManager.h"
-#include "DIContainer.h"
-#include "SpriteRenderer.h"
+#include "Game.h"
 
 class TitleScene : public SceneBase {
 public:
