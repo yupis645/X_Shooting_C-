@@ -15,6 +15,7 @@
 
 #include "DIContainer.h"
 #include "DebugManager.h" 
+#include "InputManager.h" 
 
 
 

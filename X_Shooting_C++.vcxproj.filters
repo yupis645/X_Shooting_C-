@@ -115,6 +115,54 @@
     <Filter Include="TESTソース\TestPlayer">
       <UniqueIdentifier>{418bd8e3-5cc6-46f3-9710-52c5fa808007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Bullets">
+      <UniqueIdentifier>{9e02f227-9697-4ec7-b7f5-5700a60417b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Bullets\BulletManager">
+      <UniqueIdentifier>{d71566e7-3254-41b8-ab8b-de79f3247644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Bullets\PlayerBom">
+      <UniqueIdentifier>{f6e3fbd2-2e69-488f-949b-f17742a1d563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Bullets\PlayerShot">
+      <UniqueIdentifier>{361a34aa-59b0-4491-9ece-74e34c2c2b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Bullets\EnemyShot">
+      <UniqueIdentifier>{dcd48082-d2e8-4be9-a31f-7ef1509b8121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\BACURA">
+      <UniqueIdentifier>{738f6d97-6e67-448d-bba4-a3b72764ddcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\BRAGZAKATO">
+      <UniqueIdentifier>{8825f198-313f-4507-b780-efeb818e3789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO">
+      <UniqueIdentifier>{9d726376-0744-46a0-a0a5-ba7c878caca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO">
+      <UniqueIdentifier>{8b6521fb-54e5-4619-bd33-b11b88be479e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\JARA">
+      <UniqueIdentifier>{075bfb50-03e9-43b3-9389-11be98222e83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\KAPI">
+      <UniqueIdentifier>{4d487c95-20be-45b5-b4b1-fe36dfd8ada7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\TERRAZI">
+      <UniqueIdentifier>{bd7b5124-a98d-4f34-b701-a2845baa39c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\ZAKATO">
+      <UniqueIdentifier>{d93b04cb-3b96-4c20-a02f-f57ec2ecc0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\ZOSHI">
+      <UniqueIdentifier>{ebc3be9e-ecab-40c1-9b2d-cc40a9056946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\1.TOROID">
+      <UniqueIdentifier>{3f29729e-1ef7-472f-aaae-a564e2ddaf32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\2.TORKAN">
+      <UniqueIdentifier>{cb54e43a-f7dd-4e03-b5ed-b6b5543b33d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -216,6 +264,72 @@
     <ClInclude Include="Test\TestPlayer.h">
       <Filter>TESTソース\TestPlayer</Filter>
     </ClInclude>
+    <ClInclude Include="Bullets\BulletBase.h">
+      <Filter>ソース ファイル\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets\BulletsManager.h">
+      <Filter>ソース ファイル\Bullets\BulletManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets\EnemyShot.h">
+      <Filter>ソース ファイル\Bullets\EnemyShot</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets\IBulletsManager.h">
+      <Filter>ソース ファイル\Bullets\BulletManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets\PlayerShot.h">
+      <Filter>ソース ファイル\Bullets\PlayerShot</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets\PlayerBom.h">
+      <Filter>ソース ファイル\Bullets\PlayerBom</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\EnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\EnemysManager.h">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\IEnemysManager.h">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\GroundEnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\GroundEnemys</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\BACURA.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BACURA</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\BRAGZAKATO.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BRAGZAKATO</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\GARUZAKATO.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\GIDDOSPARIO.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\JARA.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\JARA</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\KAPI.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\KAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\TERRAZI.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\TERRAZI</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\TORKAN.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\2.TORKAN</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\TOROID.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\1.TOROID</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\ZAKATO.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZAKATO</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Enemy\AirEnemys\ZOSHI.h">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZOSHI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -289,6 +403,60 @@
     </ClCompile>
     <ClCompile Include="Test\TestPlayer.cpp">
       <Filter>TESTソース\TestPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets\BulletsManager.cpp">
+      <Filter>ソース ファイル\Bullets\BulletManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets\EnemyShot.cpp">
+      <Filter>ソース ファイル\Bullets\EnemyShot</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets\PlayerBom.cpp">
+      <Filter>ソース ファイル\Bullets\PlayerBom</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets\PlayerShot.cpp">
+      <Filter>ソース ファイル\Bullets\PlayerShot</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\EnemyBase.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\EnemysManager.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\BACURA.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BACURA</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\BRAGZAKATO.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BRAGZAKATO</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\GARUZAKATO.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\GIDDOSPARIO.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\JARA.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\JARA</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\KAPI.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\KAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\TERRAZI.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\TERRAZI</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\TORKAN.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\2.TORKAN</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\TOROID.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\1.TOROID</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\ZAKATO.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZAKATO</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\ZOSHI.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZOSHI</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\AirEnemys\AirEnemyBase.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

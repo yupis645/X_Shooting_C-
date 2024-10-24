@@ -31,12 +31,12 @@ void DebugManager::DrawInputFrag()
 
 void DebugManager::DrawHitBox(const Boxcollider box)
 {
-	DrawRect(box.left,box.top,box.right,box.bottom, DWRGB(0, 255, 255), true);	//当たり判定
+	DrawRect(static_cast<int>(box.left), static_cast<int>(box.top), static_cast<int>(box.right), static_cast<int>(box.bottom), DWRGB(0, 255, 255), true);	//当たり判定
 
 }
 void DebugManager::DrawCenterPos(const Vector2 pos)
 {
-	DrawRect(pos.x - 1, pos.y - 1, pos.x + 1, pos.y + 1, DWRGB(255, 255, 255), true);	//中心点
+	DrawRect(static_cast<int>(pos.x )- 1, static_cast<int>(pos.y )- 1, static_cast<int>(pos.x )+ 1, static_cast<int>(pos.y )+ 1, DWRGB(255, 255, 255), true);	//中心点
 
 
 }

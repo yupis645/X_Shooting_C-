@@ -1,6 +1,8 @@
 #ifndef TEXTUREDATAMANAGER_H
 #define TEXTUREDATAMANAGER_H
 
+class GameTexture;
+
 #include <iostream>
 #include <map>
 #include <string>
@@ -31,9 +33,31 @@ public:
         return str.c_str();
     }
 
+    //=======================================================================================
+  //pngデータとサイズなどの情報を受けとり、画像をスライスしてメンバ変数に格納する
+  //=======================================================================================
+    bool CreateGameTexture(TextureType type, const std::wstring&, TextureConfig config);
+
+    //=======================================================================================
+    // 任意の GameTexture を描画する共通関数
+    //=======================================================================================
+    std::shared_ptr<GameTexture> GetTexture(TextureType type);
+
+    //getter
+    const std::map<TextureType, std::shared_ptr<GameTexture>>& GetAllTexture() const { return textures_; }
+
+    //=======================================================================================
+    //                          デストラクタ
+    //=======================================================================================
+    ~TextureDataManager() {}
+
+
+
 private:
     std::map<TextureType, TextureConfig> texdatacongfig;
     std::map<TextureType, std::wstring> texturepath;
+    std::map<TextureType, std::shared_ptr<GameTexture>> textures_;      // TextureType をキーにして GameTexture を管理するマップ
+
 };
 
 

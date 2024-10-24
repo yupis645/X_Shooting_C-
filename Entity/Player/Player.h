@@ -80,8 +80,7 @@ private:
         }
 
         void Draw() {
-           // int anim = enemyhit ? 1 : 0;
-            int anim = 1;
+            int anim = enemyhit ? 1 : 0;
             if (player_.render_ && texture) {
                 player_.render_->DrawFromCenterPos(texture, anim, static_cast<int>(position.x), static_cast<int>(position.y), PlayerConfig::SIGHT_PIC_SIZE);
             }

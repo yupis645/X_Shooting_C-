@@ -1,31 +1,30 @@
 #ifndef TOROID_H
 #define TOROID_H
 
+class Boxcollider;
+class Vector2;
 #include "AirEnemyBase.h"
-#include "Player.h"
-#include "BulletManager.h"
 
 class TOROID : public AirEnemyBase 
 {
 public:
-	TOROID(std::shared_ptr<IPlayer> pl, std::shared_ptr<IBulletManager> bm):player_(pl),bulletmanager_(bm) {}
+	TOROID() {}
 	~TOROID(){}
 
 
-	int Init() override;
-	int Create(int number, int typenumber = 0) override;
-	int ActionUpdate(int framecount) override;
-	int UniqueUpdate(int framecount) override;
+	void Init() override;
+	int Create(std::shared_ptr<IPlayer> pl,int number, int typenumber = 0) override;
 
-	int ActionPattern01();
-	int ActionPattern02(int framecount);
-	int ActionPattern03(int framecount);
 
-	int tiypeaction();
+	int Update(std::shared_ptr<IPlayer> pl) override;
+	int UniqueUpdate(std::shared_ptr<IPlayer> pl) override;
 
-protected:
-	std::shared_ptr<IPlayer> player_;
-	std::shared_ptr<IBulletManager> bulletmanager_;;
+
+private:
+
+	int ActionPattern01(const Boxcollider& playerhitbox,const Vector2& playerpos);
+	void ActionPattern02();
+	void ActionPattern03();
 };
 
 

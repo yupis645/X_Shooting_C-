@@ -17,19 +17,19 @@ public:
 			return false;
 		}
 
-		drawfile = drawFile;
-		backfile = backFile;
+		mapdatafile = drawFile;
+		enemyplacement = backFile;
 		return true;
 	}
 
 
-	std::string GetDrawmapcsv() { return drawfile;  }
-	std::string Getbackmapcsv() { return backfile;  }
+	std::string GetMapData() { return mapdatafile;  }
+	std::string GetEnemyPlacement() { return enemyplacement;  }
 	
 
 private:
-	std::string drawfile;
-	std::string backfile;
+	std::string mapdatafile;
+	std::string enemyplacement;
 
 	// ファイルが存在するかチェックする関数
 	bool IsFileAccessible(const std::string& filename) {

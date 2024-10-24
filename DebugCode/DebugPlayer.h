@@ -14,8 +14,18 @@ public :
 	void DrawPos(bool is)
 	{
 		if (is) {
-			DrawRect(player_->GetHitbox().left, player_->GetHitbox().top, player_->GetHitbox().right, player_->GetHitbox().bottom, DWRGB(255, 0, 0), true);								//当たり判定
-			DrawRect((int)player_->GetPosition().x - 1, (int)player_->GetPosition().y - 1, (int)player_->GetPosition().x + 1, (int)player_->GetPosition().y + 1, DWRGB(255, 255, 255), true);	//中心点
+			int left = static_cast<int>(player_->GetHitbox().left);
+			int top = static_cast<int>(player_->GetHitbox().top);
+			int right = static_cast<int>(player_->GetHitbox().right);
+			int bottom = static_cast<int>(player_->GetHitbox().bottom);
+
+			int x = static_cast<int>(player_->GetPosition().x);
+			int y = static_cast<int>(player_->GetPosition().y);
+
+
+
+			DrawRect(left, top, right, bottom, DWRGB(255, 0, 0), true);								//当たり判定
+			DrawRect(x - 1, y - 1, x + 1, y + 1, DWRGB(255, 255, 255), true);	//中心点
 			//DrawRect(_p.sight_hitbox.left, _p.sight_hitbox.top, _p.sight_hitbox.right, _p.sight_hitbox.bottom, DWRGB(0, 255, 255), false);	//当たり判定
 
 		}

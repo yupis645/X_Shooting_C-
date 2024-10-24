@@ -264,7 +264,7 @@ namespace {
 // 
 // 1.管理するクラスのインスタンスをスマートポインタで生成する
 // 2.ゲーム中に使用するテクスチャをTextureDataManagerに保存する
-// 3.GameTextureManagerにて画像をゲームで使えるようにスライスする
+// 3.texturedataに格納された画像をスライスしてgametexturesに格納する
 // 4.csvファイルを読み込み、ファイルをCsvDataManagerに保存する
 //===============================================================================================
 ResourceManager::ResourceManager()
@@ -273,13 +273,12 @@ ResourceManager::ResourceManager()
     // 1.管理するクラスのインスタンスをスマートポインタで生成する
     texturedata = std::make_shared<TextureDataManager>();
     csvdata = std::make_shared<CsvDataManager>();
-    gametextures = std::make_shared<GameTextureManager>();
 
     // 2.テクスチャのファイルパスを取得し、texturedataに格納する
     // 関数はnamespaceにある
     AllTextureLoad(*this);
 
-    // 3.texturedataに格納された画像を元にTextrueConfigに基づいて画像をスライスしてgametexturesに格納する
+    // 3.texturedataに格納された画像をスライスしてgametexturesに格納する
     // 関数はnamespaceにある
     AllTex_Convert_GameTex(*this);
 
@@ -319,7 +318,7 @@ bool ResourceManager::InitTextureLoad(TextureType type, const std::wstring& path
 //===============================================================================================
 bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
 {
-    if (gametextures->CreateGameTexture(type, TextureTypeToTexturePath(texturedata, type), config))
+    if (texturedata->CreateGameTexture(type, TextureTypeToTexturePath(texturedata, type), config))
     {
         std::wcerr << L"Error: Texture  not found : " << std::endl;
         return true;
@@ -333,7 +332,7 @@ bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
 // インスタンス化されているテクスチャを取り出す
 //===============================================================================================
  std::shared_ptr<GameTexture> ResourceManager::GetTexture(TextureType type) {
-    auto tex = gametextures->GetTexture(type);
+    auto tex = texturedata->GetTexture(type);
     // テクスチャが有効かどうかを確認する
     if (tex == nullptr) {
         std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
@@ -359,7 +358,7 @@ bool ResourceManager::LoadMapCsvFile(const std::string& frontcsvfile, const std:
 // csvファイルをint配列に変換する
 //===============================================================================================
  std::vector<int> ResourceManager::ConvertDrawMapCsv_Vector() {
-    return ConvertCsv_VectorReverse(csvdata->GetDrawmapcsv());
+    return ConvertCsv_VectorReverse(csvdata->GetMapData());
 }
 
 //===============================================================================================

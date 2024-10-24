@@ -1,18 +1,20 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-class GameSceneFactory;
+
 class DIContainer;
+class GameSceneFactory;
+class IPlayer;
+class GameStatus;
+class IMapManager;
+class IInputManager;
+class ResourceManager;
+class IBulletsManager;
+class IEnemysManager;
 
-
-#include "Game.h"
-#include "DIContainer.h"
+#include <iostream>
 #include "SceneBase.h"
-#include "IMapManager.h"
-#include "IInputManager.h"
-#include "ResourceManager.h"
-#include "GameSceneFactory.h"
-#include "IPlayer.h"
+
 
 
 class GameScene : public SceneBase {
@@ -33,9 +35,12 @@ public:
     }
 private:
     std::shared_ptr<IPlayer> player_;  // Player クラスへの依存
+    std::shared_ptr<IBulletsManager> bullets_;  // Player クラスへの依存
+    std::shared_ptr<IMapManager> mapmanager_;
+    std::shared_ptr<IEnemysManager> enemys_;
+
     std::shared_ptr<DIContainer> container_;  // Player クラスへの依存
     std::shared_ptr<GameStatus> gamestatus_;  // Player クラスへの依存
-    std::shared_ptr<IMapManager>mapmanager_;
     std::shared_ptr<IInputManager>input_;
     std::shared_ptr<ResourceManager>resourcemanager_;
     std::shared_ptr<GameSceneFactory>instanceFactory_;

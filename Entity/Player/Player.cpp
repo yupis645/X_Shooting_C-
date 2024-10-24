@@ -135,7 +135,7 @@ int Player::Draw() {
 
 	/* プレイヤー or 照準の描写 */
 	if (!shootdown) {
-		render_->DrawFromCenterPos(texture,anim, position.x,position.y, PLAYER_PIC_SIZE);
+		render_->DrawFromCenterPos(texture,anim, position, PLAYER_PIC_SIZE);
 		targetsight->Draw();
 
 		
@@ -143,7 +143,7 @@ int Player::Draw() {
 
 	/* プレイヤーが撃破された場合 */
 	else if (shootdown && anim < 6) {  // 爆発アニメーションの描画（anim <= 6は爆発アニメーションが6フレーム）
-		render_->DrawBomberFromCenterPos(SpriteRenderer::BomberType::bomber,anim, position.x, position.y);
+		render_->DrawBomberFromCenterPos(SpriteRenderer::BomberType::bomber,anim, position);
 		//DrawBmp(pic.x, pic.y, ImageManager::PlayerBomber[anim]);  // 自機の描写
 		//render_->DrawFromCenterPos(texture, anim, position.x, position.y, PLAYER_PIC_SIZE);
 
@@ -184,7 +184,6 @@ int Player::AnimationUpdate(){
 			anim++;		//アニメーション番号を進める
 			//Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
 			if (anim >= 5) anim = 0;
-			ownframecount = 0;
 		}
 		if (ownframecount % 20 == 0)	return 2;
 	}

@@ -98,8 +98,8 @@ namespace TextureConfigs {
 	constexpr TextureConfig TITLE			{ 198, 58,  1,  1, 0, 1};
 	constexpr TextureConfig PLAYER			{  32, 32,  6,  2, 2, 3};
 	constexpr TextureConfig TARGETSIGHT		{  32, 32,  6,  2, 0, 2};
-	constexpr TextureConfig BULLET			{  16, 16,  3,  1, 0, 2};
-	constexpr TextureConfig BOM				{  16, 16,  3,  1, 2, 1};
+	constexpr TextureConfig BULLET			{  8, 8,  3,  1, 0, 2};
+	constexpr TextureConfig BOM				{  8, 8,  3,  1, 2, 1};
 	constexpr TextureConfig BOSS			{  32, 32, 11, 11, 0, 11*11};
 	constexpr TextureConfig BOSSALGO		{  32, 32,  5,  1, 0, 1};
 	constexpr TextureConfig COMMON_BOMBER	{  47, 47,  6,  1, 0, 6};
@@ -166,6 +166,7 @@ void Clamp(T & num, T min, T max) {
 		num = max;
 	}
 }
+
 //
 //Vector2 LeftTopPos(Vector2 centerpos, int size) {
 //	return Vector2(centerpos.x - (size / 2), centerpos.y - (size / 2));

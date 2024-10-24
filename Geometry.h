@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-struct Vector2 {
+class Vector2 {
+public:
     float x, y;
 
     // 引数付きコンストラクタ
@@ -34,7 +35,8 @@ struct Vector2 {
     static const Vector2 zero;   
 };
 
-struct Boxcollider {
+class Boxcollider {
+public :
     float left;
     float top;
     float right;

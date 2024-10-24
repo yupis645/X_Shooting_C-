@@ -13,67 +13,35 @@
 //      primarymapとsecondarymapは mapdata からマップチップの配置を受け取る
 //----------------------------------------------------------------------------------------------------
 
+class ResourceManager;
+class GameTexture;
+class SpriteRenderer;
+
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include "types.h"
-
-#include "ResourceManager.h" 
-#include "GameTexture.h" 
 #include "IMapManager.h"
-#include "SpriteRenderer.h"
 
 
 class MapManager : public IMapManager {
 public:
-    //=============================================================================================
-    //                              コンストラクタ
-    //=============================================================================================
-    MapManager(std::shared_ptr<ResourceManager> rm) : currentnumber(0), currentpartition(0),
-        mapchip(0), mapdata({}), backmap({}),
-        primarymap({ false, {}, 0, 0 }),
-        secondarymap({ false, {},0,0 })
-    {
-        mapchip = rm->GetTexture(TextureType::Map);     //マップチップのロード
+    MapManager(std::shared_ptr<ResourceManager> rm);        //コンストラクタ
+   
 
-        SetDrawMapData(rm->ConvertDrawMapCsv_Vector());
-
-        //mapmanager_->LoadFrontMapDataCsv(rm->Getmapcsv(ScopeMapData::frontmap));                    //フロントマップのcsv
-        //mapmanager_->LoadBackMapDataCsv(rm->Getmapcsv(ScopeMapData::backmap));                      //バックマップのcsv
-
-    }
-    //=============================================================================================
-    //                              デストラクタ
-    //=============================================================================================
-    ~MapManager() = default;
-
-    //=============================================================================================
-    //                              ライフサイクル関数
-    //=============================================================================================
     int Init() override;       //初期化
     int Update() override;     //更新
     int Draw() override;       //描画
 
-    //=============================================================================================
-    //                              マップチップ画像のロード
-    //=============================================================================================
-    bool LoadMapChipTexture(std::shared_ptr<GameTexture> tex)override {
-        // テクスチャが有効かどうかを確認する
-        if (!tex) {
-            std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
-            return false;  // 失敗を示す
-        }
+    bool LoadMapChipTexture(std::shared_ptr<GameTexture> tex)override;      //マップチップ画像のロード
 
-        // 正常に読み込まれた場合
-        mapchip = tex;
-        return true;        // 成功を示す
-    }
-
-    //=============================================================================================
-    //                              Getter / Setter
-    //=============================================================================================
+    void SwapMapdata();       //int配列のmapdataを更新する
+ 
     const std::vector<int>& GetDrawMapData() const override { return mapdata; } //マップチップのint配列のgetter
     void SetDrawMapData(std::vector<int> copyvector) { mapdata = copyvector; }  //マップチップのint配列のsetter
+
+    ~MapManager() = default;        ///デストラクタ
 
 
 private:
@@ -88,6 +56,7 @@ private:
     MapStatus secondarymap;     //分割したマップデータを保持しておく変数
      
     std::shared_ptr<SpriteRenderer> render_;
+    std::shared_ptr<ResourceManager> resource_;
 
     void MapDataUpdate(MapStatus& map, int startprogress);       //描写するマップの配列を更新する
 };

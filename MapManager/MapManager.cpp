@@ -1,4 +1,3 @@
-#include "MapManager.h"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 //                                              描写するマップを管理するクラス(テストクラス)
@@ -6,6 +5,15 @@
 // マップチップを並べたint配列を元にマップの座標を管理しつつ、描画する
 // 描画できるスクリーンのサイズと同じ大きさを持ったint配列のprimarymapとsecondarymapを交互に描画することでスクロールする
 //---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#include "MapManager.h"
+
+
+#include "ResourceManager.h" 
+#include "GameTexture.h" 
+#include "IMapManager.h"
+#include "SpriteRenderer.h"
 
 using namespace MapConfig;      //mapサイズやチップサイズなどが定義されている定数の集まり
 
@@ -18,6 +26,24 @@ namespace {
     constexpr int PARTITION_MAX = 4;                     //マップの分割数
     constexpr int INIT_Y_OFFSET = -DRAWMAP_HIGH;      //マップが描画範囲に入る前のy座標の補正値(描画は一番後ろのインデックスから始まるので左上座標はDRAWMAP_HIGH分引く必要がある)
 }
+
+//=============================================================================================
+  //                              コンストラクタ
+  //=============================================================================================
+MapManager::MapManager(std::shared_ptr<ResourceManager> rm) : currentnumber(0), currentpartition(0),
+mapchip(0), mapdata({}), backmap({}),
+primarymap({ false, {}, 0, 0 }),
+secondarymap({ false, {},0,0 })
+{
+    mapchip = rm->GetTexture(TextureType::Map);     //マップチップのロード
+
+    mapdata = rm->ConvertDrawMapCsv_Vector();
+
+    //mapmanager_->LoadFrontMapDataCsv(rm->Getmapcsv(ScopeMapData::frontmap));                    //フロントマップのcsv
+    //mapmanager_->LoadBackMapDataCsv(rm->Getmapcsv(ScopeMapData::backmap));                      //バックマップのcsv
+
+}
+
 
 //=======================================================================================
 //                      初期化
@@ -86,4 +112,29 @@ int MapManager::Draw()
     }
 
     return 0;
+}
+
+//=============================================================================================
+//                              マップチップ画像のロード
+//=============================================================================================
+
+inline bool MapManager::LoadMapChipTexture(std::shared_ptr<GameTexture> tex) {
+    // テクスチャが有効かどうかを確認する
+    if (!tex) {
+        std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
+        return false;  // 失敗を示す
+    }
+
+    // 正常に読み込まれた場合
+    mapchip = tex;
+    return true;        // 成功を示す
+}
+
+
+//=============================================================================================
+//                              マップデータの更新
+//=============================================================================================
+void MapManager::SwapMapdata() {
+
+    mapdata = resource_->ConvertDrawMapCsv_Vector();
 }

@@ -32,6 +32,7 @@ namespace PlayerConfig {
 
 	constexpr int MAX_SHOT = 3;		//画面内に表示できるショットの数
 	constexpr int SHOT_SPEED = 20;	//ショットの弾速
+	constexpr int SHOT_SPEED_HOLLOW = 8;
 	constexpr int SHOT_HITBOX_SIZE = 8;		//画像のサイズ
 	constexpr int SHOT_PIC_SIZE = 8;		//画像のサイズ
 
@@ -53,6 +54,8 @@ namespace GroundEnemyConfig {
 	constexpr int MAX_ENEMY = 20;			//敵の最大出現数( 空中と地上は別カウント)
 }
 namespace EnemyShotConfig {
+	constexpr int HITBOX_SIZE = 8;		//画像のサイズ
+	constexpr int PIC_SIZE = 8;		//画像のサイズ
 	constexpr int SPEED = 4;			//敵弾の基本の速度
 	constexpr int MAX_SHOT = 17;			//敵弾の基本の速度
 
@@ -60,6 +63,7 @@ namespace EnemyShotConfig {
 constexpr int MAX_LEVEL	= 64;			//敵の出現レベルの上限
 
 constexpr int BOMBER_PIC_SIZE = 47;			//敵の出現レベルの上限
+
 
 
 //============================================
@@ -124,32 +128,6 @@ enum Ground_EnemyType {
 };
 
 
-enum GameModeStateNumber {
-	Title = 0,
-	Game,
-	Option,
-	Result,
-	GameEnd = 99,
-
-};
-
-//============================================
-//  空中、地上共通のステータス
-//============================================
-typedef struct ENEMY_DATA {
-	int number;			//エネミーの種類を区別するための番号
-	int hitbox_size;	//当たり判定のサイズ
-	int pic_size;		//画像サイズ
-	int type;		//同一個体の違う挙動
-	int dir;		//向き
-	int anim;		//アニメーションパターンの切り替えタイミング
-	int anim_sum;	//行動パターンの数
-	int points;		//ポイント
-	float speed;	//移動速度
-	float acc;		//加速度
-}ENEMY_DATA;
-
-
 
 
 
@@ -186,6 +164,7 @@ public:
 	virtual void InitClear() {
 		 position = Vector2::zero;
 		 hitbox = Boxcollider::zero;
+		 active = false;
 	}
 
 	virtual Vector2 GetPosition()const {	return position;	}
@@ -198,7 +177,7 @@ public:
 	virtual void SetActive(bool isactive) { active = isactive; }
 
 
-	virtual ~GameObject() {}
+	~GameObject() = default;
 
 protected :
 	Vector2 position;
@@ -212,7 +191,7 @@ public:
 		number(num), hitbox_size(hsize), pic_size(psize), type(t), anim_number(a_num), anim_sum(a_sum), points(p), speed(sp), acceleration(ac) {}
 	~EnemyStatusData() {}
 
-	virtual int Init()
+	int Init()
 	{
 		number = 0; 
 		hitbox_size = 0;

@@ -1,3 +1,18 @@
-﻿  SpriteRenderer.cpp
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Renderer\SpriteRenderer.cpp(53,1): warning C4715: 'SpriteRenderer::DrawFromCenterPos': 値を返さないコントロール パスがあります。
+﻿  AirEnemyBase.cpp
+  BACURA.cpp
+  BRAGZAKATO.cpp
+  GARUZAKATO.cpp
+  GIDDOSPARIO.cpp
+  JARA.cpp
+  KAPI.cpp
+  TERRAZI.cpp
+  TORKAN.cpp
+  TOROID.cpp
+  ZAKATO.cpp
+  ZOSHI.cpp
+  EnemysManager.cpp
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(104,23): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(108,26): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  GameScene.cpp
+  コードを生成中...
   X_Shooting_C++.vcxproj -> C:\制作\DirectXプロジェクト\X_Shooting_C++\x64\Debug\X_Shooting_C++.exe
