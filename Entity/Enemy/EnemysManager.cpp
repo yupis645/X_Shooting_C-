@@ -12,6 +12,9 @@
 #include "AirEnemyBase.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
+#include "Player.h"
+
+using enemyID = EnemyID::EnemyName;
 
 namespace EnemyUtils {
 
@@ -26,17 +29,16 @@ namespace EnemyUtils {
 		return -1;
 	}
 
-
 }
 
-EnemysManager::EnemysManager(std::shared_ptr<IPlayer> pl,
-	std::shared_ptr<IBulletsManager> bm,
-	std::shared_ptr<IMapManager> mr,
+EnemysManager::EnemysManager(std::weak_ptr<IPlayer> pl,
+	std::weak_ptr<IBulletsManager> bm,
+	std::weak_ptr<IMapManager> mr,
 	std::shared_ptr<ResourceManager> rm,
 	std::shared_ptr<SpriteRenderer> sm) :
 	player_(pl), bullets_(bm), mapdata_(mr),render_(sm)
 {
-	textures_ = rm->GetAllTexture();
+	SetEnemyTexture(rm);
 
 	for (auto& ae : airenemys) {
 		ae = std::make_shared<AirEnemyDummy>();
@@ -44,6 +46,37 @@ EnemysManager::EnemysManager(std::shared_ptr<IPlayer> pl,
 	for (auto& ge : groundenemys) {
 		ge = std::make_shared<GroundEnemyDummy>();
 	}
+}
+
+
+void EnemysManager::SetEnemyTexture(std::shared_ptr<ResourceManager> rm)
+{
+
+	int type_Strat= static_cast<int>(TextureType::Toroid);
+	int type_End= static_cast<int>(TextureType::AirEnemyEnd);
+
+	for (int i = enemyID::Toroid; i < enemyID::AirEnemyEnd; ++i) {
+		enemyID id = static_cast<enemyID>(i);
+
+		TextureType textureType = static_cast<TextureType>(type_Strat + i);
+
+		// テクスチャを設定
+		textures_[id] = rm->GetTexture(textureType);
+	}
+
+	type_Strat= static_cast<int>(TextureType::Barra);
+	type_End= static_cast<int>(TextureType::GroundEnemyEnd);
+
+
+	for (int i = enemyID::Barra; i < enemyID::GroundEnemyEnd; ++i) {
+		enemyID id = static_cast<enemyID>(i);
+		TextureType textureType = static_cast<TextureType>(type_Strat + i);
+
+		// テクスチャを設定
+		textures_[id]  = rm->GetTexture(textureType);
+	}
+
+
 }
 
 int EnemysManager::ALLEnemysInit()
@@ -58,30 +91,107 @@ int EnemysManager::ALLEnemysInit()
 	return 0;
 }
 
-void EnemysManager::CreateAirEnemy(AirEnemytype type)
+void EnemysManager::CreateAirEnemy(EnemyID::EnemyName name)
 {
+	int index = EnemyUtils::FindActiveIndex(airenemys, false);
+	if (index == -1) return;
+
+	switch (name)
+	{
+	case EnemyID::EnemyName::Toroid:
+	case EnemyID::EnemyName::toroid_type2:
+		airenemys[index] = std::make_shared<TOROID>(player_, name);
+		break;
+	case EnemyID::EnemyName::Torkan:
+		airenemys[index] = std::make_shared<TORKAN>(player_, name);
+		break;
+	case EnemyID::EnemyName::Giddospario:
+		break;
+	case EnemyID::EnemyName::Zoshi:
+	case EnemyID::EnemyName::zoshi_type2:
+	case EnemyID::EnemyName::zoshi_type3:
+		break;
+	case EnemyID::EnemyName::Jara:
+		break;
+	case EnemyID::EnemyName::Kapi:
+		break;
+	case EnemyID::EnemyName::Terrazi:
+		break;
+	case EnemyID::EnemyName::Zakato:
+		break;
+	case EnemyID::EnemyName::Bragzakato:
+		break;
+	case EnemyID::EnemyName::Garuzakato:
+		break;
+	case EnemyID::EnemyName::Bacura:
+		break;
+	default:
+		break;
+	}
+	
 }
 
-void EnemysManager::CreateGroundEnemy(GroundEnemytype type)
+void EnemysManager::CreateGroundEnemy(EnemyID::EnemyName name)
 {
 	int index = EnemyUtils::FindActiveIndex(groundenemys, false);
 	if (index == -1) return;
 
-	for (int i = 0; i < groundenemys.size(); i++) {
-		if (groundenemys[i]->GetActive()) {
-			//ここに処理を書く
-		}
+	switch (name)
+	{
+	case EnemyID::EnemyName::Barra:
+		//groundenemys[index] = std::make_shared<BARA>();
+		break;
+	case EnemyID::EnemyName::Zolbak:
+		break;
+	case EnemyID::EnemyName::Logram:
+	case EnemyID::EnemyName::Logram_type2:
+	case EnemyID::EnemyName::Logram_type3:
+	case EnemyID::EnemyName::Logram_type4:
+		break;
+	case EnemyID::EnemyName::Domogram:
+		break;
+	case EnemyID::EnemyName::Derota:
+		break;
+	case EnemyID::EnemyName::Grobda:
+		break;
+	case EnemyID::EnemyName::Bozalogram:
+		break;
+	case EnemyID::EnemyName::Sol:
+		break;
+	case EnemyID::EnemyName::Garubarra:
+		break;
+	case EnemyID::EnemyName::Garuderota:
+	case EnemyID::EnemyName::Garubarra_type2:
+	case EnemyID::EnemyName::Garubarra_type3:
+	case EnemyID::EnemyName::Garubarra_type4:
+	case EnemyID::EnemyName::Garubarra_type5:
+	case EnemyID::EnemyName::Garubarra_type6:
+	case EnemyID::EnemyName::Garubarra_type7:
+	case EnemyID::EnemyName::Garubarra_type8:
+	case EnemyID::EnemyName::Garubarra_type9:
+		break;
+	case EnemyID::EnemyName::Algo:
+		break;
+	case EnemyID::EnemyName::Ad_core:
+		break;
+	case EnemyID::EnemyName::Spflag:
+		break;
+	default:
+		break;
 	}
 }
 
 int EnemysManager::GroundEnemysUpdate(int framecount)
 {
+	auto usebullet = bullets_.lock();
+	auto useplayer= player_.lock();
+
 	for (int i = 0; i < groundenemys.size(); i++) {
 		if (groundenemys[i]->GetActive()) {
 			int Re = groundenemys[i]->Update(player_);
 			if (Re == EnemyBase::UpdateReturnID::OnBulletShot)
 			{
-				bullets_->CreateEnemyShot(player_->GetPosition(), groundenemys[i]->GetPosition());
+				usebullet->CreateEnemyShot(groundenemys[i]->GetPosition(), useplayer->GetPosition());
 			}
 		}
 	}
@@ -90,12 +200,14 @@ int EnemysManager::GroundEnemysUpdate(int framecount)
 
 int EnemysManager::AirEnemysUpdate(int framecount)
 {
+	auto usebullet = bullets_.lock();
+	auto useplayer = player_.lock();
 	for (int i = 0; i < airenemys.size(); i++) {
 		if (airenemys[i]->GetActive()) {
-			int Re = airenemys[i]->Update(player_);
+			int Re = airenemys[i]->Update(useplayer);
 			if (Re == EnemyBase::UpdateReturnID::OnBulletShot)
 			{
-				bullets_->CreateEnemyShot(player_->GetPosition(), airenemys[i]->GetPosition());
+				usebullet->CreateEnemyShot(airenemys[i]->GetPosition(), useplayer->GetPosition());
 			}
 		}
 	}
@@ -114,9 +226,22 @@ int EnemysManager::GroundEnemysDraw()
 
 int EnemysManager::AirEnemysDraw()
 {
+
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 0, Vector2(240,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 1, Vector2(280,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 2, Vector2(320,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 3, Vector2(360,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 4, Vector2(400,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 5, Vector2(440,300), 48);
+	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 6, Vector2(480,300), 48);
+
+
+
+
 	for (int i = 0; i < airenemys.size(); i++) {
 		if (airenemys[i]->GetActive()) {
-			//airenemys[i].Draw();
+			EnemyID::EnemyName enemyname = static_cast<EnemyID::EnemyName>(airenemys[i]->GetNumber());
+			render_->DrawFromCenterPos(textures_.at(enemyname), airenemys[i]->GetAnimNum(), airenemys[i]->GetPosition(), airenemys[i]->GetPicSize());
 		}
 	}
 	return 0;
@@ -143,22 +268,13 @@ int EnemysManager::GetGroundEnemysSum()
 }
 int EnemysManager::searchEmptyAirEnemyIndex()
 {
-	for (int i = 0; i < airenemys.size(); ++i) {
-		if (airenemys[i]->GetActive() == false) {  // activeがfalseの場合
-			return i;  // 条件に合致するEnemyを返す
-		}
-	}
-	return -1;
+	return EnemyUtils::FindActiveIndex(airenemys, false);
 }
 
 int EnemysManager::searchEmptyGroundEnemyIndex()
 {
-	for (int i = 0; i < groundenemys.size(); ++i) {
-		if (groundenemys[i]->GetActive() == false) {  // activeがfalseの場合
-			return i;  // 条件に合致するEnemyを返す
-		}
-	}
-	return -1;
+	return EnemyUtils::FindActiveIndex(groundenemys, false);
+
 
 }
 
@@ -235,3 +351,4 @@ void EnemysManager::BackMap_Enemy_table(std::shared_ptr<IPlayer> player, std::sh
 	//	}
 	//}
 }
+

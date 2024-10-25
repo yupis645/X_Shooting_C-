@@ -23,49 +23,57 @@
 
 class GameSceneFactory {
 public:
-    GameSceneFactory(std::shared_ptr<DIContainer> con,
-        std::shared_ptr<IPlayer> pl,
-        std::shared_ptr<IMapManager> mm,
-        std::shared_ptr<IEnemysManager> em,
-        std::shared_ptr<IBulletsManager> bm)
-        : container_(con), player_(pl), bullets_(bm), map_(mm), enemys_(em) {}
+    GameSceneFactory(std::shared_ptr<DIContainer> con) : container_(con) {}
 
     std::shared_ptr<IPlayer> CreatePlayer() {
-        return std::make_shared<Player>(
+        auto instance = std::make_shared<Player>(
             container_->Create<ResourceManager>(),
             container_->Create<SpriteRenderer>(),
             container_->Create<IInputManager>()
         );
+        player_ = instance;
+        return instance;
     }
 
     std::shared_ptr<IPlayer> CreateTestPlayer() {
-        return std::make_shared<TestPlayer>(container_);
+        auto instance =  std::make_shared<TestPlayer>(container_);
+        player_ = instance;
+        return instance;
+
     }
 
     std::shared_ptr<IMapManager> CreateMap() {
-        return std::make_shared<MapManager>(container_->Create<ResourceManager>());
+        auto instance = std::make_shared<MapManager>(container_->Create<ResourceManager>());
+        map_ = instance;
+        return instance;
     }
 
     std::shared_ptr<IMapManager> CreateTestMap() {
-        return std::make_shared<TestMapManager>(container_->Create<ResourceManager>());
+        auto instance = std::make_shared<TestMapManager>(container_->Create<ResourceManager>());
+        map_ = instance;
+        return instance;
     }
 
      std::shared_ptr<IBulletsManager> CreateBulletsManager() {
-         return std::make_shared<BulletsManager>(container_->Create<ResourceManager>(),container_->Create<SpriteRenderer>(), player_);
+         auto instance = std::make_shared<BulletsManager>(container_->Create<ResourceManager>(),container_->Create<SpriteRenderer>());
+         bullets_ = instance;
+         return instance;
     }
 
       std::shared_ptr<IEnemysManager> CreateEnemysManager() {
-         return std::make_shared<EnemysManager>(player_,bullets_, map_,container_->Create<ResourceManager>(),container_->Create<SpriteRenderer>());
+          auto instance = std::make_shared<EnemysManager>(player_,bullets_, map_,container_->Create<ResourceManager>(),container_->Create<SpriteRenderer>());
+         enemys_ = instance;
+         return instance;
     }
 
 
 
 private:
     std::shared_ptr<DIContainer> container_;
-    std::shared_ptr<IPlayer> player_; 
-    std::shared_ptr<IBulletsManager> bullets_;  
-    std::shared_ptr<IMapManager> map_;
-    std::shared_ptr<IEnemysManager> enemys_;
+    std::weak_ptr<IPlayer> player_;
+    std::weak_ptr<IBulletsManager> bullets_;
+    std::weak_ptr<IMapManager> map_;
+    std::weak_ptr<IEnemysManager> enemys_;
 };
 
 #endif //GAMESCENEFACTORY_H

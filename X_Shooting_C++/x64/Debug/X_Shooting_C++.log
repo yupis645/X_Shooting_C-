@@ -1,4 +1,11 @@
-﻿  AirEnemyBase.cpp
+﻿  BulletsManager.cpp
+  EnemyShot.cpp
+  PlayerBom.cpp
+  PlayerShot.cpp
+  DIContainer.cpp
+  DebugInput.cpp
+  DebugManager.cpp
+  AirEnemyBase.cpp
   BACURA.cpp
   BRAGZAKATO.cpp
   GARUZAKATO.cpp
@@ -10,9 +17,35 @@
   TOROID.cpp
   ZAKATO.cpp
   ZOSHI.cpp
+  EnemyBase.cpp
+  コードを生成中...
+  コンパイル中...
   EnemysManager.cpp
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(104,23): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(108,26): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(263,23): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Entity\Enemy\EnemysManager.cpp(267,26): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  GroundEnemyBase.cpp
+  Player.cpp
+  GameManager.cpp
+  InputManager.cpp
+  MapManager.cpp
+  SpriteRenderer.cpp
+  ResourceManager.cpp
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Resource\ResourceManager.cpp(34,53): warning C4101: 'e': ローカル変数は 1 度も使われていません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Resource\ResourceManager.cpp(38,49): warning C4101: 'e': ローカル変数は 1 度も使われていません。
+  TextureDataManager.cpp
   GameScene.cpp
+  SceneManager.cpp
+  TitleScene.cpp
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(112,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(116,45): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Scene\TitleScene.cpp(118,44): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  TestGameManager.cpp
+  TestInputManager.cpp
+  TestMapManager.cpp
+  TestPlayer.cpp
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Test\TestPlayer.cpp(139,65): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\制作\DirectXプロジェクト\X_Shooting_C++\Test\TestPlayer.cpp(139,53): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TestScene.cpp
+  main.cpp
   コードを生成中...
   X_Shooting_C++.vcxproj -> C:\制作\DirectXプロジェクト\X_Shooting_C++\x64\Debug\X_Shooting_C++.exe

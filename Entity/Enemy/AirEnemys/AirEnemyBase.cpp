@@ -14,6 +14,52 @@ namespace {
 	}
 }
 
+
+int AirEnemyBase::Create(std::weak_ptr<IPlayer> pl, int number)
+{
+	active = true;
+
+
+	//numberの百の位はエネミーのTypeを表す(100 = Type:1 , 200 = Type:2)
+	if (number >= 100) {
+		status.type = number / 100;								//ナンバーを100で割ってTypeを取り出す
+	}
+
+	hitbox.CenterPositionSync(position, status.hitbox_size);
+
+	/*画面の中心を軸に左右どちらに寄っているかによって最初の進行方向をさだめる*/
+	direction = position.x < ScreenConfig::CENTER_X ? 1 : -1;
+
+	return 0;
+}
+
+int AirEnemyBase::Update(std::weak_ptr<IPlayer> player)
+{
+	auto useplayer = player.lock();
+
+	ownframecount++;				//敵一体についている個別のタイマーを進める(行動処理に使う)
+
+	//以下は被弾判定が出ていない場合に処理に進む
+	int UpdateReturn = UniqueUpdate(useplayer);		//敵の行動(numberによって異なる挙動をする)
+
+	hitbox.CenterPositionSync(position, status.hitbox_size);
+
+
+	//座標が画面外に出た場合の座標の初期化
+	if (ownframecount > 50) {				//出現してから50フレーム立ってから判定に入る(出現してしばらくは画面端に当たっていても消去しない)
+		if (hitbox.BoxCollision(winView) == false)		//当たり判定とウィンドウサイズのRECTと重なっていない = 画面外 なら
+		{
+			InitClear();
+		}
+	}
+
+	if (UpdateReturn == OnBulletShot) {
+		return OnBulletShot;
+	}
+
+	return 0;
+}
+
 int AirEnemyBase::AnimUpdate(int UpdateInterval) {
 	//アニメーション番号を進める
 	if (!shootdown) {
@@ -36,7 +82,11 @@ int AirEnemyBase::AnimUpdate(int UpdateInterval) {
 	return 0;
 }
 
-void AirEnemyBase::AppearPattern(float x_pos)
+void AirEnemyBase::CreateSetup()
+{
+}
+
+void AirEnemyBase::InitPostionPattern(float x_pos)
 {
 	if (x_pos == -1) {
 		position.x = (float)(rand() % ScreenConfig::SRN_W + ONE_OFFSET);
@@ -47,4 +97,9 @@ void AirEnemyBase::AppearPattern(float x_pos)
 	//もし乱数で取得したX座標が画面の横サイズを超えていたら
 	if (position.x >= ScreenConfig::SRN_W) { position.x = x_pos - PLAYER_X_DISTANCE + GenerateRandomX(); }
 
+}
+
+void AirEnemyBase::TergetRadian(const Vector2& targetpos)
+{
+	radian = atan2(targetpos.y - position.y, targetpos.x - position.x);		//三角形の角度を算出する
 }

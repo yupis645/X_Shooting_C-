@@ -1,1 +1,1 @@
-#include "BRAGZAKATO.h"
+#include "EnemyBase.h"

@@ -228,9 +228,6 @@
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>ソース ファイル\Scene\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Texture\GameTextureManager.h">
-      <Filter>ソース ファイル\gameTexture</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Texture\GameTexture.h">
       <Filter>ソース ファイル\gameTexture</Filter>
     </ClInclude>
@@ -291,44 +288,11 @@
     <ClInclude Include="Entity\Enemy\IEnemysManager.h">
       <Filter>ソース ファイル\Entity\Enemys\EnemysManager</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\GroundEnemyBase.h">
-      <Filter>ソース ファイル\Entity\Enemys\GroundEnemys</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\BACURA.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BACURA</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\BRAGZAKATO.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\BRAGZAKATO</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\GARUZAKATO.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\GIDDOSPARIO.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\JARA.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\JARA</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\KAPI.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\KAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\TERRAZI.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\TERRAZI</Filter>
-    </ClInclude>
     <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h">
       <Filter>ソース ファイル\Entity\Enemys\AirEnemys</Filter>
     </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\TORKAN.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\2.TORKAN</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\TOROID.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\1.TOROID</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\ZAKATO.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZAKATO</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Enemy\AirEnemys\ZOSHI.h">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\ZOSHI</Filter>
+    <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h">
+      <Filter>ソース ファイル\Entity\Enemys\GroundEnemys</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -343,9 +307,6 @@
     </ClCompile>
     <ClCompile Include="SchooLlibrary\conioex.cpp">
       <Filter>学校のソース</Filter>
-    </ClCompile>
-    <ClCompile Include="X_Shooting_C++\Geometry.cpp">
-      <Filter>ソース ファイル\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Test\TestInputManager.cpp">
       <Filter>TESTソース\TestInput</Filter>
@@ -376,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>ソース ファイル\Scene\TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Texture\GameTextureManager.cpp">
-      <Filter>ソース ファイル\gameTexture</Filter>
     </ClCompile>
     <ClCompile Include="Test\TestMapManager.cpp">
       <Filter>TESTソース\TestMapManager</Filter>
@@ -457,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="Entity\Enemy\AirEnemys\AirEnemyBase.cpp">
       <Filter>ソース ファイル\Entity\Enemys\AirEnemys</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.cpp">
+      <Filter>ソース ファイル\Entity\Enemys\GroundEnemys</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>ソース ファイル\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

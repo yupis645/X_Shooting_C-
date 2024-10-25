@@ -8,40 +8,10 @@ class AirEnemyBase;
 class IEnemysManager {
 public:
     virtual ~IEnemysManager() = default;
-    enum class AirEnemytype {
-        TOROID,
-        TORKAN,
-        GIDDOSPARIO,
-        ZOSHI,
-        JARA,
-        KAPI,
-        TERRAZI,
-        ZAKATO,
-        BRAGZAKATO,
-        GARUZAKATO,
-        BACURA
-    }
-    ;enum class GroundEnemytype {
-        BARRA,
-        ZOLBAK,
-        LOGRAM,
-        DOMOGRAM,
-        DEROTA,
-        GROBDA,
-        BOZALOGRAM,
-        SOL,
-        GARUBARRA,
-        GARUDEROTA,
-        BOSS,
-        BOSSPARTS,
-        ALGO,
-        AD_CORE,
-        SPFLAG
-    };
     virtual int ALLEnemysInit() = 0;
 
-    virtual void CreateAirEnemy(AirEnemytype type) = 0;
-    virtual void CreateGroundEnemy(GroundEnemytype type) = 0;
+    virtual void CreateAirEnemy(EnemyID::EnemyName name) = 0;
+    virtual void CreateGroundEnemy(EnemyID::EnemyName name) = 0;
 
     virtual int GroundEnemysUpdate(int framecount) = 0;
     virtual int AirEnemysUpdate(int framecount) = 0;

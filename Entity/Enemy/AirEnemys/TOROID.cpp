@@ -1,68 +1,58 @@
-#include "TOROID.h"
+#include "AirEnemyBase.h"
 
 #include "common.h"
 #include "Player.h"
 
 
 namespace {
-	constexpr int ANIM_UPDATE_INTERVAL = 5;
+	constexpr int   ANIM_UPDATE_INTERVAL = 5;
+	constexpr float DECELERATION       = 5;
+	constexpr int   DECELERATION_LINIT   = 5;
 }
 
+
+TOROID::TOROID(std::weak_ptr<IPlayer> player, int num)
+{
+	Create(player, num);
+}
 
 void TOROID::Init(){
 	EnemyBase::Init();
 }
 
-int TOROID::Create( std::shared_ptr<IPlayer> player,int number, int typenumber)
+int TOROID::Create( std::weak_ptr<IPlayer> player,int number)
 {
-	EnemyBase::StatusSetup(number,typenumber);
+	auto useplayer = player.lock();
 
-	AppearPattern(player->GetPosition().x);
+	EnemyBase::StatusSetup(EnemyStatusData::TOROID);
 
-	hitbox.CenterPositionSync(position, status.hitbox_size);
 
-	/*画面の中心を軸に左右どちらに寄っているかによって最初の進行方向をさだめる*/
-	direction = position.x < ScreenConfig::CENTER_X ? -1 : 1;
+	AirEnemyBase::InitPostionPattern(useplayer->GetPosition().x);
+
+	AirEnemyBase::Create(useplayer, number);
 
 	return 0;
 }
 
-int TOROID::Update(std::shared_ptr<IPlayer> player)
+int TOROID::Update(std::weak_ptr<IPlayer> player)
 {
-	ownframecount++;				//敵一体についている個別のタイマーを進める(行動処理に使う)
+	return  AirEnemyBase::Update(player);
+}
+
+
+int TOROID::UniqueUpdate(std::weak_ptr<IPlayer> player)
+{
+	auto useplayer = player.lock();
+
+	if(ownframecount < 5) TergetRadian(useplayer->GetPosition());
 
 	//被弾判定がtrueの場合
 	AirEnemyBase::AnimUpdate(ANIM_UPDATE_INTERVAL);
 
-	//以下は被弾判定が出ていない場合に処理に進む
-	int UpdateReturn  = UniqueUpdate(player);		//敵の行動(numberによって異なる挙動をする)
-
-	hitbox.CenterPositionSync(position, status.hitbox_size);
-
-
-	//座標が画面外に出た場合の座標の初期化
-	if (ownframecount > 50) {				//出現してから50フレーム立ってから判定に入る(出現してしばらくは画面端に当たっていても消去しない)
-		if (hitbox.BoxCollision( winView) == false)		//当たり判定とウィンドウサイズのRECTと重なっていない = 画面外 なら
-		{
-			InitClear();
-		}
-	}
-
-	if (UpdateReturn == OnBulletShot) {
-		return OnBulletShot;
-	}
-
-	return 0;
-}
-
-
-int TOROID::UniqueUpdate(std::shared_ptr<IPlayer> player)
-{
-
 	/*弾を撃つ前の動き*/
 	if (actionpattern == 0)
 	{
-		return ActionPattern01(player->GetHitbox(), player->GetPosition()) != 0;
+		return ActionPattern01(useplayer->GetHitbox(), useplayer->GetPosition());
 	}
 
 	if (actionpattern == 1) 
@@ -80,7 +70,7 @@ int TOROID::ActionPattern01(const Boxcollider& playerhitbox, const Vector2& play
 {
 	//出現時にプレイヤーがいた座標に向かって進む
 
-		Enemy_Patterns(0);		//行動パターン 0:自機に向かう
+		Enemy_Patterns(MovePatternID::TowardsPlayer);		//行動パターン 0:自機に向かう
 
 		/*Y軸の距離関係なくプレイヤーのの当たり判定とX軸が重なったら*/
 		if (playerhitbox.left <= position.x  &&
@@ -92,7 +82,7 @@ int TOROID::ActionPattern01(const Boxcollider& playerhitbox, const Vector2& play
 
 			direction = position.x > playerpos.x ? -1 : 1;	//プレイヤーとの位置関係によって向きを再設定する
 
-			return  OnBulletShot;
+			return OnBulletShot;
 
 		}
 	return 0;
@@ -100,16 +90,16 @@ int TOROID::ActionPattern01(const Boxcollider& playerhitbox, const Vector2& play
 
 void TOROID::ActionPattern02()
 {	//一定速度に落ちるまで減速する
-	Enemy_Patterns(0);		//行動パターン 0:自機に向かう
+	Enemy_Patterns(MovePatternID::TowardsPlayer);		//行動パターン 0:自機に向かう
 
-	currentspeed -= 0.1f;					//減速
-	if (currentspeed < 0.6)  actionpattern = 2; 		//速度が0.6を下回ったら逃走パターンに移行する
+	status.speed -= 0.2f;					            //減速
+	if (status.speed < 0.6)  actionpattern = 2; 		//速度が0.6を下回ったら逃走パターンに移行する
 }
 
 void TOROID::ActionPattern03()
 {
 	//反対方向に向かって逃走する
-	Enemy_Patterns(5);		//行動パターン 5:加速度を加算しつつｘ軸方向に逃げる
+	Enemy_Patterns(MovePatternID::EscapeX);		//行動パターン 5:加速度を加算しつつｘ軸方向に逃げる
 
 
 }

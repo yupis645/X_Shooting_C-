@@ -12,8 +12,8 @@ namespace {
 //==========================================================
 //				コンストラクタ
 //==========================================================
-EnemyBase::EnemyBase() :shootdown(false), back_num(0), back_coord(0), type(0), direction(0),
-						currentanimnum(0),  ownframecount(0), radian(0), currentspeed(0), moving(Vector2::zero)
+EnemyBase::EnemyBase() :status(EnemyStatusData::DUMMY),shootdown(false), back_num(0), back_coord(0), direction(0), actionpattern(0),
+						currentanimnum(0),  ownframecount(0), radian(0), moving(Vector2::zero)
 {}
 
 
@@ -23,91 +23,84 @@ EnemyBase::EnemyBase() :shootdown(false), back_num(0), back_coord(0), type(0), d
 
 void EnemyBase::Init()
 {
-	status.Init();
-	shootdown = false;			//被弾判定
+	EnemyStatus status = EnemyStatusData::DUMMY;
 	back_num = 0;		//配置されている裏マップの番号
 	back_coord = 0;		//裏マップにおける配置
-	type = 0;		//同一個体の違う挙動
 	direction = 0;		//向き
+	actionpattern = 0;
 	currentanimnum = 0;		//アニメーションパターンの切り替えタイミング
 	ownframecount = 0;	//初期化された瞬間からカウントを開始する(行動パターンに使用する)
-	currentspeed = 0;
 	radian = 0;
 	moving = 0;
 	Vector2::zero;
+	GameObject::InitClear();
 }
 
 
-Vector2 EnemyBase::Enemy_Patterns(int movepattrnnumber)
+
+Vector2 EnemyBase::Enemy_Patterns(MovePatternID id)
 {
-	int dir_search = MapConfig::CHIP_SIZE + (MapConfig::CHIP_SIZE - (MapConfig::CHIP_SIZE * currentspeed));
 
-	switch (movepattrnnumber) {
+	switch (id) {
 		/*自機に向かって進む*/
-	case 0:
-
-		position.x += (float)currentspeed * cos(radian);		//X軸の移動
-		position.y += (float)currentspeed * sin(radian);		//Y軸の移動
+	case MovePatternID::TowardsPlayer:
+		position.x += status.speed * cos(radian);		    //X軸の移動
+		position.y += status.speed * sin(radian);		    //Y軸の移動
 		break;
 
+		/*自機とは逆方向に進む*/
+	case MovePatternID::ReverseTowardsPlayer:
+		position.x -= status.speed * cos(radian);		    //X軸の移動
+		position.y -= status.speed * sin(radian);		    //Y軸の移動
+		break;
 
 		/*Y軸の位置に関係なく自機の方向に向かう*/
-	case 1:
-		position.x += (float)currentspeed * cos(radian);		//X軸の移動
-		position.y += currentspeed;
+	case MovePatternID::HorizontalTrack:
+		position.x += status.speed * cos(radian);		    //X軸の移動
+		position.y += status.speed;
 		break;
 
 		/*画面の下から出現する*/
-	case 2:
-		if (ownframecount <= 5) {
-			position.y = ScreenConfig::SRN_H;
-		}
-		position.x += (float)currentspeed * cos(radian);		//X軸の移動
-		position.y -= currentspeed;		//Y軸の移動
+	case MovePatternID::AppearFromBottom:
+		position.x += status.speed * cos(radian);		    //X軸の移動
+		position.y -= status.speed;		                    //Y軸の移動
 		break;
 		/*そのまま直進する*/
-	case 3:
-		position.y += (float)currentspeed;		//Y軸の移動
+	case MovePatternID::StraightAccelerate:
+		position.y += status.speed;		                    //Y軸の移動
 		break;
+
 		/*加速度を加算しつつdirの方へ移動する*/
-	case 4:
-		position.x -= (float)1 * cos(radian) * direction;		//X軸の移動
-		position.y -= (float)currentspeed * status.acceleration;		//Y軸の移動
+	case MovePatternID::AccelerateTowardsDir:
+		position.x -= 1.0f * cos(radian) * direction;		//X軸の移動
+		position.y -= status.speed * status.acceleration;	//Y軸の移動
 
 		/*加速*/
-		currentspeed += currentspeed * status.acceleration;
+		status.speed += status.speed * status.acceleration;
 
 		break;
+
 
 		/*加速度を加算しつつｘ軸方向に逃げる*/
-	case 5:
+	case MovePatternID::EscapeX:
 		position.y++;
-		position.x -= (float)currentspeed * direction;		//X軸の移動
+		position.x -= status.speed * direction;		        //X軸の移動
 		/*加速*/
-		currentspeed += currentspeed * status.acceleration;
+		status.speed += status.speed * status.acceleration;
 		break;
 
 	}
 
 	return 0;
+
 }
 
 
-void EnemyBase::StatusSetup(int number, int typenumber)
+void EnemyBase::StatusSetup(const EnemyStatus& initstatus)
 {
-	type = typenumber;
-
-	//numberの百の位はエネミーのTypeを表す(100 = Type:1 , 200 = Type:2)
-	if (number >= 100) {
-		type = number / 100;								//ナンバーを100で割ってTypeを取り出す
-		number = number - (100 * type);						//100の位を取り除いた敵のナンバーを取り出す
-	}
-
-	//_e->enemy[EmptyNum] = A_enemyDate[number];
 	//基礎ステータスをコピー or 各値のセット
-	status = A_ENEMY_DATA_ARRAY[number];
+	status = initstatus;
 
-	currentspeed = status.speed;
 
 	/*複数の行動パターンのある敵のステータス変更*/
 	////ジソー

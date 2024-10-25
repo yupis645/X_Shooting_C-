@@ -35,17 +35,17 @@ namespace di = boost::di;
 // 
 //==============================================================
 namespace ScreenConfig {
-	constexpr int PXW = 1;		//サイズ比率(横幅)
-	constexpr int PXH = 1;		//サイズ比率(高さ)
-	constexpr int WIN_W = 200 * 3;	//(8*25*4)	//ウィンドウサイズ(横幅)
-	constexpr int WIN_H = 260 * 3;		//(8*25*3)	//ウィンドウサイズ(縦幅)
-	constexpr int SRN_W = WIN_W / PXW;			//画面サイズ(横幅)
-	constexpr int SRN_H = WIN_H / PXH;			//画面サイズ(高さ)
-	constexpr int CENTER_X = SRN_W / 2;		//画面の中央X座標
-	constexpr int CENTER_Y = SRN_H / 2;		//画面の中央Y座標
-	constexpr int WORD_W = 8;					//1文字の横幅
-	constexpr int HALFWORD_W = 4;				//半角文字の横幅
-	constexpr int WORD_H = 15;				//1文字の高さ
+	constexpr int PXW        = 1;		     //サイズ比率(横幅)
+	constexpr int PXH        = 1;		     //サイズ比率(高さ)
+	constexpr int WIN_W      = 200 * 3;	     //(8*25*4)	//ウィンドウサイズ(横幅)
+	constexpr int WIN_H      = 260 * 3;		 //(8*25*3)	//ウィンドウサイズ(縦幅)
+	constexpr int SRN_W      = WIN_W / PXW;	 //画面サイズ(横幅)
+	constexpr int SRN_H      = WIN_H / PXH;	 //画面サイズ(高さ)
+	constexpr int CENTER_X   = SRN_W / 2;	 //画面の中央X座標
+	constexpr int CENTER_Y   = SRN_H / 2;	 //画面の中央Y座標
+	constexpr int WORD_W     = 8;	         //1文字の横幅
+	constexpr int HALFWORD_W = 4;		     //半角文字の横幅
+	constexpr int WORD_H     = 15;		     //1文字の高さ
 }
 
 //==============================================================
@@ -95,43 +95,85 @@ struct TextureConfig {
 };
 
 namespace TextureConfigs {
-	constexpr TextureConfig TITLE			{ 198, 58,  1,  1, 0, 1};
-	constexpr TextureConfig PLAYER			{  32, 32,  6,  2, 2, 3};
-	constexpr TextureConfig TARGETSIGHT		{  32, 32,  6,  2, 0, 2};
-	constexpr TextureConfig BULLET			{  8, 8,  3,  1, 0, 2};
-	constexpr TextureConfig BOM				{  8, 8,  3,  1, 2, 1};
-	constexpr TextureConfig BOSS			{  32, 32, 11, 11, 0, 11*11};
-	constexpr TextureConfig BOSSALGO		{  32, 32,  5,  1, 0, 1};
-	constexpr TextureConfig COMMON_BOMBER	{  47, 47,  6,  1, 0, 6};
-	constexpr TextureConfig AIR_ENEMYBOMBER	{  47, 47,  6,  1, 6, 6};
-	constexpr TextureConfig MAP				{  32, 32, 12, 10, 0, 12*10 };
+	constexpr TextureConfig TITLE          { 198, 58,  1,  1, 0, 1         };
+	constexpr TextureConfig PLAYER         { 32 , 32,  6,  2, 2, 3         };
+	constexpr TextureConfig TARGETSIGHT    { 32 , 32,  6,  2, 0, 2         };
+	constexpr TextureConfig BULLET         { 8  ,  8,  3,  1, 0, 2         };
+	constexpr TextureConfig BOM            { 8  ,  8,  3,  1, 2, 1         };
+	constexpr TextureConfig BOSS           { 32 , 32, 11, 11, 0, 11 * 11   };
+	constexpr TextureConfig BOSSALGO       { 32 , 32,  5,  1, 0, 1         };
+	constexpr TextureConfig COMMON_BOMBER  { 48 , 48,  6,  1, 0, 6         };
+	constexpr TextureConfig AIR_ENEMYBOMBER{ 48 , 48,  6,  1, 6, 6         };
+	constexpr TextureConfig MAP            { 32 , 32, 12, 10, 0, 12 * 10   };
 
-	constexpr TextureConfig TOROID		{ 32, 32, 8, 1 , 0, 8};
-	constexpr TextureConfig TORKAN		{ 32, 32, 8, 1 , 8, 7};
-	constexpr TextureConfig GIDDOSPARIO	{ 32, 32, 8, 1 ,16, 8};
-	constexpr TextureConfig ZOSHI		{ 32, 32, 8, 1 ,24, 4};
-	constexpr TextureConfig JARA		{ 32, 32, 8, 1 ,32, 6};
-	constexpr TextureConfig KAPI		{ 32, 32, 8, 1 ,40, 7};
-	constexpr TextureConfig TERRAZI		{ 32, 32, 8, 1 ,48, 7};
-	constexpr TextureConfig ZAKATO		{ 32, 32, 8, 1 ,56, 1};
-	constexpr TextureConfig BRAGZAKATO	{ 32, 32, 8, 1 ,64, 1};
-	constexpr TextureConfig GARUZAKATO	{ 32, 32, 8, 1 ,72, 1};
-	constexpr TextureConfig BACURA		{ 48, 48, 8, 1 ,56, 8};
-	
-	constexpr TextureConfig BARRA		{ 32, 32, 4, 1 ,0,  2};
-	constexpr TextureConfig ZOLBAK		{ 32, 32, 4, 1 ,4,  4};
-	constexpr TextureConfig LOGRAM		{ 32, 32, 4, 1 ,8,  4};
-	constexpr TextureConfig DOMOGRAM	{ 32, 32, 4, 1 ,12, 4};
-	constexpr TextureConfig DEROTA		{ 32, 32, 4, 1 ,16, 4};
-	constexpr TextureConfig GROBDA		{ 32, 32, 4, 1 ,20, 4};
-	constexpr TextureConfig BOZALOGRAM	{ 32, 32, 4, 1 ,24, 1};
-	constexpr TextureConfig SOL			{ 32, 32, 4, 1 ,28, 4};
-	constexpr TextureConfig GARUBARRA	{ 64, 64, 4, 1 ,20, 1};
-	constexpr TextureConfig GARUDEROTA	{ 64, 64, 4, 1 ,24, 4};
-	constexpr TextureConfig ALGO		{ 48, 48, 4, 1 , 0, 4};
-	constexpr TextureConfig AD_CORE		{ 64, 64, 4, 1 , 0, 1};
-	constexpr TextureConfig SPFLAG		{ 32, 32, 4, 1 , 3, 1};
-	
+	constexpr TextureConfig TOROID         { 32, 32,  1, 8 , 0, 8        };
+	constexpr TextureConfig TORKAN         { 32, 32,  8, 2 , 8, 7        };
+	constexpr TextureConfig GIDDOSPARIO    { 32, 32,  8, 3 ,16, 8        };
+	constexpr TextureConfig ZOSHI          { 32, 32,  8, 4 ,24, 4        };
+	constexpr TextureConfig JARA           { 32, 32,  8, 5 ,32, 6        };
+	constexpr TextureConfig KAPI           { 32, 32,  8, 6 ,40, 7        };
+	constexpr TextureConfig TERRAZI        { 32, 32,  8, 7 ,48, 7        };
+	constexpr TextureConfig ZAKATO         { 32, 32,  8, 8 ,56, 1        };
+	constexpr TextureConfig BRAGZAKATO     { 32, 32,  8, 9 ,64, 1        };
+	constexpr TextureConfig GARUZAKATO     { 32, 32,  8,10 ,72, 1        };
+	constexpr TextureConfig BACURA         { 48, 48,  8, 8 ,56, 8        };
+
+	constexpr TextureConfig BARRA          { 32, 32,  1, 4 ,0,  2        };
+	constexpr TextureConfig ZOLBAK         { 32, 32,  1, 8 ,4,  4        };
+	constexpr TextureConfig LOGRAM         { 32, 32,  1,12 ,8,  4        };
+	constexpr TextureConfig DOMOGRAM       { 32, 32,  1,16 ,12, 4        };
+	constexpr TextureConfig DEROTA         { 32, 32,  1,20 ,16, 4        };
+	constexpr TextureConfig GROBDA         { 32, 32,  1,24 ,20, 4        };
+	constexpr TextureConfig BOZALOGRAM     { 32, 32,  1,28 ,24, 1        };
+	constexpr TextureConfig SOL            { 32, 32,  1,32 ,28, 4        };
+	constexpr TextureConfig GARUBARRA      { 64, 64,  1,22 ,20, 1        };
+	constexpr TextureConfig GARUDEROTA     { 64, 64,  1,28 ,24, 4        };
+	constexpr TextureConfig ALGO           { 48, 48,  1, 4 , 0, 4        };
+	constexpr TextureConfig AD_CORE        { 64, 64,  1, 1 , 0, 1        };
+	constexpr TextureConfig SPFLAG         { 32, 32,  1, 3 , 3, 1        };
+
+}
+
+
+struct EnemyStatus {
+	int number;			//エネミーの種類を区別するための番号
+	int hitbox_size;	//当たり判定のサイズ
+	int pic_size;		//画像サイズ
+	int type;		    //同一個体の違う挙動
+	int anim_sum;	    //行動パターンの数
+	int points;		    //ポイント
+	float speed;	    //移動速度
+	float acceleration;	//加速度
+};
+
+// 敵データの配列
+namespace EnemyStatusData{
+	constexpr EnemyStatus DUMMY      {-1 ,  0,  0, 0,  0,    0, 0.0f, 0.0f  };	// ダミー
+	constexpr EnemyStatus TOROID     { 0 , 32, 32, 1,  8,   30, 2.0f, 0.04f };	// トーロイド
+	constexpr EnemyStatus TORKAN     { 1 , 32, 32, 0,  7,   50, 4.0f, 0.0f  };   // タルケン
+	constexpr EnemyStatus GIDDOSPARIO{ 2 , 16, 32, 0,  8,   10, 7.0f, 0.0f  };   // ギドスパリオ
+	constexpr EnemyStatus ZOSHI      { 3 , 32, 32, 2,  4,   70, 3.0f, 0.0f  };   // ゾシー
+	constexpr EnemyStatus JARA       { 4 , 32, 32, 0,  6,  150, 4.0f, 0.04f };   // ジアラ
+	constexpr EnemyStatus KAPI       { 5 , 32, 32, 0,  7,  300, 4.0f, 0.15f };   // カピ
+	constexpr EnemyStatus TERRAZI    { 6 , 32, 32, 0,  7,  700, 5.0f, 0.08f };   // テラジ
+	constexpr EnemyStatus ZAKATO     { 7 , 16, 32, 3,  1,  100, 3.0f, 0.0f  };   // ザカート
+	constexpr EnemyStatus BRAGZAKATO { 8 , 16, 32, 3,  1,  600, 3.0f, 0.0f  };   // ブラグザカート
+	constexpr EnemyStatus GARUZAKATO { 9 , 16, 32, 0,  1, 1000, 3.0f, 0.0f  };   // ガルザカート
+	constexpr EnemyStatus BACURA     { 10, 48, 48, 0,  8,    0, 2.0f, 0.0f  };   // バキュラ
+
+	constexpr EnemyStatus BARRA      { 50, 32, 32, 0,  1,  100, 0.0f , 0.0f };   // バーラ
+	constexpr EnemyStatus ZOLBAK     { 51, 32, 32, 0,  4,  200, 0.0f , 0.0f };   // ゾルバグ
+	constexpr EnemyStatus LOGRAM     { 52, 32, 32, 4,  4,  300, 0.0f , 0.0f };   // ログラム
+	constexpr EnemyStatus DOMOGRAM   { 53, 32, 32, 0,  4,  800, 0.75f, 0.5f };   // ドモグラム
+	constexpr EnemyStatus DEROTA     { 54, 32, 32, 0,  4,  200, 0.0f , 0.0f };   // デローダ
+	constexpr EnemyStatus GROBDA     { 55, 32, 32, 8,  4,  200, 0.5f , 0.5f };   // グロブダー
+	constexpr EnemyStatus BOZALOGRAM { 56, 32, 32, 0,  1,  600, 0.0f , 0.0f };   // ボザログラム
+	constexpr EnemyStatus SOL        { 57, 32, 32, 0,  4, 2000, 0.0f , 0.0f };   // ソル
+	constexpr EnemyStatus GARUBARRA  { 58, 32, 63, 0,  1,  300, 0.0f , 0.0f };   // ガルバーラ
+	constexpr EnemyStatus GARUDEROTA { 59, 32, 64, 0,  4, 2000, 0.0f , 0.0f };   // ガルデロータ
+	constexpr EnemyStatus ALGO       { 60, 16, 48, 0,  0, 1000, 0.0f , 0.0f };   // アルゴ
+	constexpr EnemyStatus AD_CORE    { 61, 32, 64, 0,  1, 4000, 0.0f , 0.0f };   // A/Gコア
+	constexpr EnemyStatus SPFLAG     { 62, 32, 32, 0,  1, 1000, 0.0f , 0.0f };   // SPフラッグ
 }
 
 namespace EnemyTextureConfig {
@@ -158,7 +200,7 @@ T ABS(T num) {
 }
 
 template<typename T>
-void Clamp(T & num, T min, T max) {
+void Clamp(T& num, T min, T max) {
 	if (num > max) {
 		num = min;
 	}
@@ -167,51 +209,11 @@ void Clamp(T & num, T min, T max) {
 	}
 }
 
-//
-//Vector2 LeftTopPos(Vector2 centerpos, int size) {
-//	return Vector2(centerpos.x - (size / 2), centerpos.y - (size / 2));
-//}
-//
-
-
-
-
-////
-//class ParttitionMap {
-//public:
-//	bool drawFlag;
-//	std::array<int, MapConfig::MAP_H* MapConfig::MAP_H > data;
-//	int x, y;
-//
-//	ParttitionMap() : drawFlag(false), x(0), y(0), data({}) {}
-//	~ParttitionMap() {}
-//};
-//
-//// マップデータを管理するクラス
-//class WholeMap {
-//public:
-//
-//	int stage;
-//	int currentparttition_num;
-//	int x, y;
-//	std::array<ParttitionMap, MapConfig::MAP_PARTITION_SUM> frontmap;
-//	std::array<ParttitionMap, MapConfig::MAP_PARTITION_SUM> backmap;
-//
-//	Bmp* pics[MapConfig::MAP_PARTITION_SUM];
-//	const wchar_t* filenames[MapConfig::MAP_PARTITION_SUM];
-//
-//	WholeMap() : stage(0), currentparttition_num(0), x(0), y(0) {}
-//	~WholeMap() {}
-//
-//};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 													/*変数宣言*/
 
 const Boxcollider winView = { 0,0,ScreenConfig::SRN_W,ScreenConfig::SRN_H };		//画面の端っこの座標。画面内に映っているか判定する
 
-			
+
 extern bool DebugEnable;
 
 

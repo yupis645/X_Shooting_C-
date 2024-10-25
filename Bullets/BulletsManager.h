@@ -21,7 +21,7 @@ class GameTexture;
 //===================================================================================
 class BulletsManager : public IBulletsManager  {
 public:
-    BulletsManager(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer> sr, std::shared_ptr<IPlayer> lpa);
+    BulletsManager(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer> sr);
 
 
     // ’e‚Ì¶¬AŠÇ—ŠÖ”‚È‚Ç‚ğ’Ç‰Á

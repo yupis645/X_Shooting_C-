@@ -142,20 +142,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Entity\Enemy\AirEnemys\AirEnemyBase.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\BACURA.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\BRAGZAKATO.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\GARUZAKATO.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\GIDDOSPARIO.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\JARA.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\KAPI.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\TERRAZI.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\TORKAN.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\TOROID.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\ZAKATO.h" />
-    <ClInclude Include="Entity\Enemy\AirEnemys\ZOSHI.h" />
     <ClInclude Include="Entity\Enemy\EnemyBase.h" />
     <ClInclude Include="Entity\Enemy\EnemysManager.h" />
-    <ClInclude Include="Entity\Enemy\GroundEnemyBase.h" />
+    <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h" />
     <ClInclude Include="Entity\Enemy\IEnemysManager.h" />
     <ClInclude Include="Entity\Player\IPlayer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -181,7 +170,6 @@
     <ClInclude Include="Resource\CsvDataManager.h" />
     <ClInclude Include="Resource\ResourceManager.h" />
     <ClInclude Include="Resource\Texture\GameTexture.h" />
-    <ClInclude Include="Resource\Texture\GameTextureManager.h" />
     <ClInclude Include="Scene\GameScene.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -223,12 +211,14 @@
     <ClCompile Include="Entity\Enemy\AirEnemys\ZOSHI.cpp" />
     <ClCompile Include="Entity\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Entity\Enemy\EnemysManager.cpp" />
+    <ClCompile Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.cpp" />
     <ClCompile Include="Entity\Player\Player.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="InputManager\InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -238,7 +228,6 @@
     <ClCompile Include="Resource\TextureDataManager.cpp" />
     <ClCompile Include="Resource\CsvDataManager.cpp" />
     <ClCompile Include="Resource\ResourceManager.cpp" />
-    <ClCompile Include="Resource\Texture\GameTextureManager.cpp" />
     <ClCompile Include="Scene\GameScene.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -252,7 +241,6 @@
     <ClCompile Include="Test\TestMapManager.cpp" />
     <ClCompile Include="Test\TestPlayer.cpp" />
     <ClCompile Include="Test\TestScene.cpp" />
-    <ClCompile Include="X_Shooting_C++\Geometry.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
