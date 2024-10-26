@@ -4,7 +4,7 @@
 #include "EnemyBase.h"
 
 //=================================================================================================
-// 
+//							空中敵の基底クラス
 //=================================================================================================
 class AirEnemyBase : public EnemyBase {
 public:
@@ -18,17 +18,17 @@ public:
 
 protected:
 
-	virtual int UniqueUpdate(std::weak_ptr<IPlayer> pl) = 0;
+	virtual int UniqueUpdate(std::shared_ptr<IPlayer> pl) = 0;
 
 	virtual int AnimUpdate(int UpdateInterval);
 	void CreateSetup();
-	void InitPostionPattern(float x_pos = -1);
+	void InitPostionPattern(float x_pos = -1.0f);
 	void TergetRadian(const Vector2& pos);
 };
 
 
 //=================================================================================================
-// 
+//						初期化用のダミー派生クラス
 //=================================================================================================
 class AirEnemyDummy : public AirEnemyBase{
 public:
@@ -37,13 +37,13 @@ public:
 	void Init() override {}
 	int Create(std::weak_ptr<IPlayer> pl, int number)  { return 0; }
 	int Update(std::weak_ptr<IPlayer> pl) { return 0; }
-	int UniqueUpdate(std::weak_ptr<IPlayer> pl)  { return 0; }
+	int UniqueUpdate(std::shared_ptr<IPlayer> pl)  { return 0; }
 
 	~AirEnemyDummy() = default;
 };
 
 //=================================================================================================
-// 
+//							トーロイド
 //=================================================================================================
 class TOROID : public AirEnemyBase{
 public:
@@ -52,7 +52,7 @@ public:
 	void Init() override;
 	int Create(std::weak_ptr<IPlayer> pl, int number) override;
 	int Update(std::weak_ptr<IPlayer> pl) override;
-	int UniqueUpdate(std::weak_ptr<IPlayer> pl) override;
+	int UniqueUpdate(std::shared_ptr<IPlayer> pl) override;
 
 	~TOROID() = default;
 
@@ -63,7 +63,7 @@ private:
 };
 
 //=================================================================================================
-// 
+//							タルケン
 //=================================================================================================
 class TORKAN : public AirEnemyBase{
 public:
@@ -72,83 +72,34 @@ public:
 	void Init() override;
 	int Create(std::weak_ptr<IPlayer> pl, int number) override;
 	int Update(std::weak_ptr<IPlayer> pl) override;
-	int UniqueUpdate(std::weak_ptr<IPlayer> pl) override;
+	int UniqueUpdate(std::shared_ptr<IPlayer> pl) override;
 
 	~TORKAN() = default;
 
 private:
 	int ActionPattern01();
-	void ActionPattern02(std::weak_ptr<IPlayer> pl);
+	void ActionPattern02(std::shared_ptr<IPlayer> pl);
 	void ActionPattern03();
 
 
 };
 
-//=================================================================================================
-// 
-//=================================================================================================
-class BACURA : public AirEnemyBase
-{
-};
-
 
 //=================================================================================================
-// 
+//						ギドスパリオ
 //=================================================================================================
-class BRAGZAKATO : public AirEnemyBase
-{
-};
+class GIDDOSPARIO : public AirEnemyBase{
+public:
+	GIDDOSPARIO(std::weak_ptr<IPlayer> player, int num);
+
+	void Init() override;
+	int Create(std::weak_ptr<IPlayer> pl, int number) override;
+	int Update(std::weak_ptr<IPlayer> pl) override;
+	int UniqueUpdate(std::shared_ptr<IPlayer> pl) override;
+
+	~GIDDOSPARIO() = default;
 
 
-//=================================================================================================
-// 
-//=================================================================================================
-class GARUZAKATO : public AirEnemyBase
-{
-};
-
-
-//=================================================================================================
-// 
-//=================================================================================================
-class GIDDOSPARIO : public AirEnemyBase
-{
-};
-
-
-//=================================================================================================
-// 
-//=================================================================================================
-class JARA : public AirEnemyBase
-{
-};
-
-//=================================================================================================
-// 
-//=================================================================================================
-class KAPI : public AirEnemyBase
-{
-};
-
-//=================================================================================================
-// 
-//=================================================================================================
-class TERRAZI : public AirEnemyBase
-{
-};
-
-//=================================================================================================
-// 
-//=================================================================================================
-class ZAKATO : public AirEnemyBase
-{
-};
-
-//=================================================================================================
-// 
-//=================================================================================================
-class ZOSHI : public AirEnemyBase
-{
 };
 
 #endif // AIRENEMYBASE_H

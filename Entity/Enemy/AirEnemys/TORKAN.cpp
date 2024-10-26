@@ -49,7 +49,7 @@ int TORKAN::Create(std::weak_ptr<IPlayer> player, int number)
 	EnemyBase::StatusSetup(EnemyStatusData::TORKAN);
 
 	//	2.出現時の座標を設定する
-	AirEnemyBase::InitPostionPattern(useplayer->GetPosition().x);
+	AirEnemyBase::InitPostionPattern();
 
 	//  3.activeやtypeなどEnemyBaseの変数で調整が必要なものを調整する
 	AirEnemyBase::Create(useplayer, number);
@@ -81,15 +81,14 @@ int TORKAN::Update(std::weak_ptr<IPlayer> player)
 // 2.アニメーションの更新
 // 3.アクションパターンによって動きを替える
 //========================================================================================
-int TORKAN::UniqueUpdate(std::weak_ptr<IPlayer> player)
+int TORKAN::UniqueUpdate(std::shared_ptr<IPlayer> player)
 {
-	auto useplayer = player.lock();			//スマートポインタを一時shared_ptrに変換する
 
 	// 1.このフレーム値が低いと動きが一定になりやすい
-	if (ownframecount < PLAYER_TRACKING_FRAME) TergetRadian(useplayer->GetPosition());
+	if (ownframecount < PLAYER_TRACKING_FRAME) TergetRadian(player->GetPosition());
 
 	// 2.TORKENはアニメーションは特定の場面でしか動かさないので、撃破時のみ自動更新する
-	if (!shootdown) {
+	if (shootdown) {
 		AirEnemyBase::AnimUpdate(ANIM_UPDATE_INTERVAL);
 	}
 	
@@ -131,15 +130,15 @@ int TORKAN::ActionPattern01()
 // アニメーションを動かす。その間は移動はしない
 // アニメーション完了後はプレイヤーの位置を再度取得する
 //========================================================================================
-void TORKAN::ActionPattern02(std::weak_ptr<IPlayer> player){
+void TORKAN::ActionPattern02(std::shared_ptr<IPlayer> player) {
 
-	if ( ownframecount % ANIM_UPDATE_INTERVAL == 0) {	//一定フレームのたびに入る
-		if (currentanimnum < status.anim_sum) {				//アニメーション番号がアニメーション数の最大より少なければ処理に入る
+	if (ownframecount % ANIM_UPDATE_INTERVAL == 0) {	        //一定フレームのたびに入る
+		if (currentanimnum < status.anim_sum) {				    //アニメーション番号がアニメーション数の最大より少なければ処理に入る
 			currentanimnum++;									//アニメーション番号を進める
+								
 		}
-		else {												//アニメーションが最大数を超えたら
-			auto useplayer = player.lock();						//スマートポインタを一時shared_ptrに変換する
-			TergetRadian(useplayer->GetPosition());				//プレイヤーの位置を取得する
+		else {                                                  //アニメーションが最大数を超えたら
+			TergetRadian(player->GetPosition());				//プレイヤーの位置を取得する
 			actionpattern++;									//パターンを進める
 		}
 	}

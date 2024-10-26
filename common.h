@@ -103,10 +103,10 @@ namespace TextureConfigs {
 	constexpr TextureConfig BOSS           { 32 , 32, 11, 11, 0, 11 * 11   };
 	constexpr TextureConfig BOSSALGO       { 32 , 32,  5,  1, 0, 1         };
 	constexpr TextureConfig COMMON_BOMBER  { 48 , 48,  6,  1, 0, 6         };
-	constexpr TextureConfig AIR_ENEMYBOMBER{ 48 , 48,  6,  1, 6, 6         };
+	constexpr TextureConfig AIR_ENEMYBOMBER{ 48 , 48,  6,  2, 6, 6         };
 	constexpr TextureConfig MAP            { 32 , 32, 12, 10, 0, 12 * 10   };
 
-	constexpr TextureConfig TOROID         { 32, 32,  1, 8 , 0, 8        };
+	constexpr TextureConfig TOROID         { 32, 32,  8, 1 , 0, 8        };
 	constexpr TextureConfig TORKAN         { 32, 32,  8, 2 , 8, 7        };
 	constexpr TextureConfig GIDDOSPARIO    { 32, 32,  8, 3 ,16, 8        };
 	constexpr TextureConfig ZOSHI          { 32, 32,  8, 4 ,24, 4        };
@@ -118,19 +118,19 @@ namespace TextureConfigs {
 	constexpr TextureConfig GARUZAKATO     { 32, 32,  8,10 ,72, 1        };
 	constexpr TextureConfig BACURA         { 48, 48,  8, 8 ,56, 8        };
 
-	constexpr TextureConfig BARRA          { 32, 32,  1, 4 ,0,  2        };
-	constexpr TextureConfig ZOLBAK         { 32, 32,  1, 8 ,4,  4        };
-	constexpr TextureConfig LOGRAM         { 32, 32,  1,12 ,8,  4        };
-	constexpr TextureConfig DOMOGRAM       { 32, 32,  1,16 ,12, 4        };
-	constexpr TextureConfig DEROTA         { 32, 32,  1,20 ,16, 4        };
-	constexpr TextureConfig GROBDA         { 32, 32,  1,24 ,20, 4        };
-	constexpr TextureConfig BOZALOGRAM     { 32, 32,  1,28 ,24, 1        };
-	constexpr TextureConfig SOL            { 32, 32,  1,32 ,28, 4        };
-	constexpr TextureConfig GARUBARRA      { 64, 64,  1,22 ,20, 1        };
-	constexpr TextureConfig GARUDEROTA     { 64, 64,  1,28 ,24, 4        };
-	constexpr TextureConfig ALGO           { 48, 48,  1, 4 , 0, 4        };
-	constexpr TextureConfig AD_CORE        { 64, 64,  1, 1 , 0, 1        };
-	constexpr TextureConfig SPFLAG         { 32, 32,  1, 3 , 3, 1        };
+	constexpr TextureConfig BARRA          { 32, 32,  4, 1 ,0,  2        };
+	constexpr TextureConfig ZOLBAK         { 32, 32,  4, 2 ,4,  4        };
+	constexpr TextureConfig LOGRAM         { 32, 32,  4, 3 ,8,  4        };
+	constexpr TextureConfig DOMOGRAM       { 32, 32,  4, 4 ,12, 4        };
+	constexpr TextureConfig DEROTA         { 32, 32,  4, 5 ,16, 4        };
+	constexpr TextureConfig GROBDA         { 32, 32,  4, 6 ,20, 4        };
+	constexpr TextureConfig BOZALOGRAM     { 32, 32,  4, 7 ,24, 1        };
+	constexpr TextureConfig SOL            { 32, 32,  4, 8 ,28, 4        };
+	constexpr TextureConfig GARUBARRA      { 64, 64,  4, 6 ,20, 1        };
+	constexpr TextureConfig GARUDEROTA     { 64, 64,  4, 7, 24, 4        };
+	constexpr TextureConfig ALGO           { 32, 32,  4, 1 , 0, 4        };
+	constexpr TextureConfig AD_CORE        { 32, 32,  4, 2 , 4, 1        };
+	constexpr TextureConfig SPFLAG         { 32, 32,  4, 1 , 2, 1        };
 
 }
 
@@ -150,7 +150,7 @@ struct EnemyStatus {
 namespace EnemyStatusData{
 	constexpr EnemyStatus DUMMY      {-1 ,  0,  0, 0,  0,    0, 0.0f, 0.0f  };	// ダミー
 	constexpr EnemyStatus TOROID     { 0 , 32, 32, 1,  8,   30, 2.0f, 0.04f };	// トーロイド
-	constexpr EnemyStatus TORKAN     { 1 , 32, 32, 0,  7,   50, 4.0f, 0.0f  };   // タルケン
+	constexpr EnemyStatus TORKAN     { 1 , 32, 32, 0,  6,   50, 4.0f, 0.0f  };   // タルケン
 	constexpr EnemyStatus GIDDOSPARIO{ 2 , 16, 32, 0,  8,   10, 7.0f, 0.0f  };   // ギドスパリオ
 	constexpr EnemyStatus ZOSHI      { 3 , 32, 32, 2,  4,   70, 3.0f, 0.0f  };   // ゾシー
 	constexpr EnemyStatus JARA       { 4 , 32, 32, 0,  6,  150, 4.0f, 0.04f };   // ジアラ

@@ -94,7 +94,7 @@ private:
         std::shared_ptr<GameTexture> texture; // マップチップの画像を保管しておく変数
     };
 
-protected:
+private:
     int anim;
     int pat;
     bool shootdown;

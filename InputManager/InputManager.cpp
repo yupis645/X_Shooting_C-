@@ -50,15 +50,6 @@ int InputManager::InputReception()
 	directionkeyaxis = DirctionkeyinputAxis(0.01f, 0.01f,1);
 
 
-	//テストモード有効時のみ作用
-#if TestMode
-	if (DebugOn) {				//
-		if (ChkKeyEdge(PK_D)) {
-			DebugEnable = DebugEnable ? false : true;
-		}
-	}
-#endif
-
 	return 0;
 }
 

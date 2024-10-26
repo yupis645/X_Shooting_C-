@@ -1,7 +1,7 @@
 #include "DebugInput.h"
 
 
-
+#include "InputManager.h"
 #include "conioex.h"
 #include "Geometry.h"
 #include "common.h"

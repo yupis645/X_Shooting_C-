@@ -74,7 +74,7 @@ namespace {
         }
 
         //GroundEnemyのpngデータには地上の敵の画像が入っている
-        if (TextureType::GroundEnemy <= type && type <= TextureType::Spflag) {
+        if (TextureType::GroundEnemy <= type && type <= TextureType::Garuderota || type == TextureType::Spflag) {
             return tdm->GetTexturePath(TextureType::GroundEnemy);
         }
         //GroundEnemyのpngデータには地上の敵の画像が入っている
@@ -95,7 +95,7 @@ namespace {
             rm.InitTextureLoad(TextureType::Player, L"res/Player_Sight.png") ||
             rm.InitTextureLoad(TextureType::Bullet, L"res/Bullet.png") ||
             rm.InitTextureLoad(TextureType::Boss, L"res/Boss.png") ||
-            rm.InitTextureLoad(TextureType::BossParts, L"res/Bossparts.png") ||
+            rm.InitTextureLoad(TextureType::BossParts, L"res/Algo_Core.png") ||
             rm.InitTextureLoad(TextureType::Bomber, L"res/Bomber.png") ||
             rm.InitTextureLoad(TextureType::Map, L"res/MapChip.png") ||
             rm.InitTextureLoad(TextureType::AirEnemy, L"res/AirEnemy.png") ||
@@ -111,12 +111,12 @@ namespace {
    //                  プレイヤーが使う画像を作成する
    //===============================================================================================
     bool Player_Convert_GameTex(ResourceManager& rm) {
-        if (rm.SliceTexturebytype(TextureType::Player, TextureConfigs::PLAYER) ||
-            rm.SliceTexturebytype(TextureType::Targetsight, TextureConfigs::TARGETSIGHT) ||
-            rm.SliceTexturebytype(TextureType::Bullet, TextureConfigs::BULLET) ||
-            rm.SliceTexturebytype(TextureType::Bom, TextureConfigs::BOM) ||
+        if (rm.SliceTexturebytype(TextureType::Player,       TextureConfigs::PLAYER) ||
+            rm.SliceTexturebytype(TextureType::Targetsight,  TextureConfigs::TARGETSIGHT) ||
+            rm.SliceTexturebytype(TextureType::Bullet,       TextureConfigs::BULLET) ||
+            rm.SliceTexturebytype(TextureType::Bom,          TextureConfigs::BOM) ||
             rm.SliceTexturebytype(TextureType::PlayerBomber, TextureConfigs::COMMON_BOMBER) ||
-            rm.SliceTexturebytype(TextureType::BomBomber, TextureConfigs::COMMON_BOMBER)) {
+            rm.SliceTexturebytype(TextureType::BomBomber,    TextureConfigs::COMMON_BOMBER)) {
             std::cerr << "Error: Failed to Player convert." << std::endl;
             return true;  // エラー発生
         }
@@ -146,74 +146,25 @@ namespace {
  //                  地上敵の画像を作成する
  //===============================================================================================
     bool GroundEnemy_Convert_GameTex(ResourceManager& rm) {
-        if (rm.SliceTexturebytype(TextureType::Ground_EnemyBomber, TextureConfigs::COMMON_BOMBER)) {
+         if (rm.SliceTexturebytype(TextureType::Ground_EnemyBomber, TextureConfigs::COMMON_BOMBER) ||
+            rm.SliceTexturebytype(TextureType::Barra,               TextureConfigs::BARRA) ||
+            rm.SliceTexturebytype(TextureType::Zolbak,              TextureConfigs::ZOLBAK) ||
+            rm.SliceTexturebytype(TextureType::Logram,              TextureConfigs::LOGRAM) ||
+            rm.SliceTexturebytype(TextureType::Domogram,            TextureConfigs::DOMOGRAM) ||
+            rm.SliceTexturebytype(TextureType::Derota,              TextureConfigs::DEROTA) ||
+            rm.SliceTexturebytype(TextureType::Grobda,              TextureConfigs::GROBDA) ||
+            rm.SliceTexturebytype(TextureType::Bozalogram,          TextureConfigs::BOZALOGRAM) ||
+            rm.SliceTexturebytype(TextureType::Sol,                 TextureConfigs::SOL) ||
+            rm.SliceTexturebytype(TextureType::Garubarra,           TextureConfigs::GARUBARRA) ||
+            rm.SliceTexturebytype(TextureType::Garuderota,          TextureConfigs::GARUDEROTA) ||
+            rm.SliceTexturebytype(TextureType::Boss,                TextureConfigs::BOSS) ||
+            rm.SliceTexturebytype(TextureType::Algo,                TextureConfigs::ALGO) ||
+            rm.SliceTexturebytype(TextureType::Ad_core,             TextureConfigs::AD_CORE) ||
+            rm.SliceTexturebytype(TextureType::Spflag,              TextureConfigs::SPFLAG)) {
             std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
+            return true;  // エラー発生
         }
-        if (rm.SliceTexturebytype(TextureType::Barra, TextureConfigs::BARRA)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Zolbak, TextureConfigs::ZOLBAK)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Logram, TextureConfigs::LOGRAM)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Domogram, TextureConfigs::DOMOGRAM)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl; 
-        }
-        if (rm.SliceTexturebytype(TextureType::Derota, TextureConfigs::DEROTA)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Grobda, TextureConfigs::GROBDA)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Bozalogram, TextureConfigs::BOZALOGRAM)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Sol, TextureConfigs::SOL)) { 
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Garubarra, TextureConfigs::GARUBARRA)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Garuderota, TextureConfigs::GARUDEROTA)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl; 
-        }
-        if (rm.SliceTexturebytype(TextureType::Boss, TextureConfigs::BOSS))
-        {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Algo, TextureConfigs::ALGO)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Ad_core, TextureConfigs::AD_CORE)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-        if (rm.SliceTexturebytype(TextureType::Spflag, TextureConfigs::SPFLAG)) {
-            std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        }
-
         return false;
-        //return false;
-        // if (rm.SliceTexturebytype(TextureType::Ground_EnemyBomber, TextureConfigs::COMMON_BOMBER) ||
-        //    rm.SliceTexturebytype(TextureType::Barra, TextureConfigs::BARRA) ||
-        //    rm.SliceTexturebytype(TextureType::Zolbak, TextureConfigs::ZOLBAK) ||
-        //    rm.SliceTexturebytype(TextureType::Logram, TextureConfigs::LOGRAM) ||
-        //    rm.SliceTexturebytype(TextureType::Domogram, TextureConfigs::DOMOGRAM) ||
-        //    rm.SliceTexturebytype(TextureType::Derota, TextureConfigs::DEROTA) ||
-        //    rm.SliceTexturebytype(TextureType::Grobda, TextureConfigs::GROBDA) ||
-        //    rm.SliceTexturebytype(TextureType::Bozalogram, TextureConfigs::BOZALOGRAM) ||
-        //    rm.SliceTexturebytype(TextureType::Sol, TextureConfigs::SOL) ||
-        //    rm.SliceTexturebytype(TextureType::Garubarra, TextureConfigs::GARUBARRA) ||
-        //    rm.SliceTexturebytype(TextureType::Garuderota, TextureConfigs::GARUDEROTA) ||
-        //    rm.SliceTexturebytype(TextureType::Boss, TextureConfigs::BOSS) ||
-        //    rm.SliceTexturebytype(TextureType::Algo, TextureConfigs::ALGO) ||
-        //    rm.SliceTexturebytype(TextureType::Ad_core, TextureConfigs::AD_CORE) ||
-        //    rm.SliceTexturebytype(TextureType::Spflag, TextureConfigs::SPFLAG)) {
-        //    std::cerr << "Error: Failed to GroundEnemy convert." << std::endl;
-        //    return true;  // エラー発生
-        //}
-        //return false;
     }
 
 //===============================================================================================
@@ -221,17 +172,17 @@ namespace {
 //===============================================================================================
     bool AirEnemy_Convert_GameTex(ResourceManager& rm) {
         if (rm.SliceTexturebytype(TextureType::Air_EnemyBomber, TextureConfigs::AIR_ENEMYBOMBER) ||
-            rm.SliceTexturebytype(TextureType::Toroid, TextureConfigs::TOROID) ||
-            rm.SliceTexturebytype(TextureType::Torkan, TextureConfigs::TORKAN) ||
-            rm.SliceTexturebytype(TextureType::Giddospario, TextureConfigs::GIDDOSPARIO) ||
-            rm.SliceTexturebytype(TextureType::Zoshi, TextureConfigs::ZOSHI) ||
-            rm.SliceTexturebytype(TextureType::Jara, TextureConfigs::JARA) ||
-            rm.SliceTexturebytype(TextureType::Kapi, TextureConfigs::KAPI) ||
-            rm.SliceTexturebytype(TextureType::Terrazi, TextureConfigs::TERRAZI) ||
-            rm.SliceTexturebytype(TextureType::Zakato, TextureConfigs::ZAKATO) ||
-            rm.SliceTexturebytype(TextureType::Bragzakato, TextureConfigs::BRAGZAKATO) ||
-            rm.SliceTexturebytype(TextureType::Garuzakato, TextureConfigs::GARUZAKATO) ||
-            rm.SliceTexturebytype(TextureType::Bacura, TextureConfigs::BACURA)) {
+            rm.SliceTexturebytype(TextureType::Toroid,          TextureConfigs::TOROID) ||
+            rm.SliceTexturebytype(TextureType::Torkan,          TextureConfigs::TORKAN) ||
+            rm.SliceTexturebytype(TextureType::Giddospario,     TextureConfigs::GIDDOSPARIO) ||
+            rm.SliceTexturebytype(TextureType::Zoshi,           TextureConfigs::ZOSHI) ||
+            rm.SliceTexturebytype(TextureType::Jara,            TextureConfigs::JARA) ||
+            rm.SliceTexturebytype(TextureType::Kapi,            TextureConfigs::KAPI) ||
+            rm.SliceTexturebytype(TextureType::Terrazi,         TextureConfigs::TERRAZI) ||
+            rm.SliceTexturebytype(TextureType::Zakato,          TextureConfigs::ZAKATO) ||
+            rm.SliceTexturebytype(TextureType::Bragzakato,      TextureConfigs::BRAGZAKATO) ||
+            rm.SliceTexturebytype(TextureType::Garuzakato,      TextureConfigs::GARUZAKATO) ||
+            rm.SliceTexturebytype(TextureType::Bacura,          TextureConfigs::BACURA)) {
             std::cerr << "Error: Failed to AirEnemy convert." << std::endl;
             return true;  // エラー発生
         }

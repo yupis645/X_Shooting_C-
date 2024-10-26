@@ -1,8 +1,9 @@
 #ifndef DEBUGINPUT_H
 #define DEBUGINPUT_H
 
+class IInputManager;
+
 #include <iostream>
-#include "IInputManager.h"
 
 class DebugInput{
 public :

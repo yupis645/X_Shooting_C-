@@ -33,6 +33,13 @@ public:
     ~GameScene() override {
         // 終了処理（リソース解放など）
     }
+
+protected:
+    std::shared_ptr<IPlayer> GetPlayer() { return player_; }
+    std::shared_ptr<IBulletsManager> GetBullets() { return bullets_; }
+    std::shared_ptr<IMapManager> GetMaps() { return mapmanager_; }
+    std::shared_ptr<IEnemysManager> GetEnemys() { return enemys_; }
+
 private:
     std::shared_ptr<IPlayer> player_;  // Player クラスへの依存
     std::shared_ptr<IBulletsManager> bullets_;  // Player クラスへの依存

@@ -22,7 +22,7 @@
 
 class GameTexture {
 public:
-    GameTexture(const std::wstring& path, TextureConfig cof) { SliceTexture(path, cof); }
+    GameTexture(const std::wstring& path, TextureConfig cof) :config(cof) { SliceTexture(path, cof); }
     
     bool SliceTexture(const std::wstring& path, TextureConfig cof);     //画像のロード inline関数
 
@@ -42,6 +42,8 @@ public:
     const std::vector<std::unique_ptr<Bmp>>& GetTextures() const {
         return textures_;
     }
+
+    TextureConfig GetConfig() { return config; }
 
     ~GameTexture() = default;       // デストラクタ
 

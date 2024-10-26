@@ -40,11 +40,10 @@ int TOROID::Update(std::weak_ptr<IPlayer> player)
 }
 
 
-int TOROID::UniqueUpdate(std::weak_ptr<IPlayer> player)
+int TOROID::UniqueUpdate(std::shared_ptr<IPlayer> player)
 {
-	auto useplayer = player.lock();
 
-	if(ownframecount < 5) TergetRadian(useplayer->GetPosition());
+	if(ownframecount < 5) TergetRadian(player->GetPosition());
 
 	//”í’e”»’è‚ªtrue‚Ìê‡
 	AirEnemyBase::AnimUpdate(ANIM_UPDATE_INTERVAL);
@@ -52,7 +51,7 @@ int TOROID::UniqueUpdate(std::weak_ptr<IPlayer> player)
 	/*’e‚ğŒ‚‚Â‘O‚Ì“®‚«*/
 	if (actionpattern == 0)
 	{
-		return ActionPattern01(useplayer->GetHitbox(), useplayer->GetPosition());
+		return ActionPattern01(player->GetHitbox(), player->GetPosition());
 	}
 
 	if (actionpattern == 1) 

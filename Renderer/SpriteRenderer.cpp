@@ -60,8 +60,8 @@ bool SpriteRenderer::DrawFromCenterPos(const std::shared_ptr<const GameTexture>&
 
     if (texture_convert_bmp == nullptr) return true;        //•ÏŠ·¸”s‚È‚Ì‚Å‚±‚±‚Åˆ—‚ğI‚¦‚é
 
-    int lefttop_x = x - (pic_size / 2) + 1;
-    int lefttop_y = y - (pic_size / 2) + 1;
+    int lefttop_x = x - (pic_size / 2) ;
+    int lefttop_y = y - (pic_size / 2) ;
 
     DrawBmp(static_cast<int>(lefttop_x), static_cast<int>(lefttop_y), texture_convert_bmp);
 

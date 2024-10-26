@@ -1,4 +1,5 @@
 #include "AirEnemyBase.h"
+#include "Player.h"
 
 
 namespace {
@@ -17,6 +18,8 @@ namespace {
 
 int AirEnemyBase::Create(std::weak_ptr<IPlayer> pl, int number)
 {
+	auto useplayer = pl.lock();
+
 	active = true;
 
 
@@ -26,6 +29,8 @@ int AirEnemyBase::Create(std::weak_ptr<IPlayer> pl, int number)
 	}
 
 	hitbox.CenterPositionSync(position, status.hitbox_size);
+
+	TergetRadian(useplayer->GetPosition());
 
 	/*画面の中心を軸に左右どちらに寄っているかによって最初の進行方向をさだめる*/
 	direction = position.x < ScreenConfig::CENTER_X ? 1 : -1;
@@ -88,7 +93,7 @@ void AirEnemyBase::CreateSetup()
 
 void AirEnemyBase::InitPostionPattern(float x_pos)
 {
-	if (x_pos == -1) {
+	if (x_pos == -1.0f) {
 		position.x = (float)(rand() % ScreenConfig::SRN_W + ONE_OFFSET);
 	}
 	//出現位置の設定

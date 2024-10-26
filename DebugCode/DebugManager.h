@@ -9,11 +9,14 @@ class GameStatus;
 class IInputManager;
 
 class DebugInput;
+class DebugTexture;
+class DebugPlayer;
 class BoxCollider;
 class Vector2;
 
 #include <iostream>
 #include "common.h"
+#include "DebugTexture.h"
 
 
 class DebugManager{
@@ -22,9 +25,14 @@ public:
 
 	void DrawInputFrag();
 
-	void DrawHitBox(const Boxcollider);
+	void DebugDrawTexture(DebugTexture::DebugSelectDraw draw);
 
-	void DrawCenterPos(const Vector2);
+	void DrawBoxcollider(const Boxcollider);
+
+	void DrawPsotion(const Vector2);
+
+
+	void DrawHitBox(const GameObject& obj,int r,int g,int b,bool frame);
 
 	~DebugManager() = default;
 
@@ -36,6 +44,8 @@ public:
 	std::shared_ptr<IInputManager> im;
 
 	std::shared_ptr<DebugInput> debug_im;
+	std::shared_ptr<DebugTexture> debug_tex;
+	std::shared_ptr<DebugPlayer> debug_player;
 private:
 	int writenum;
 

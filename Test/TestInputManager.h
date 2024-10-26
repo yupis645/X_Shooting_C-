@@ -12,12 +12,15 @@
 //		そのため、他のクラスはIsFlagSetで確認したいフラグを指定してboolの返り値で入力の有無がわかる
 //----------------------------------------------------------------------------------------------------
 
-#include "IInputManager.h"
-#include "Geometry.h"
+class DebugManager;
 
-class TestInputManager: public IInputManager {
+#include "InputManager.h"
+#include "Geometry.h"
+#include <iostream>
+
+class TestInputManager: public InputManager {
 	public:
-		TestInputManager() : active(true), pressFlags(0), triggerFlags(0), releaseFlags(0), toggleFlags(0), directionkeyaxis(Vector2::zero) {}
+		TestInputManager() {}
 		~TestInputManager() {}
 
 		int InputReception()override;							//入力受け付ける
@@ -28,12 +31,6 @@ class TestInputManager: public IInputManager {
 		void ToggleFlag(InputFlag flag)override;				// フラグのトグル（ビットXOR）
 		bool IsFlagSet(InputFlag flag, InputMode mode) const;	// フラグが設定されているか確認（ビットAND）
 		bool FlagsCompare(int a, int b, InputFlag flag);		//ビット同士で比較し、同じビット列が立っているならtrue,ないならfalseを返す
-		void SetActive(bool ac)override { active = ac; }		//入力の有効状態を設定する
-		bool Active()const override { return active; }			//入力の有効状態か確認する
-		Vector2 GetAxis()const  override { return directionkeyaxis; };
-
-		void InputPritf();			//テスト用の描画
-
 
 		void GetKeySetup() override;		//キーの入力状態を許可する
 
@@ -51,18 +48,19 @@ class TestInputManager: public IInputManager {
 		void pose() override;
 		void esc() override;
 
+		bool DebugSwitch();
+		bool DebugCreateAirEnemy();
+		bool DebugCreateEnemyShot();
 
 		void InputFlagsControl(InputFlag flag, bool inputley);		//４つのビットのON/OFFをする
 
 private:
-	bool active;
+	std::shared_ptr<DebugManager> debug_;
+
 	int pressFlags = 0;       // キーが押されている間のフラグ
 	int triggerFlags = 0;     // 押下の瞬間のフラグ
 	int releaseFlags = 0;     // 離した瞬間のフラグ
 	int toggleFlags = 0;      // トグル状態のフラグ
-	Vector2 directionkeyaxis;
-
-
 };
 
 

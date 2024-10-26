@@ -106,6 +106,8 @@ void EnemysManager::CreateAirEnemy(EnemyID::EnemyName name)
 		airenemys[index] = std::make_shared<TORKAN>(player_, name);
 		break;
 	case EnemyID::EnemyName::Giddospario:
+		airenemys[index] = std::make_shared<GIDDOSPARIO>(player_, name);
+
 		break;
 	case EnemyID::EnemyName::Zoshi:
 	case EnemyID::EnemyName::zoshi_type2:
@@ -226,18 +228,6 @@ int EnemysManager::GroundEnemysDraw()
 
 int EnemysManager::AirEnemysDraw()
 {
-
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 0, Vector2(240,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 1, Vector2(280,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 2, Vector2(320,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 3, Vector2(360,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 4, Vector2(400,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 5, Vector2(440,300), 48);
-	render_->DrawFromCenterPos(textures_.at(enemyID::Bacura), 6, Vector2(480,300), 48);
-
-
-
-
 	for (int i = 0; i < airenemys.size(); i++) {
 		if (airenemys[i]->GetActive()) {
 			EnemyID::EnemyName enemyname = static_cast<EnemyID::EnemyName>(airenemys[i]->GetNumber());

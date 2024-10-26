@@ -10,6 +10,7 @@
 #include "GameSceneFactory.h"
 #include "Player.h"
 
+
 GameScene::GameScene(std::shared_ptr<DIContainer> con)
     : container_(con),
     gamestatus_(con->Create<GameStatus>()),
@@ -17,7 +18,7 @@ GameScene::GameScene(std::shared_ptr<DIContainer> con)
     resourcemanager_(con->Create<ResourceManager>()),
     instanceFactory_ (std::make_shared<GameSceneFactory>(con))
 {
-    player_ = instanceFactory_->CreatePlayer();
+    player_ = instanceFactory_->CreateTestPlayer();
     mapmanager_ = instanceFactory_->CreateMap();
     bullets_ = instanceFactory_->CreateBulletsManager();
     enemys_ = instanceFactory_->CreateEnemysManager();
@@ -43,7 +44,7 @@ int GameScene::Update()
 
 
     if (input_->IsFlagSet(IInputManager::InputFlag::bom, IInputManager::InputMode::pushdown))bullets_->CreateEnemyShot(Vector2(300,200), player_->GetPosition());
-    if (input_->IsFlagSet(IInputManager::InputFlag::shot, IInputManager::InputMode::pushdown))enemys_->CreateAirEnemy(EnemyID::EnemyName::Torkan);
+    if (input_->IsFlagSet(IInputManager::InputFlag::shot, IInputManager::InputMode::pushdown))enemys_->CreateAirEnemy(EnemyID::EnemyName::Giddospario);
    
 
     bullets_->Update(framecount);
@@ -56,11 +57,14 @@ int GameScene::Update()
 
 int GameScene::Draw()
 {
+
     mapmanager_->Draw();
     player_->Draw();
     enemys_->AirEnemysDraw();
     enemys_->GroundEnemysDraw();
     bullets_->Draw();
+
+
     return 0;
 
 }

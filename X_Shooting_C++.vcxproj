@@ -138,6 +138,7 @@
     <ClInclude Include="DebugCode\DebugManager.h" />
     <ClInclude Include="DebugCode\DebugInput.h" />
     <ClInclude Include="DebugCode\DebugPlayer.h" />
+    <ClInclude Include="DebugCode\DebugTexture.h" />
     <ClInclude Include="DIContainer\DIContainer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -182,6 +183,7 @@
     </ClInclude>
     <ClInclude Include="SchooLlibrary\conioex.h" />
     <ClInclude Include="Test\TestGameManager.h" />
+    <ClInclude Include="Test\TestGameScene.h" />
     <ClInclude Include="Test\TestInputManager.h" />
     <ClInclude Include="Test\TestMapManager.h" />
     <ClInclude Include="Test\TestPlayer.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="Bullets\PlayerShot.cpp" />
     <ClCompile Include="DebugCode\DebugInput.cpp" />
     <ClCompile Include="DebugCode\DebugPlayer.cpp" />
+    <ClCompile Include="DebugCode\DebugTexture.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DIContainer\DIContainer.cpp" />
     <ClCompile Include="Entity\Enemy\AirEnemys\AirEnemyBase.cpp" />
@@ -237,6 +240,7 @@
     </ClCompile>
     <ClCompile Include="SchooLlibrary\conioex.cpp" />
     <ClCompile Include="Test\TestGameManager.cpp" />
+    <ClCompile Include="Test\TestGameScene.cpp" />
     <ClCompile Include="Test\TestInputManager.cpp" />
     <ClCompile Include="Test\TestMapManager.cpp" />
     <ClCompile Include="Test\TestPlayer.cpp" />

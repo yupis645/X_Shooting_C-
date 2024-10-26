@@ -17,6 +17,7 @@
 #include "DebugManager.h" 
 #include "InputManager.h" 
 
+#include "TestGameScene.h"
 
 
 #include "conioex.h"
@@ -35,7 +36,7 @@ namespace {
 			sm.SwitchToScene<TitleScene>();		//タイトルシーンをもう一度ロードする
 			break;
 		case SceneID::GAME:
-			sm.SwitchToScene<GameScene>();		//ゲームシーンをロードする
+			sm.SwitchToScene<TestGameScene>();		//ゲームシーンをロードする
 			break;
 		case SceneID::OPTION:					//オプションシーンをロードする
 			break;
@@ -102,6 +103,7 @@ int SceneManager::Draw()
 	currentscene_->Draw();
 
 	//container_->Create<DebugManager>()->DrawInputFrag();
+	//container_->Create<DebugManager>()->DebugDrawTexture(DebugTexture::DebugSelectDraw::Boss);
 
 	PrintFrameBuffer();	//画面バッファを転送
 	RenderScreen();		//画面をレンダリング

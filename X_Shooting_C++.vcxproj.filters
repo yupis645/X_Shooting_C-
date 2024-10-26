@@ -139,9 +139,6 @@
     <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO">
       <UniqueIdentifier>{9d726376-0744-46a0-a0a5-ba7c878caca9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO">
-      <UniqueIdentifier>{8b6521fb-54e5-4619-bd33-b11b88be479e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\JARA">
       <UniqueIdentifier>{075bfb50-03e9-43b3-9389-11be98222e83}</UniqueIdentifier>
     </Filter>
@@ -162,6 +159,12 @@
     </Filter>
     <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\2.TORKAN">
       <UniqueIdentifier>{cb54e43a-f7dd-4e03-b5ed-b6b5543b33d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="デバックソース\TextureDebug">
+      <UniqueIdentifier>{85f87398-0e3e-4f8d-9fdd-dc1f302a63df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Entity\Enemys\AirEnemys\3.GIDDOSPARIO">
+      <UniqueIdentifier>{8b6521fb-54e5-4619-bd33-b11b88be479e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +297,12 @@
     <ClInclude Include="Entity\Enemy\GroundEnemys\GroundEnemyBase.h">
       <Filter>ソース ファイル\Entity\Enemys\GroundEnemys</Filter>
     </ClInclude>
+    <ClInclude Include="DebugCode\DebugTexture.h">
+      <Filter>デバックソース\TextureDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestGameScene.h">
+      <Filter>TESTソース\TestScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -390,7 +399,7 @@
       <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GARUZAKATO</Filter>
     </ClCompile>
     <ClCompile Include="Entity\Enemy\AirEnemys\GIDDOSPARIO.cpp">
-      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\GIDDOSPARIO</Filter>
+      <Filter>ソース ファイル\Entity\Enemys\AirEnemys\3.GIDDOSPARIO</Filter>
     </ClCompile>
     <ClCompile Include="Entity\Enemy\AirEnemys\JARA.cpp">
       <Filter>ソース ファイル\Entity\Enemys\AirEnemys\JARA</Filter>
@@ -421,6 +430,12 @@
     </ClCompile>
     <ClCompile Include="Geometry.cpp">
       <Filter>ソース ファイル\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCode\DebugTexture.cpp">
+      <Filter>デバックソース\TextureDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestGameScene.cpp">
+      <Filter>TESTソース\TestScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
