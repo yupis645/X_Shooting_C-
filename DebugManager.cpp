@@ -14,15 +14,10 @@
 #include "Geometry.h"
 
 DebugManager::DebugManager(std::shared_ptr<DIContainer> con) :
-	container(con),
-	gm(con->Create<IGameManager>()),
-	gs(con->Create<GameStatus>()),
-	rm(con->Create<ResourceManager>()),
-	sr(con->Create<SpriteRenderer>()),
-	im(con->Create<IInputManager>())
+	container(con)
 {
-	debug_im = std::make_shared<DebugInput>(im);
-	debug_tex = std::make_shared<DebugTexture>(rm,sr);
+	debug_im = std::make_shared<DebugInput>(container);
+	debug_tex = std::make_shared<DebugTexture>(con->Create<ResourceManager>(),con->Create<SpriteRenderer>());
 	writenum = 3;
 }
 

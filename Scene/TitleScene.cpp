@@ -104,18 +104,20 @@ int TitleScene::Draw()
 	auto TextW_offset = [](int y = 0) { return CENTER_X - (HALFWORD_W * y); };		//テキストを表示する際の行方向へのオフセット
 	auto SelectTextOffset = [](int i = 1) { return 30 - (i * 30); };
 
+	
+
 	//resourcemanager_->GameTextureDraw(TextureType::Title, 0, SRN_W / 2 - 99, 100);		//タイトルの表示
 	render_->DrawFromTopLeftPos(titlenameplate, 0, SRN_W / 2 - 99, 100);
 
 	switch (state) {
 	case PUSH_START_WAIT_STATE:
-		WriteTextFA(TextW_offset(menu[0].str.size()), CENTER_Y, 0, "%s", menu[0].toCharArray());		//"PUSH START ENTER"の表示
+		WriteTextFA(TextW_offset(static_cast<int>(menu[0].str.size())), CENTER_Y, 0, "%s", menu[0].toCharArray());		//"PUSH START ENTER"の表示
 		break;
 	case SELECT_PLAYER_MODE_STATE:
 		for (int i = 0; i < 2; i++) {
-			WriteTextFA(TextW_offset(menu[2].str.size()), CENTER_Y - SelectTextOffset(i), 0, "%s", menu[i + 1].toCharArray());	//テキストの表示位置
+			WriteTextFA(TextW_offset(static_cast<int>(menu[2].str.size())), CENTER_Y - SelectTextOffset(i), 0, "%s", menu[i + 1].toCharArray());	//テキストの表示位置
 		}
-		WriteTextFA(TextW_offset(menu[0].str.size()) - WORD_W, CENTER_Y - SelectTextOffset((int)Getcarsor().y), 0, "→");	//カーソルの表示
+		WriteTextFA(TextW_offset(static_cast<int>(menu[0].str.size())) - WORD_W, CENTER_Y - SelectTextOffset((int)Getcarsor().y), 0, "→");	//カーソルの表示
 		break;
 	
 	}

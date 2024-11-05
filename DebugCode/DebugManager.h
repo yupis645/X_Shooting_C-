@@ -10,7 +10,6 @@ class IInputManager;
 
 class DebugInput;
 class DebugTexture;
-class DebugPlayer;
 class BoxCollider;
 class Vector2;
 
@@ -37,15 +36,9 @@ public:
 	~DebugManager() = default;
 
 	std::shared_ptr<DIContainer> container;
-	std::shared_ptr<IGameManager> gm;
-	std::shared_ptr<GameStatus> gs;
-	std::shared_ptr<ResourceManager> rm;
-	std::shared_ptr<SpriteRenderer> sr;
-	std::shared_ptr<IInputManager> im;
 
 	std::shared_ptr<DebugInput> debug_im;
 	std::shared_ptr<DebugTexture> debug_tex;
-	std::shared_ptr<DebugPlayer> debug_player;
 private:
 	int writenum;
 

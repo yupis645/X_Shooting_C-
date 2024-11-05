@@ -65,6 +65,7 @@ namespace SceneConfig {
 
 }
 
+constexpr int AIR_ENEMY_MAX_LEVEL = 64;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,24 +150,24 @@ struct EnemyStatus {
 // 敵データの配列
 namespace EnemyStatusData{
 	constexpr EnemyStatus DUMMY      {-1 ,  0,  0, 0,  0,    0, 0.0f, 0.0f  };	// ダミー
-	constexpr EnemyStatus TOROID     { 0 , 32, 32, 1,  8,   30, 2.0f, 0.04f };	// トーロイド
+	constexpr EnemyStatus TOROID     { 0 , 32, 32, 0,  8,   30, 2.0f, 0.04f };	// トーロイド
 	constexpr EnemyStatus TORKAN     { 1 , 32, 32, 0,  6,   50, 4.0f, 0.0f  };   // タルケン
 	constexpr EnemyStatus GIDDOSPARIO{ 2 , 16, 32, 0,  8,   10, 7.0f, 0.0f  };   // ギドスパリオ
-	constexpr EnemyStatus ZOSHI      { 3 , 32, 32, 2,  4,   70, 3.0f, 0.0f  };   // ゾシー
-	constexpr EnemyStatus JARA       { 4 , 32, 32, 0,  6,  150, 4.0f, 0.04f };   // ジアラ
+	constexpr EnemyStatus ZOSHI      { 3 , 32, 32, 0,  4,   70, 3.0f, 0.0f  };   // ゾシー
+	constexpr EnemyStatus JARA       { 4 , 32, 32, 0,  6,  150, 4.0f, 0.06f };   // ジアラ
 	constexpr EnemyStatus KAPI       { 5 , 32, 32, 0,  7,  300, 4.0f, 0.15f };   // カピ
 	constexpr EnemyStatus TERRAZI    { 6 , 32, 32, 0,  7,  700, 5.0f, 0.08f };   // テラジ
-	constexpr EnemyStatus ZAKATO     { 7 , 16, 32, 3,  1,  100, 3.0f, 0.0f  };   // ザカート
-	constexpr EnemyStatus BRAGZAKATO { 8 , 16, 32, 3,  1,  600, 3.0f, 0.0f  };   // ブラグザカート
+	constexpr EnemyStatus ZAKATO     { 7 , 16, 32, 0,  1,  100, 3.0f, 0.0f  };   // ザカート
+	constexpr EnemyStatus BRAGZAKATO { 8 , 16, 32, 0,  1,  600, 3.0f, 0.0f  };   // ブラグザカート
 	constexpr EnemyStatus GARUZAKATO { 9 , 16, 32, 0,  1, 1000, 3.0f, 0.0f  };   // ガルザカート
 	constexpr EnemyStatus BACURA     { 10, 48, 48, 0,  8,    0, 2.0f, 0.0f  };   // バキュラ
 
 	constexpr EnemyStatus BARRA      { 50, 32, 32, 0,  1,  100, 0.0f , 0.0f };   // バーラ
 	constexpr EnemyStatus ZOLBAK     { 51, 32, 32, 0,  4,  200, 0.0f , 0.0f };   // ゾルバグ
-	constexpr EnemyStatus LOGRAM     { 52, 32, 32, 4,  4,  300, 0.0f , 0.0f };   // ログラム
+	constexpr EnemyStatus LOGRAM     { 52, 32, 32, 0,  4,  300, 0.0f , 0.0f };   // ログラム
 	constexpr EnemyStatus DOMOGRAM   { 53, 32, 32, 0,  4,  800, 0.75f, 0.5f };   // ドモグラム
 	constexpr EnemyStatus DEROTA     { 54, 32, 32, 0,  4,  200, 0.0f , 0.0f };   // デローダ
-	constexpr EnemyStatus GROBDA     { 55, 32, 32, 8,  4,  200, 0.5f , 0.5f };   // グロブダー
+	constexpr EnemyStatus GROBDA     { 55, 32, 32, 0,  4,  200, 0.5f , 0.5f };   // グロブダー
 	constexpr EnemyStatus BOZALOGRAM { 56, 32, 32, 0,  1,  600, 0.0f , 0.0f };   // ボザログラム
 	constexpr EnemyStatus SOL        { 57, 32, 32, 0,  4, 2000, 0.0f , 0.0f };   // ソル
 	constexpr EnemyStatus GARUBARRA  { 58, 32, 63, 0,  1,  300, 0.0f , 0.0f };   // ガルバーラ
@@ -207,6 +208,21 @@ void Clamp(T& num, T min, T max) {
 	else if (num < min) {
 		num = max;
 	}
+}
+
+//============================================================================================================================
+//			インターフェース型変数のインスタンスチェック
+// 
+// インターフェース型を最初に指定し、そのあとに判別したい実装クラスを指定することで
+//		実装クラスがインスタンス化されているか確認できる。返り値は
+//		実装クラスならそのクラスが帰る
+//		それ以外ならnullptr帰る
+//============================================================================================================================
+template <typename TargetType, typename InterfaceType>
+std::shared_ptr<TargetType> InterfaceInstanceCheak(const std::shared_ptr<InterfaceType>& instance, const std::string& typeName) {
+	auto castedInstance = std::dynamic_pointer_cast<TargetType>(instance);
+
+	return castedInstance;
 }
 
 													/*変数宣言*/

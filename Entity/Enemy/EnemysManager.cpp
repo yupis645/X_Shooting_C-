@@ -96,28 +96,36 @@ void EnemysManager::CreateAirEnemy(EnemyID::EnemyName name)
 	int index = EnemyUtils::FindActiveIndex(airenemys, false);
 	if (index == -1) return;
 
+	int type_in_number = static_cast<int>(name);
+
 	switch (name)
 	{
 	case EnemyID::EnemyName::Toroid:
 	case EnemyID::EnemyName::toroid_type2:
-		airenemys[index] = std::make_shared<TOROID>(player_, name);
+		airenemys[index] = std::make_shared<TOROID>(player_, type_in_number);
 		break;
 	case EnemyID::EnemyName::Torkan:
-		airenemys[index] = std::make_shared<TORKAN>(player_, name);
+		airenemys[index] = std::make_shared<TORKAN>(player_, type_in_number);
 		break;
 	case EnemyID::EnemyName::Giddospario:
-		airenemys[index] = std::make_shared<GIDDOSPARIO>(player_, name);
+		airenemys[index] = std::make_shared<GIDDOSPARIO>(player_, type_in_number);
 
 		break;
 	case EnemyID::EnemyName::Zoshi:
 	case EnemyID::EnemyName::zoshi_type2:
 	case EnemyID::EnemyName::zoshi_type3:
+		airenemys[index] = std::make_shared<ZOSHI>(player_, type_in_number);
 		break;
 	case EnemyID::EnemyName::Jara:
+	case EnemyID::EnemyName::Jara_type2:
+		airenemys[index] = std::make_shared<JARA>(player_, type_in_number);
 		break;
 	case EnemyID::EnemyName::Kapi:
+		airenemys[index] = std::make_shared<KAPI>(player_, type_in_number);
+
 		break;
 	case EnemyID::EnemyName::Terrazi:
+		airenemys[index] = std::make_shared<TERRAZI>(player_, type_in_number);
 		break;
 	case EnemyID::EnemyName::Zakato:
 		break;
@@ -231,7 +239,13 @@ int EnemysManager::AirEnemysDraw()
 	for (int i = 0; i < airenemys.size(); i++) {
 		if (airenemys[i]->GetActive()) {
 			EnemyID::EnemyName enemyname = static_cast<EnemyID::EnemyName>(airenemys[i]->GetNumber());
-			render_->DrawFromCenterPos(textures_.at(enemyname), airenemys[i]->GetAnimNum(), airenemys[i]->GetPosition(), airenemys[i]->GetPicSize());
+			if (!airenemys[i]->Getshootdown()) {
+				render_->DrawFromCenterPos(textures_.at(enemyname), airenemys[i]->GetAnimNum(), airenemys[i]->GetPosition(), airenemys[i]->GetPicSize());
+			}
+			else {
+				render_->DrawBomberFromCenterPos(SpriteRenderer::BomberType::airenemybomber, airenemys[i]->GetAnimNum(), airenemys[i]->GetPosition());
+
+			}
 		}
 	}
 	return 0;
@@ -250,11 +264,11 @@ std::shared_ptr<AirEnemyBase>  EnemysManager::GetAirEnemysIndex(int index)
 }
 int EnemysManager::GetAirEnemysSum()
 {
-	return airenemys.size();
+	return static_cast<int>(airenemys.size());
 }
 int EnemysManager::GetGroundEnemysSum()
 {
-	return groundenemys.size();
+	return static_cast<int>(groundenemys.size());
 }
 int EnemysManager::searchEmptyAirEnemyIndex()
 {

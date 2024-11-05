@@ -5,10 +5,16 @@
 #include "conioex.h"
 #include "Geometry.h"
 #include "common.h"
+#include "DIContainer.h"
+
 
 using  InputFlag = IInputManager::InputFlag;
 using  InputMode = IInputManager::InputMode;
 
+
+DebugInput::DebugInput(std::shared_ptr<DIContainer> con) : input_(con->Create<IInputManager>())
+{
+}
 
 void DebugInput::InputPritf()
 {

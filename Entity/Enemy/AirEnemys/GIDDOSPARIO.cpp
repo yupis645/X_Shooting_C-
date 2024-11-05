@@ -94,7 +94,7 @@ int GIDDOSPARIO::UniqueUpdate(std::shared_ptr<IPlayer> player)
 		AirEnemyBase::AnimUpdate(ANIM_UPDATE_INTERVAL);
 
 		// 2.出現時にプレイヤーがいた座標に向かって進む
-		Enemy_Patterns(MovePatternID::TowardsPlayer);
+		Enemy_Patterns(MovePatternID::TowardsTarget);
 
 
 	return 0;

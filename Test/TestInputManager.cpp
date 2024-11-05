@@ -12,15 +12,15 @@
 #include "TestInputManager.h"
 #include "conioex.h"
 #include "Geometry.h"
-#include "common.h"
-#include "conioex.h"
+
+using InputFlag = IInputManager::InputFlag;
 
 //=======================================================
 //		キー入力をするためのセットアップ
 //=======================================================
 void TestInputManager::GetKeySetup()
 {
-	GetKeyAll();	//全てのキー入力。
+	InputManager::GetKeySetup();	//全てのキー入力。
 }
 
 //=======================================================
@@ -33,13 +33,14 @@ int TestInputManager::InputReception()
 {
 	InputManager::InputReception();
 
-#if TestMode
-	if (DebugOn) {				//
-		if (ChkKeyEdge(PK_D)) {
-			DebugEnable = DebugEnable ? false : true;
-		}
-	}
-#endif
+
+	DebugSwitch();
+	DebugCreateA_Enemy();
+	DebugCreateA_EnemyNumberUpdate();
+	DebugCreateG_Enemy();
+	DebugCreateG_EnemyNumberUpdate();
+	DebugCreateEnemyShot();
+
 
 	return 0;
 }
@@ -51,7 +52,8 @@ int TestInputManager::InputReception()
 //=======================================================
 Vector2 TestInputManager::Dirctionkeyinput(InputMode mode)
 {
-	auto dirction = InputManager::Dirctionkeyinput(mode);
+	return InputManager::Dirctionkeyinput(mode);
+
 
 }
 
@@ -62,7 +64,7 @@ Vector2 TestInputManager::Dirctionkeyinput(InputMode mode)
 // 第三引数が1フレームに増加する値で、入力を検知したら入力方向によってその値を増減させる
 //==============================================================================================================
 Vector2 TestInputManager::DirctionkeyinputAxis(float x_value, float y_value, float maxspeed) {
-	InputManager::DirctionkeyinputAxis(x_value, y_value, maxspeed);
+	return InputManager::DirctionkeyinputAxis(x_value, y_value, maxspeed);
 }
 
 //=======================================================
@@ -101,6 +103,7 @@ void TestInputManager::down()
 //=======================================================
 void  TestInputManager::select()
 {
+
 	InputManager::select();
 }
 
@@ -120,21 +123,6 @@ void  TestInputManager::esc()
 	InputManager::esc();
 }
 
-
-bool TestInputManager::DebugSwitch()
-{
-	return ChkKeyEdge(PK_D);
-}
-bool TestInputManager::DebugCreateAirEnemy()
-{
-	return ChkKeyEdge(PK_A);
-
-}
-bool TestInputManager::DebugCreateEnemyShot()
-{
-	return ChkKeyEdge(PK_F);
-
-}
 //=======================================================
 //			ショットの発射
 //=======================================================
@@ -164,36 +152,35 @@ void  TestInputManager::pose()
 //			フラグの設定（ビットOR）
 //=======================================================
 void TestInputManager::SetFlag(InputFlag flag, InputMode mode) {
-	InputManager::SetFlag(flag, mode);
+	return InputManager::SetFlag(flag, mode);
 }
 
 //=======================================================
 //			フラグの解除（ビットAND NOT）
 //=======================================================
 void TestInputManager::ClearFlag(InputFlag flag, InputMode mode) {
-	InputManager::ClearFlag(flag, mode);
+	return InputManager::ClearFlag(flag, mode);
 }
 
 //=======================================================
 //			 フラグのトグル（ビットXOR）
 //=======================================================
 void TestInputManager::ToggleFlag(InputFlag flag) {
-	InputManager::ToggleFlag(flag);
+	return InputManager::ToggleFlag(flag);
+
+	
 }
 
 //=======================================================
 //			フラグが設定されているか確認（ビットAND）
 //=======================================================
 bool TestInputManager::IsFlagSet(InputFlag flag, InputMode mode) const {
-	InputManager::IsFlagSet(flag, mode);
+	return InputManager::IsFlagSet(flag, mode);
 }
 
-//=======================================================
-//ビット同士で比較
-//=======================================================
-bool TestInputManager::FlagsCompare(int a, int b, InputFlag flag) {
-	InputManager::FlagsCompare(a, b, flag);
-}
+
+
+
 
 
 //==============================================================================================================
@@ -224,6 +211,84 @@ int TestInputManager::GetFlags(InputMode mode) const {
 	{
 		//エラー
 	}
+
+	return 0;
 }
 
 
+
+
+bool TestInputManager::DebugSwitch()
+{
+	DebugInputFlagsControl(DebugInputFlag::DebugMode, ChkKeyEdge(PK_D));
+
+	return false;
+}
+bool TestInputManager::DebugCreateA_Enemy()
+{
+	DebugInputFlagsControl(DebugInputFlag::createA_Enemy, ChkKeyEdge(PK_A));
+
+	return false;
+
+}
+bool TestInputManager::DebugCreateA_EnemyNumberUpdate()
+{
+
+	DebugInputFlagsControl(DebugInputFlag::updateA_Enemynumber, ChkKeyEdge(PK_Q));
+
+	return false;
+
+}
+bool TestInputManager::DebugCreateG_Enemy()
+{
+
+	DebugInputFlagsControl(DebugInputFlag::createG_Enemy, ChkKeyEdge(PK_S));
+
+	return false;
+
+}
+bool TestInputManager::DebugCreateG_EnemyNumberUpdate()
+{
+
+	DebugInputFlagsControl(DebugInputFlag::updateG_Enemynumber, ChkKeyEdge(PK_W));
+
+	return false;
+
+}
+bool TestInputManager::DebugCreateEnemyShot()
+{
+	DebugInputFlagsControl(DebugInputFlag::createE_Shot, ChkKeyEdge(PK_F));
+
+	return false;
+
+}
+
+//==============================================================================================================
+//											押した瞬間
+// 
+// 押した瞬間（pushdown)  : 入力が 1 で前回のフラグが 0 だった
+//==============================================================================================================
+
+void TestInputManager::DebugInputFlagsControl(DebugInputFlag flag, bool inputley)
+{
+	bool toggle = inputley != DebugIsFlagSet(flag);	//pressを前回の入力として使い、現在の入力と比較する
+
+	int bit = static_cast<int>(flag);
+
+
+	// 押した瞬間（pushdown）
+	if (inputley && toggle) debugtriggerFlags |= bit;
+	else					debugtriggerFlags &= ~bit;
+}
+
+
+//=======================================================
+//			フラグが設定されているか確認（ビットAND）
+//=======================================================
+
+bool TestInputManager::DebugIsFlagSet(DebugInputFlag flag) const {
+	int bit = static_cast<int>(flag);
+
+	return (debugtriggerFlags & bit) != 0;
+
+}

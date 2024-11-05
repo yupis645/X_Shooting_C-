@@ -30,9 +30,11 @@ public:
 
     void InitClear() override { GameObject::InitClear(); }
 
+    void HitCollision(bool isshootdown) override;
+
     // プロパティ & getter / setter
     bool Getshootdown() const override { return shootdown; }
-    void Setshootdown(bool isshootdown) override { shootdown = isshootdown; }
+    
 
     Vector2 GetPosition() const override { return GameObject::GetPosition(); }
     void SetPosition(Vector2 pos) override { GameObject::SetPosition(pos); }

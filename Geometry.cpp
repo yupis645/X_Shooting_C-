@@ -91,17 +91,23 @@ const Boxcollider Boxcollider::zero = Boxcollider(0.0f, 0.0f, 0.0f, 0.0f);
 //================================================================
 // 中心座標から頂点の位置をセットする
 //================================================================
- void Boxcollider::CenterPositionSync(Vector2 centerpos, int size)
-{
-    float hitbox_size_half = ((float)size / 2);		//ステータスの当たり判定の半分の長さ()
-
-    /*当たり判定の同期*/
-    left = (centerpos.x) - hitbox_size_half;
-    top = (centerpos.y) - hitbox_size_half;
-    right = (centerpos.x) + hitbox_size_half;
-    bottom = (centerpos.y) + hitbox_size_half;
+ void Boxcollider::CenterPositionSync(Vector2 centerpos, int size){
+     CenterPositionSync(centerpos, size,size);
 }
 
+ //================================================================
+ // 中心座標から頂点の位置をセットする(オーバーロード)
+ //================================================================
+ void Boxcollider::CenterPositionSync(Vector2 centerpos, int width, int height){
+     float half_width  = static_cast<float>(width)  / 2;   // 横幅の半分
+     float half_height = static_cast<float>(height) / 2; // 縦幅の半分
+
+     /* 当たり判定の同期 */
+     left   = centerpos.x - half_width;
+     top    = centerpos.y - half_height;
+     right  = centerpos.x + half_width;
+     bottom = centerpos.y + half_height;
+ }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                      /*StringText(文字列を保持し、場合によっては Cスタイルのchar[]に変換する)*/
 

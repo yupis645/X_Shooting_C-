@@ -18,9 +18,10 @@ public:
 
     virtual void InitClear() = 0;
 
+    virtual void HitCollision(bool isshootdown) = 0;
+
     //プロパティ & getter / setter
     virtual bool Getshootdown() const = 0;
-    virtual void Setshootdown(bool isshootdown) = 0;
 
 	virtual Vector2 GetPosition()const = 0;
 	virtual void SetPosition(Vector2 pos) = 0;

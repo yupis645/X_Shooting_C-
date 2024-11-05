@@ -8,9 +8,8 @@
 using namespace PlayerConfig;
 using namespace ScreenConfig;
 
-//===============================================================
-//					コンストラクタ
-//===============================================================
+constexpr int START_POS_Y_OFFSET = 150;
+constexpr int   ANIM_UPDATE_INTERVAL = 10;		//アニメーション画像を入れ替えるフレーム数
 //===============================================================
 //					コンストラクタ
 //===============================================================
@@ -18,8 +17,10 @@ Player::Player(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRender
 	: anim(0), pat(0), shootdown(false), ownframecount(0), render_(render),input_(input),
 	texture(rm->GetTexture(TextureType::Player)) // 必要なら初期化
 {
+
 	// Targetsightのインスタンスを動的に作成
 	targetsight = std::make_unique<Targetsight>(*this, rm);
+	position = Vector2(CENTER_X, CENTER_Y + START_POS_Y_OFFSET);
 }
 
 
@@ -100,14 +101,18 @@ int Player::Update( int framecount, Vector2 moveinput) {
 	//独自のframecountを進める
 	ownframecount++;
 
+	////*自機のアニメーション番号の進行*/
+	int s = AnimationUpdate();
+
+	if (s == 2) return 2;
+
+	if (shootdown) return 0;
+
 	//プレイヤーと照準器のboxcolliderの移動
 	Sync_PositionAndHitbox();
 
 	targetsight->Update();
 
-	////*自機のアニメーション番号の進行*/
-	int s = AnimationUpdate();
-	if (s == 2) return 2;
 
 	//入力に対する自機の移動
 	Move(moveinput) ;
@@ -144,8 +149,6 @@ int Player::Draw() {
 	/* プレイヤーが撃破された場合 */
 	else if (shootdown && anim < 6) {  // 爆発アニメーションの描画（anim <= 6は爆発アニメーションが6フレーム）
 		render_->DrawBomberFromCenterPos(SpriteRenderer::BomberType::bomber,anim, position);
-		//DrawBmp(pic.x, pic.y, ImageManager::PlayerBomber[anim]);  // 自機の描写
-		//render_->DrawFromCenterPos(texture, anim, position.x, position.y, PLAYER_PIC_SIZE);
 
 
 		return 0;
@@ -169,24 +172,26 @@ int Player::AnimationUpdate(){
 
 	////*自機のアニメーション番号の進行*/
 
-		//被弾していない場合
-	if (shootdown == false) {
-		if (ownframecount % 12 == 0) {
+	if (ownframecount % ANIM_UPDATE_INTERVAL == 0) {
+		if (shootdown == false) {
 			anim++;		//アニメーション番号を進める
 			//Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
-			if(anim >= TextureConfigs::PLAYER.indexcount) anim = 0;
+			if (anim >= TextureConfigs::PLAYER.indexcount) anim = 0;
 			ownframecount = 0;
 		}
-	}
-
-	else {
-		if (ownframecount % 12 == 0) {
-			anim++;		//アニメーション番号を進める
-			//Clamp(anim, 2, 4);		//プレイヤーのanim番号をループさせる
-			if (anim >= 5) anim = 0;
+		else {
+			if (anim < TextureConfigs::COMMON_BOMBER.indexcount) {
+				anim++;		//アニメーション番号を進める
+				ownframecount = 0;
+			}
+			else if (ownframecount > 20) return 2;
 		}
-		if (ownframecount % 20 == 0)	return 2;
 	}
-
 	return 0;
+}
+
+void Player::HitCollision(bool isshootdown) { 
+	shootdown = isshootdown;
+	anim = 0;
+	ownframecount = 0;
 }

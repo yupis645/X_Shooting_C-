@@ -113,7 +113,7 @@ int TORKAN::UniqueUpdate(std::shared_ptr<IPlayer> player)
 int TORKAN::ActionPattern01()
 {
 	//出現時にプレイヤーがいた座標に向かって進む
-	Enemy_Patterns(MovePatternID::TowardsPlayer);		
+	Enemy_Patterns(MovePatternID::TowardsTarget);
 
 	//一定時間がたったら射撃をしてパターンを進める
 	if (ownframecount >= MOVING_FRAME_TIME) {
@@ -151,7 +151,7 @@ void TORKAN::ActionPattern02(std::shared_ptr<IPlayer> player) {
 void TORKAN::ActionPattern03()
 {
 	//反対方向に向かって逃走する
-	Enemy_Patterns(MovePatternID::ReverseTowardsPlayer);		//行動パターン 5:加速度を加算しつつｘ軸方向に逃げる
+	Enemy_Patterns(MovePatternID::ReverseTowardsTarget);		//行動パターン 5:加速度を加算しつつｘ軸方向に逃げる
 
 
 }

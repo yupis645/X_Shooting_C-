@@ -15,8 +15,8 @@ public:
 		OnBulletShot = 2,		//弾を発射する
 	};
 	enum class MovePatternID {
-		TowardsPlayer,          // 自機に向かって進む
-		ReverseTowardsPlayer,   // 自機とは逆方向に進む
+		TowardsTarget,          // 自機に向かって進む
+		ReverseTowardsTarget,   // 自機とは逆方向に進む
 		HorizontalTrack,        // Y軸の位置に関係なく自機の方向に向かう
 		AppearFromBottom,       // 画面の下から上に向かう
 		StraightAccelerate,     //直進しながら加速する
@@ -26,7 +26,8 @@ public:
 
 	virtual void Init() ;
 	
-	void Setshootdown(bool value) { shootdown = value; }
+	void HitCollision(bool value);
+	bool Getshootdown() { return shootdown ; }
 	int GetNumber() { return status.number; }
 	int GetAnimNum() { return currentanimnum; }
 	int GetPicSize() { return status.pic_size; }

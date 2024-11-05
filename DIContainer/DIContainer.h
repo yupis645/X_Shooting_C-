@@ -34,11 +34,11 @@ public:
 private:
     std::shared_ptr<
         di::injector<
-        std::shared_ptr<IGameManager>,
-        std::shared_ptr<GameStatus>,
-        std::shared_ptr<ResourceManager>,
-        std::shared_ptr<SpriteRenderer>,
-        std::shared_ptr<IInputManager>,
+        std::shared_ptr<IGameManager>,      //ゲームマネージャーのインターフェース型
+        std::shared_ptr<GameStatus>,        //スコアや残機などのゲーム全体で参照するステータス
+        std::shared_ptr<ResourceManager>,   //画像やcsvファイルのパスなどを管理するクラス
+        std::shared_ptr<SpriteRenderer>,    //画像の描画などを担当するクラス
+        std::shared_ptr<IInputManager>,     //入力を受付、キーの管理をするクラス
 
         std::shared_ptr<DebugManager>
         >

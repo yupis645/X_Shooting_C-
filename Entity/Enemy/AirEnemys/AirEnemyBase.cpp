@@ -7,7 +7,7 @@ namespace {
 	constexpr int POS_X_RANDOM_VALUE = 200;
 	constexpr int ONE_OFFSET = 1;
 	constexpr int OWNFRAMECOUNT_LIMIT = 1000;
-	constexpr int BOMBERUPDATEINTERVAL = 18;
+	constexpr int BOMBERUPDATEINTERVAL = 3;
 
 	// ランダムなX座標を生成する関数
 	int GenerateRandomX() {
@@ -43,6 +43,11 @@ int AirEnemyBase::Update(std::weak_ptr<IPlayer> player)
 	auto useplayer = player.lock();
 
 	ownframecount++;				//敵一体についている個別のタイマーを進める(行動処理に使う)
+	
+	if (shootdown) {
+		AnimUpdate(1);
+		return 0;
+	}
 
 	//以下は被弾判定が出ていない場合に処理に進む
 	int UpdateReturn = UniqueUpdate(useplayer);		//敵の行動(numberによって異なる挙動をする)
@@ -79,7 +84,7 @@ int AirEnemyBase::AnimUpdate(int UpdateInterval) {
 	else {
 		if (ownframecount % BOMBERUPDATEINTERVAL == 0) {
 			currentanimnum++;
-			if (currentanimnum > TextureConfigs::COMMON_BOMBER.indexcount) {				//anim変数が 11よりも大きくなったら
+			if (currentanimnum >= TextureConfigs::COMMON_BOMBER.indexcount) {				//anim変数が 11よりも大きくなったら
 				InitClear();
 			}
 		}
@@ -87,17 +92,14 @@ int AirEnemyBase::AnimUpdate(int UpdateInterval) {
 	return 0;
 }
 
-void AirEnemyBase::CreateSetup()
-{
-}
-
 void AirEnemyBase::InitPostionPattern(float x_pos)
 {
 	if (x_pos == -1.0f) {
 		position.x = (float)(rand() % ScreenConfig::SRN_W + ONE_OFFSET);
 	}
-	//出現位置の設定
-	position.x = x_pos + PLAYER_X_DISTANCE + GenerateRandomX();		//player_から 250 離れた位置から更に 0～200 の乱数を加算したX座標を指定 
+	else {
+		position.x = x_pos + PLAYER_X_DISTANCE + GenerateRandomX();		//player_から 250 離れた位置から更に 0～200 の乱数を加算したX座標を指定 
+	}
 
 	//もし乱数で取得したX座標が画面の横サイズを超えていたら
 	if (position.x >= ScreenConfig::SRN_W) { position.x = x_pos - PLAYER_X_DISTANCE + GenerateRandomX(); }

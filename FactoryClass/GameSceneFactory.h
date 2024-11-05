@@ -9,14 +9,19 @@
 #include "GameScene.h"
 #include "Player.h"
 #include "MapManager.h"
-#include "TestMapManager.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
-#include "TestPlayer.h"
+
 #include "SpriteRenderer.h"
 #include "BulletsManager.h"
 #include "IEnemysManager.h"
 #include "EnemysManager.h"
+
+#include "TestPlayer.h"
+#include "TestMapManager.h"
+#include "TestBulletsManager.h"
+#include "TestEnemysManager.h"
+
 
 // 必要に応じてDIContainer.hをインクルード
 #include "DIContainer.h" // 前方宣言が適切に機能しない場合、これを追加
@@ -59,9 +64,19 @@ public:
          bullets_ = instance;
          return instance;
     }
+     std::shared_ptr<IBulletsManager> CreateTestBulletsManager() {
+         auto instance = std::make_shared<TestBulletsManager>(container_);
+         bullets_ = instance;
+         return instance;
+    }
 
       std::shared_ptr<IEnemysManager> CreateEnemysManager() {
           auto instance = std::make_shared<EnemysManager>(player_,bullets_, map_,container_->Create<ResourceManager>(),container_->Create<SpriteRenderer>());
+         enemys_ = instance;
+         return instance;
+    }
+      std::shared_ptr<IEnemysManager> CreateTestEnemysManager() {
+          auto instance = std::make_shared<TestEnemysManager>(player_,bullets_, map_,container_);
          enemys_ = instance;
          return instance;
     }

@@ -54,6 +54,7 @@ public :
 
     // 中心座標から頂点の位置をセットする
     void CenterPositionSync(Vector2 centerpos, int size);
+    void CenterPositionSync(Vector2 centerpos, int width, int height);
 
   // 0で初期化する静的な定数
     static const Boxcollider zero;

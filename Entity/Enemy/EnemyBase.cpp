@@ -36,6 +36,12 @@ void EnemyBase::Init()
 	GameObject::InitClear();
 }
 
+void EnemyBase::HitCollision(bool value) { 
+	shootdown = value; 
+	currentanimnum = 0;
+	ownframecount = 0;
+}
+
 
 
 Vector2 EnemyBase::Enemy_Patterns(MovePatternID id)
@@ -43,13 +49,13 @@ Vector2 EnemyBase::Enemy_Patterns(MovePatternID id)
 
 	switch (id) {
 		/*自機に向かって進む*/
-	case MovePatternID::TowardsPlayer:
+	case MovePatternID::TowardsTarget:
 		position.x += status.speed * cos(radian);		    //X軸の移動
 		position.y += status.speed * sin(radian);		    //Y軸の移動
 		break;
 
 		/*自機とは逆方向に進む*/
-	case MovePatternID::ReverseTowardsPlayer:
+	case MovePatternID::ReverseTowardsTarget:
 		position.x -= status.speed * cos(radian);		    //X軸の移動
 		position.y -= status.speed * sin(radian);		    //Y軸の移動
 		break;

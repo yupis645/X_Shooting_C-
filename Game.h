@@ -23,23 +23,24 @@
 //==============================================================
 
 namespace PlayerConfig {
-	constexpr int SPEED = 5;		//プレイヤーの移動速度	
+	constexpr int SPEED              = 5;		//プレイヤーの移動速度	
 	constexpr int PLAYER_HITBOX_SIZE = 16;		//画像のサイズ
-	constexpr int PLAYER_PIC_SIZE = 32;		//画像のサイズ
+	constexpr int PLAYER_PIC_SIZE    = 32;		//画像のサイズ
 
-	constexpr int SIGHT_HITBOX_SIZE = 32;		//画像のサイズ
-	constexpr int SIGHT_PIC_SIZE = 32;			//画像のサイズ
+	constexpr int SIGHT_HITBOX_SIZE  = 32;		//画像のサイズ
+	constexpr int SIGHT_PIC_SIZE     = 32;		//画像のサイズ
 
-	constexpr int MAX_SHOT = 3;		//画面内に表示できるショットの数
-	constexpr int SHOT_SPEED = 20;	//ショットの弾速
-	constexpr int SHOT_SPEED_HOLLOW = 8;
-	constexpr int SHOT_HITBOX_SIZE = 8;		//画像のサイズ
-	constexpr int SHOT_PIC_SIZE = 8;		//画像のサイズ
+	constexpr int MAX_SHOT           = 3;		//画面内に表示できるショットの数
+	constexpr int SHOT_SPEED         = 20;		//ショットの弾速
+	constexpr int SHOT_SPEED_HOLLOW  = 8;
+	constexpr int SHOT_HITBOX_WIDTH	 = 32;		//画像のサイズ
+	constexpr int SHOT_HITBOX_HEIGHT = 16;		//画像のサイズ
+	constexpr int SHOT_PIC_SIZE      = 8;		//画像のサイズ
 
-	constexpr int BOM_SPEED = 5;		//ショットの弾速
-	constexpr int BOM_RANGE = 100;		//ボムの射程距離
+	constexpr int BOM_SPEED          = 5;		//ショットの弾速
+	constexpr int BOM_RANGE          = 100;		//ボムの射程距離
 	constexpr int BUNBER_HITBOX_SIZE = 24;		//画像のサイズ
-	constexpr int BON_PIC_SIZE = 8;		//画像のサイズ
+	constexpr int BON_PIC_SIZE       = 8;		//画像のサイズ
 }
 //==============================================================
 //					/*エネミー共通の定義*/

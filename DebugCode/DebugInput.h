@@ -2,12 +2,13 @@
 #define DEBUGINPUT_H
 
 class IInputManager;
+class DIContainer;
 
 #include <iostream>
 
 class DebugInput{
 public :
-	DebugInput(std::shared_ptr<IInputManager> input):input_(input) {}
+	DebugInput(std::shared_ptr<DIContainer> con);
 
 	void InputPritf();
 

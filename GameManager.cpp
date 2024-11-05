@@ -31,6 +31,7 @@ GameManager::GameManager(std::shared_ptr<DIContainer> con)
 	inputmanager_(con->Create<IInputManager>()),
 	resourcemanager_(con->Create<ResourceManager>())
 {
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));		//時刻を指針に乱数をセット
 	scenemanager_ = std::make_shared<SceneManager>(container_);
 }
 

@@ -42,9 +42,8 @@ int TestPlayer::Move(Vector2 move) {
 //					プレイヤーの更新
 //===============================================================
 int TestPlayer::Update(int framecount, Vector2 moveinput) {
-	Player::Update(framecount,moveinput);
+	return Player::Update(framecount,moveinput);
 
-	return 0;
 }
 //===============================================================
 //			プレイヤー、照準器、ショット、ボムの描写
@@ -69,7 +68,6 @@ int TestPlayer::Sync_PositionAndHitbox()
 	return 0;
 }
 int TestPlayer::AnimationUpdate() {
-	Player::AnimationUpdate();
+	return Player::AnimationUpdate();
 
-	return 0;
 }
