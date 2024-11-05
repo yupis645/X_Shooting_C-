@@ -3,15 +3,9 @@
 
 class GameTexture;
 
-#include <iostream>
-#include <map>
-#include <string>
-#include <unordered_map>
-#include "types.h"
-
-class TextureDataManager {
+class TextureManager {
 public:
-    TextureDataManager() {
+    TextureManager() {
     }
 
     void SetTexConfig(TextureType type, const TextureConfig& config) {
@@ -21,11 +15,18 @@ public:
         return texdatacongfig.at(type);
     }
 
-    void SetTexPath(TextureType type, const std::wstring& path) {
-        texturepath[type] = path;  // データを更新
+    void SetBaseTexture(TextureType type, std::unique_ptr<Textures> tex) {
+        basetexture[type] = std::move(tex);  // 所有権を移動
     }
-    const std::wstring& GetTexturePath(TextureType type) const {
-        return texturepath.at(type);
+
+    bool LoadTextureBase(TextureBaseName type, const wchar_t* textureFilePath, ComPtr<ID3D11Device1> device, ComPtr<ID3D11DeviceContext1> deviceContext);
+
+
+    bool SplitTexture(SpriteName name,ComPtr<ID3D11DeviceContext1> deviceContext);
+
+
+    const Textures& GetBaseTexture(TextureType type) const {
+        return *(basetexture.at(type));
     }
 
 
@@ -49,13 +50,14 @@ public:
     //=======================================================================================
     //                          デストラクタ
     //=======================================================================================
-    ~TextureDataManager() {}
-
+    ~TextureManager() {}
 
 
 private:
     std::map<TextureType, TextureConfig> texdatacongfig;
-    std::map<TextureType, std::wstring> texturepath;
+    std::map<TextureBaseName, std::unique_ptr<Textures>> basetexture;
+    std::map<SpriteName, std::unique_ptr<Textures>> sprites;
+
     std::map<TextureType, std::shared_ptr<GameTexture>> textures_;      // TextureType をキーにして GameTexture を管理するマップ
 
 };

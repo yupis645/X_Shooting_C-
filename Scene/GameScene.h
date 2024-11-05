@@ -14,7 +14,6 @@ class IEnemysManager;
 class CollisionManager;
 
 
-#include <iostream>
 #include "SceneBase.h"
 
 

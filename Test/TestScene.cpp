@@ -1,7 +1,6 @@
 #include "TestScene.h"
 
 #include "DIContainer.h"
-#include "Game.h"
 #include "InputManager.h"
 #include  "ResourceManager.h"
 #include "IMapManager.h"

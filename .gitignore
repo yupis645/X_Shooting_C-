@@ -1,0 +1,31 @@
+.vs/
+
+# ビルド生成物
+*.exe
+*.dll
+*.obj
+*.pdb
+*.idb
+*.ipdb
+*.ilk
+*.log
+*.sdf
+*.user
+*.tlog
+*.lastbuildstate
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# ビルドフォルダ
+x64/
+x86/
+Debug/
+Release/
+
+# Visual Studio プロジェクトファイル（環境依存を避けたい場合）
+*.vcxproj.user
+*.vcxproj.filters
+
+# Git自身の一時ファイル
+.gitclone

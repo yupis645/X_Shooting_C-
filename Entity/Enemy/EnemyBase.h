@@ -4,8 +4,6 @@
 class IPlayer;
 class Vector2;
 
-#include "Game.h"
-
 class EnemyBase:public GameObject {
 public:
 	EnemyBase();

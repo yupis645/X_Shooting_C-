@@ -8,8 +8,6 @@ class ResourceManager;
 class GameTexture;
 class SpriteRenderer;
 
-#include <iostream>
-#include "types.h"
 #include "IEnemysManager.h"
 #include "AirEnemyBase.h"
 #include "GroundEnemyBase.h"

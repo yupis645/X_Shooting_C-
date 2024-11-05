@@ -1,8 +1,6 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include <iostream>
-
 class Vector2 {
 public:
     float x, y;

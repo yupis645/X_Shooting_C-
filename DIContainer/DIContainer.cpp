@@ -7,10 +7,8 @@
 //----------------------------------------------------------------------------------------------------
 
 #include "DIContainer.h"
-#include "di.hpp"
 #include "GameManager.h"
 
-#include "Game.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
 #include "InputManager.h"
@@ -22,6 +20,7 @@
 // コンストラクタで DI コンテナを生成して保持
 DIContainer::DIContainer() {
     injector = std::make_shared <di::injector<
+        std::shared_ptr<GameApplication>,
         std::shared_ptr<IGameManager>,
         std::shared_ptr<GameStatus>,
         std::shared_ptr<ResourceManager>,
@@ -29,6 +28,7 @@ DIContainer::DIContainer() {
         std::shared_ptr<IInputManager>,
         std::shared_ptr<DebugManager>>>(
             di::make_injector(
+                di::bind<GameApplication>().in(di::singleton).to<GameApplication>(),
                 di::bind<IGameManager>().in(di::singleton).to<GameManager>(),           
                 di::bind<GameStatus>().in(di::singleton).to<GameStatus>(),
                 di::bind<ResourceManager>().in(di::singleton).to<ResourceManager>(),

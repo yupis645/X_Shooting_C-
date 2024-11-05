@@ -7,8 +7,6 @@
 #include "ResourceManager.h"
 #include "GameSceneFactory.h"
 #include "Player.h"
-#include "common.h"
-#include <memory>
 
 #include "TestBulletsManager.h"
 #include "TestEnemysManager.h"

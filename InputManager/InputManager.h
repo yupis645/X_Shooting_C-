@@ -11,7 +11,6 @@
 //----------------------------------------------------------------------------------------------------
 
 #include "IInputManager.h"
-#include "Geometry.h"
 
 class InputManager : public IInputManager {
 public:

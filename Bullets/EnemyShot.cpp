@@ -1,9 +1,6 @@
 #include "EnemyShot.h"
 
-#include"Geometry.h"
 #include "IPlayer.h"
-#include "Game.h"
-#include "common.h"
 
 using namespace EnemyShotConfig;
 

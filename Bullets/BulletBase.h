@@ -1,8 +1,6 @@
 #ifndef BULLETBASE_H
 #define BULLETBASE_H
 
-#include "Geometry.h"
-#include "Game.h"
 
 //===================================================================================
 //                  ”­ŽË•¨‚ÌŠî’êƒNƒ‰ƒX

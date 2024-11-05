@@ -1,7 +1,6 @@
 #ifndef PLAYERSHOT_H
 #define PLAYERSHOT_H
 
-#include "Game.h"
 #include "BulletBase.h"
 
 class PlayerShot : public BulletBase{

@@ -11,7 +11,6 @@
 
 #include "DebugInput.h"
 #include "DebugTexture.h"
-#include "Geometry.h"
 
 DebugManager::DebugManager(std::shared_ptr<DIContainer> con) :
 	container(con)

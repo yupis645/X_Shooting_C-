@@ -5,9 +5,6 @@ class ResourceManager;
 class SpriteRenderer;
 class Vector2;
 
-#include <iostream>
-#include "types.h"
-
 class DebugTexture {
 public:
 	DebugTexture(std::shared_ptr<ResourceManager> rm, std::shared_ptr<SpriteRenderer>sr):render(sr),resource(rm) {}

@@ -1,11 +1,7 @@
 #ifndef GAMESCENEFACTORY_H
 #define GAMESCENEFACTORY_H
 
-#include <iostream>
-#include <memory>
-
 #include "DIContainer.h"
-#include "di.hpp"
 #include "GameScene.h"
 #include "Player.h"
 #include "MapManager.h"

@@ -7,7 +7,6 @@ class DebugManager;
 class DIContainer;
 
 #include "BulletsManager.h"
-#include <iostream>
 
 class TestBulletsManager :public BulletsManager{
 public :

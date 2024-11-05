@@ -6,10 +6,7 @@ class GameTexture;
 class ResourceManager;
 class SpriteRenderer;
 
-#include <iostream>
-#include <vector>
 #include "IMapManager.h"
-#include "types.h"
 
 
 class TestMapManager: public IMapManager {

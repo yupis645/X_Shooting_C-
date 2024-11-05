@@ -1,17 +1,15 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include <iostream>
-#include <array>
+class GameApplication;
 
-#include "types.h"
+
 #include "CsvDataManager.h"
-#include "TextureDataManager.h"
-#include <vector>
+#include  "TextureManager.h"
 
 class ResourceManager {
 public:
-	ResourceManager();
+	ResourceManager(std::shared_ptr<GameApplication> g_app);
 
 	bool InitTextureLoad(TextureType type, const std::wstring&);
 	bool SliceTexturebytype(TextureType type,TextureConfig);
@@ -19,7 +17,18 @@ public:
 
 	std::shared_ptr<GameTexture> GetTexture(TextureType type);
 
-	const std::map<TextureType, std::shared_ptr<GameTexture>>& GetAllTexture() const { return texturedata->GetAllTexture(); }
+	const std::map<TextureType, std::shared_ptr<GameTexture>>& GetAllTexture() const { return texturemanager_->GetAllTexture(); }
+
+
+	bool LoadTexture(TextureType type,const wchar_t* textureFilePath);
+
+	std::vector<std::unique_ptr<Textures>> SplitTexture(TextureType type);
+
+
+
+
+
+
 
 
 	bool LoadMapCsvFile(const std::string& frontcsvfile, const std::string& baclcsvfile);
@@ -39,7 +48,8 @@ private:
 	// ãtèáÇ≈ÉfÅ[É^Çì«Ç›çûÇﬁä÷êî
 	std::vector<int> ConvertCsv_VectorReverse(const std::string& filename);
 
-	std::shared_ptr<TextureDataManager> texturedata;
+	std::shared_ptr<GameApplication> gameapp_;
+	std::shared_ptr<TextureManager> texturemanager_;
 	std::shared_ptr<CsvDataManager> csvdata;
 
 

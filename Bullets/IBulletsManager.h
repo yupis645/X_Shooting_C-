@@ -11,8 +11,6 @@ class PlayerShot;
 class PlayerBom;
 class EnemyShot;
 
-#include <iostream>
-
 class IBulletsManager {
 public:
     ~IBulletsManager() = default;

@@ -1,5 +1,8 @@
 #include "ResourceManager.h"
 
+
+#include "GameApplication.h"
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -8,6 +11,8 @@
 #include <stdexcept>  
 #include <fstream>
 #include "GameTexture.h"
+#include "pch.h"
+using namespace DirectX;
 
 //.cpp内でのみ使用する定義をまとめる
 namespace {
@@ -52,7 +57,7 @@ namespace {
 // Enemyなどは一枚の画像に並んでいる場合、画像のパスは一つのキーにのみ保存する
 // TextureTypeはenumなので番号が並んでいるため、連続しているキーで判別している
 //===============================================================================================
-    const std::wstring& TextureTypeToTexturePath(std::shared_ptr<TextureDataManager> tdm, TextureType type) {
+    const std::wstring& TextureTypeToTexturePath(std::shared_ptr<TextureManager> tdm, TextureType type) {
 
         //PlayeerのpngデータにはPlayerとロックオンサイトの画像が入っている
         if (TextureType::Player <= type && type <= TextureType::Targetsight) {
@@ -214,15 +219,16 @@ namespace {
 //                  コンストラクタ
 // 
 // 1.管理するクラスのインスタンスをスマートポインタで生成する
-// 2.ゲーム中に使用するテクスチャをTextureDataManagerに保存する
+// 2.ゲーム中に使用するテクスチャをTextureManagerに保存する
 // 3.texturedataに格納された画像をスライスしてgametexturesに格納する
 // 4.csvファイルを読み込み、ファイルをCsvDataManagerに保存する
 //===============================================================================================
-ResourceManager::ResourceManager()
+ResourceManager::ResourceManager(std::shared_ptr<GameApplication> g_app)
+    :gameapp_(g_app)        //ゲームアプリケーションのスマートポインタを取得
 {
 
     // 1.管理するクラスのインスタンスをスマートポインタで生成する
-    texturedata = std::make_shared<TextureDataManager>();
+    texturemanager_ = std::make_shared<TextureManager>();
     csvdata = std::make_shared<CsvDataManager>();
 
     // 2.テクスチャのファイルパスを取得し、texturedataに格納する
@@ -255,7 +261,7 @@ bool ResourceManager::InitTextureLoad(TextureType type, const std::wstring& path
         return true;
     }
 
-    texturedata->SetTexPath(type, path);
+    texturemanager_->SetBaseTexture(type);
 
     return false;
 }
@@ -269,7 +275,7 @@ bool ResourceManager::InitTextureLoad(TextureType type, const std::wstring& path
 //===============================================================================================
 bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
 {
-    if (texturedata->CreateGameTexture(type, TextureTypeToTexturePath(texturedata, type), config))
+    if (texturemanager_->CreateGameTexture(type, TextureTypeToTexturePath(texturemanager_, type), config))
     {
         std::wcerr << L"Error: Texture  not found : " << std::endl;
         return true;
@@ -283,7 +289,7 @@ bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
 // インスタンス化されているテクスチャを取り出す
 //===============================================================================================
  std::shared_ptr<GameTexture> ResourceManager::GetTexture(TextureType type) {
-    auto tex = texturedata->GetTexture(type);
+    auto tex = texturemanager_->GetTexture(type);
     // テクスチャが有効かどうかを確認する
     if (tex == nullptr) {
         std::cerr << "Failed to load map chip texture: tex is null." << std::endl;
@@ -296,7 +302,59 @@ bool ResourceManager::SliceTexturebytype(TextureType type, TextureConfig config)
 
 //////////////////////////////////////////////// /* Csv関連 */ /////////////////////////////////////////////////////////////////////
 
-//===============================================================================================
+ bool ResourceManager::LoadTexture(TextureType type,const wchar_t* textureFilePath) {
+     return texturemanager_->LoadTexture(
+         type,
+         textureFilePath,
+         gameapp_->GetDevice(),
+         gameapp_->GetDeviceContext()
+     );
+ }
+
+ std::vector<std::unique_ptr<Textures>> ResourceManager::SplitTexture(TextureType type)
+ {
+     TextureConfig typeconfig = TextureConfigs::Configs.at(type);
+
+     // 元のテクスチャを取得
+     auto& it = texturemanager_->GetBaseTexture(type);
+
+     // 返り値として使うベクター
+     std::vector<std::unique_ptr<Textures>> slicedTextures;
+
+     // 元のテクスチャのSRVを取得
+     ComPtr<ID3D11ShaderResourceView> originalSRV = it.SRV;
+     auto spriteBatch = std::make_unique<SpriteBatch>(gameapp_->GetDeviceContext().Get());
+
+     // 行列の分割に従ってテクスチャをスライス
+     for (int row = 0; row < typeconfig .rows; ++row) {
+         for (int col = 0; col < typeconfig .columns; ++col) {
+             int currentIndex = row * typeconfig .columns + col;
+             // startindexとindexcountに基づいてテクスチャのスライスを選択
+             if (currentIndex < typeconfig .startindex || currentIndex >= typeconfig .startindex + typeconfig .indexcount) {
+                 continue;
+             }
+
+             // 新しい Textures インスタンスを生成
+             auto sliceTexture = std::make_unique<Textures>();
+             sliceTexture->SRV = originalSRV;
+             sliceTexture->Sprite = std::make_unique<SpriteBatch>(gameapp_->GetDeviceContext().Get());
+
+             // スライスの範囲を計算
+             RECT sliceRect;
+             sliceRect.left = col * typeconfig .width;
+             sliceRect.top = row * typeconfig .height;
+             sliceRect.right = sliceRect.left + typeconfig .width;
+             sliceRect.bottom = sliceRect.top + typeconfig .height;
+
+             // スライスされた Textures オブジェクトをベクターに追加
+             slicedTextures.push_back(std::move(sliceTexture));
+         }
+     }
+
+     return slicedTextures;
+ }
+
+ //===============================================================================================
 // csvをファイルから読みだす
 //===============================================================================================
 bool ResourceManager::LoadMapCsvFile(const std::string& frontcsvfile, const std::string& baclcsvfile) {

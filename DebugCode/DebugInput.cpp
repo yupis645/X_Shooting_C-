@@ -3,8 +3,6 @@
 
 #include "InputManager.h"
 #include "conioex.h"
-#include "Geometry.h"
-#include "common.h"
 #include "DIContainer.h"
 
 

@@ -16,28 +16,41 @@ class IInputManager;
 class ResourceManager;
 class SceneBase;
 
-#include <iostream>
-#include "IGameManager.h"
+#include "StepTimer.h"
+
+// A basic game implementation that creates a D3D11 device and
+// provides a game loop.
 
 
-class GameManager :public IGameManager {
+class GameManager  {
 public:
     GameManager(std::shared_ptr<DIContainer> con);      //コンストラクタ
+    ~GameManager() = default;
 
-    int Init()override;         //初期化
-    int Input()override;        //入力
-    int GameLoop()override;    //更新
-    int End()override;    // 終了処理
-    
-    ~GameManager() {}   //デストラクタ
+    // Initialization and management
+ //初期化
 
+    //初期化
+    void Initialize(Game* game, HWND window, HINSTANCE hInstance);
 
-    // テンプレート関数でシーンを生成して切り替える
-    template <typename SceneType>
-    void SwitchToScene() {
-        currentscene_ = std::make_shared<SceneType>(container_);
-    }
+    //更新
+    int Update();
+
+    //入力
+    int Input();
+
+    //描画
+    void Draw();
+
+    //解放
+    void Relese();
+
 private:
+    void SetUp();
+
+
+private:
+
     std::shared_ptr<DIContainer> container_;            // Diコンテナ
     std::shared_ptr<SceneManager> scenemanager_;            // Diコンテナ
     std::shared_ptr<GameStatus> gamestatus_;            // ゲーム関連のステータス
@@ -46,6 +59,12 @@ private:
     std::shared_ptr<SceneBase> currentscene_;           // 現在のシーン
 
 
+    IDirectInput8* m_directInput;               //DirectInputDevice8を作成するための関数やDirectXを使用するPCがどこまで機能を使いこなせるかをチェックする関数
+    IDirectInputDevice8* m_keyboardDevice;      //IDirectInputDevice8はデバイス入力を管理するインターフェース
+
 };
+
+
+
 
 #endif // GAMEMANAGER_H

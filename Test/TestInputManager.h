@@ -15,10 +15,6 @@
 class DebugManager;
 
 #include "InputManager.h"
-#include "Geometry.h"
-#include <iostream>
-#include "common.h"
-#include "types.h"
 
 class TestInputManager: public InputManager {
 	public:

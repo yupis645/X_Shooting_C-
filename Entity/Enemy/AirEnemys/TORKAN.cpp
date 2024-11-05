@@ -1,6 +1,5 @@
 #include "AirEnemyBase.h"
 
-#include "common.h"
 #include "Player.h"
 
 

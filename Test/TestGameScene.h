@@ -10,7 +10,6 @@ class TestEnemysManager;
 class TestPlayer;
 
 
-#include <iostream>
 #include "GameScene.h"
 #include "TestInputManager.h"
 

@@ -10,8 +10,6 @@
 //----------------------------------------------------------------------------------------------------
 
 #include "TestInputManager.h"
-#include "conioex.h"
-#include "Geometry.h"
 
 using InputFlag = IInputManager::InputFlag;
 

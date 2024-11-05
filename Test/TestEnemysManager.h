@@ -8,8 +8,6 @@ class GameTexture;
 class DIContainer;
 class DebugManager;
 
-#include <iostream>
-#include "types.h"
 #include "EnemysManager.h"
 #include "AirEnemyBase.h"
 #include "GroundEnemyBase.h"

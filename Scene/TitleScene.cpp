@@ -1,8 +1,6 @@
 
 #include "TitleScene.h"
 
-#include "common.h"
-#include "Geometry.h"
 #include "DIContainer.h"
 #include "IInputManager.h"
 #include "ResourceManager.h"

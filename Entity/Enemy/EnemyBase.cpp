@@ -1,6 +1,5 @@
 #include "EnemyBase.h"
 
-#include "common.h"
 #include "IPlayer.h"
 
 

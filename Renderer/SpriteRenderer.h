@@ -6,8 +6,6 @@ class ResourceManager;
 class Vector2;
 
 
-#include <iostream>
-
 class SpriteRenderer {
 public:
 	SpriteRenderer(std::shared_ptr<ResourceManager> rm);

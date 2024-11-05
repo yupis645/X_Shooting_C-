@@ -11,7 +11,6 @@
 
 #include "AirEnemyBase.h"
 
-#include "common.h"
 #include "Player.h"
 
 constexpr int   ANIM_UPDATE_INTERVAL = 5;		//アニメーション画像を入れ替えるフレーム数

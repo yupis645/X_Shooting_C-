@@ -9,9 +9,7 @@ class ResourceManager;
 class SpriteRenderer;
 class GameTexture;
 
-#include <array>
 #include "SceneBase.h"
-#include "Game.h"
 
 class TitleScene : public SceneBase {
 public:

@@ -8,7 +8,6 @@ class Boxcollider;
 class IBulletsManager;
 class IEnemysManager;
 
-#include "Geometry.h"
 
 
 class CollisionManager {

@@ -18,10 +18,6 @@ class GameTexture;
 class SpriteRenderer;
 
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include "types.h"
 #include "IMapManager.h"
 
 

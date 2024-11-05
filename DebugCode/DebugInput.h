@@ -4,7 +4,6 @@
 class IInputManager;
 class DIContainer;
 
-#include <iostream>
 
 class DebugInput{
 public :

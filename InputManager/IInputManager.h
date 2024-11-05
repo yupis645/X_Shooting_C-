@@ -1,9 +1,6 @@
 #ifndef IINPUTMANAGER_H
 #define IINPUTMANAGER_H
 
-#include "Geometry.h"
-
-
 class IInputManager {
 public:
     virtual ~IInputManager() = default;       //デストラクタ

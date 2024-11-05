@@ -1,8 +1,6 @@
 #include "EnemysManager.h"
 
-#include <functional>
 
-#include "Game.h"
 #include "IEnemysManager.h"
 #include "IMapManager.h"
 #include "IPlayer.h"

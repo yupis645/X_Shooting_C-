@@ -7,7 +7,6 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
 #include "TestMapManager.h"
-#include "common.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
 #include "GameTexture.h"

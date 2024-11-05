@@ -8,8 +8,6 @@ class ResourceManager;
 
 #include "IPlayer.h"
 
-#include "Game.h"
-#include "Geometry.h"
 #include "SpriteRenderer.h"
 #include "ResourceManager.h"
 

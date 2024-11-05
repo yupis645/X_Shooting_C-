@@ -1,10 +1,8 @@
 #include "SpriteRenderer.h"
 
-#include "Game.h"
 #include "conioex.h"
 #include "GameTexture.h"
 #include "ResourceManager.h"
-#include "Geometry.h"
 
 namespace {
     //==========================================================================================

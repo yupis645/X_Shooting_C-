@@ -13,8 +13,6 @@ class DebugTexture;
 class BoxCollider;
 class Vector2;
 
-#include <iostream>
-#include "common.h"
 #include "DebugTexture.h"
 
 

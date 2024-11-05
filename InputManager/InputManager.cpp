@@ -10,8 +10,6 @@
 
 #include "InputManager.h"
 #include "conioex.h"
-#include "Geometry.h"
-#include "Game.h"
 
 
 

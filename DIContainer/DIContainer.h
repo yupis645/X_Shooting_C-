@@ -15,10 +15,7 @@ class ResourceManager;
 class SpriteRenderer;
 class IInputManager;
 class DebugManager;
-
-#include "di.hpp"
-
-namespace di = boost::di;
+class GameApplication;
 
 class DIContainer {
 public:
@@ -34,6 +31,7 @@ public:
 private:
     std::shared_ptr<
         di::injector<
+        std::shared_ptr<GameApplication>,              //ゲームを管理する
         std::shared_ptr<IGameManager>,      //ゲームマネージャーのインターフェース型
         std::shared_ptr<GameStatus>,        //スコアや残機などのゲーム全体で参照するステータス
         std::shared_ptr<ResourceManager>,   //画像やcsvファイルのパスなどを管理するクラス

@@ -16,8 +16,6 @@
 #include "Player.h"
 #include "BulletsManager.h"
 #include "EnemysManager.h"
-#include <memory>
-#include <vector>
 
 
 CollisionManager::CollisionManager()

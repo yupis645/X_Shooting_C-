@@ -1,10 +1,7 @@
 #include "DebugTexture.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
-#include "Geometry.h"
 #include "GameTexture.h"
-#include "common.h"
-#include <iostream>
 
 namespace util {
 	constexpr int Y_POS = 40;		//•\¦‚·‚éÀ•W‚ÌŠî€“_

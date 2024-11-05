@@ -2,7 +2,6 @@
 
 #include "InputManager.h"
 #include "GameTexture.h"
-#include "types.h"
 #include "DIContainer.h"
 #include "DebugManager.h"
 #include "Player.h"

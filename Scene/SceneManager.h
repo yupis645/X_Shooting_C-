@@ -4,7 +4,6 @@
 class SceneBase;
 class DIContainer;
 
-#include <iostream>
 
 class SceneManager{
 public :

@@ -16,7 +16,6 @@ class ResourceManager;
 class SceneBase;
 class SpriteRenderer;
 
-#include <iostream>
 #include "IGameManager.h"
 
 
