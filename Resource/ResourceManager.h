@@ -11,18 +11,15 @@ class ResourceManager {
 public:
 	ResourceManager(std::shared_ptr<GameApplication> g_app);
 
-	bool InitTextureLoad(TextureType type, const std::wstring&);
-	bool SliceTexturebytype(TextureType type,TextureConfig);
-
 
 	std::shared_ptr<GameTexture> GetTexture(TextureType type);
 
 	const std::map<TextureType, std::shared_ptr<GameTexture>>& GetAllTexture() const { return texturemanager_->GetAllTexture(); }
 
 
-	bool LoadTexture(TextureType type,const wchar_t* textureFilePath);
+	bool  LoadTextureBase(TextureBaseName type, const wchar_t* textureFilePath);
 
-	std::vector<std::unique_ptr<Textures>> SplitTexture(TextureType type);
+	bool SplitTexture(SpriteName name);
 
 
 

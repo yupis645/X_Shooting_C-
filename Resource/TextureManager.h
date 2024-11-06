@@ -5,34 +5,29 @@ class GameTexture;
 
 class TextureManager {
 public:
-    TextureManager() {
-    }
+    TextureManager(){}
 
-    void SetTexConfig(TextureType type, const TextureConfig& config) {
-        texdatacongfig[type] = config;  // データを更新
-    }
-    const TextureConfig& GetTextureConfig(TextureType type) const {
-        return texdatacongfig.at(type);
-    }
-
-    void SetBaseTexture(TextureType type, std::unique_ptr<Textures> tex) {
-        basetexture[type] = std::move(tex);  // 所有権を移動
-    }
 
     bool LoadTextureBase(TextureBaseName type, const wchar_t* textureFilePath, ComPtr<ID3D11Device1> device, ComPtr<ID3D11DeviceContext1> deviceContext);
 
 
     bool SplitTexture(SpriteName name,ComPtr<ID3D11DeviceContext1> deviceContext);
 
-
-    const Textures& GetBaseTexture(TextureType type) const {
-        return *(basetexture.at(type));
+    const std::vector<std::unique_ptr<Textures>>& GetSpriteTextures(SpriteName name) const {
+        return sprites.at(name); // 該当するスプライトを参照で返す
     }
 
-
-    const wchar_t* WStringToConstWChar(const std::wstring& str) {
-        return str.c_str();
+    const Textures* GetSpriteTextureAtIndex(SpriteName name, int index) const {
+        const auto& textures = sprites.at(name);
+        if (index >= 0 && index < textures.size()) {
+            return textures[index].get(); // `unique_ptr` の所有権を移さずにポインタを返す
+        }
+        return nullptr; // 無効なインデックスの場合は `nullptr`
     }
+
+    const Textures* GetSprite(TextureType type, int index) const;
+
+
 
     //=======================================================================================
   //pngデータとサイズなどの情報を受けとり、画像をスライスしてメンバ変数に格納する
@@ -51,12 +46,10 @@ public:
     //                          デストラクタ
     //=======================================================================================
     ~TextureManager() {}
-
-
 private:
-    std::map<TextureType, TextureConfig> texdatacongfig;
     std::map<TextureBaseName, std::unique_ptr<Textures>> basetexture;
-    std::map<SpriteName, std::unique_ptr<Textures>> sprites;
+  
+    std::map<SpriteName, std::vector<std::unique_ptr<Textures>>> sprites;     // SpriteNameをキーに分割テクスチャを管理するmap
 
     std::map<TextureType, std::shared_ptr<GameTexture>> textures_;      // TextureType をキーにして GameTexture を管理するマップ
 

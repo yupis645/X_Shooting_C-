@@ -5,7 +5,7 @@
 using namespace DirectX;
 
 namespace util{
-    TextureBaseName GetTextureType_From_SpriteName(SpriteName name)
+    TextureBaseName GetTextureBaseName_From_SpriteName(SpriteName name)
     {
         switch (name) {
         case SpriteName::Title:
@@ -33,6 +33,47 @@ namespace util{
             throw std::invalid_argument("Invalid SpriteName");
         }
     }
+    SpriteName GetSpriteName_From_TextureType(TextureType type)
+    {
+        if (type == TextureType::Title)
+        {
+            return SpriteName::Title;
+        }
+        else if (type == TextureType::Player || type == TextureType::Targetsight) {
+            return SpriteName::Player_Sight;
+        }
+        else if (type == TextureType::Bullet || type == TextureType::Bullet)
+        {
+            return SpriteName::Bullet;
+        }
+        else if (type == TextureType::Map) {
+            return SpriteName::MapChip;
+        }
+        else if (type == TextureType::Bomber || type == TextureType::PlayerBomber ||
+            type == TextureType::BomBomber ||
+            type == TextureType::Air_EnemyBomber || type == TextureType::Ground_EnemyBomber) {
+            return SpriteName::Bomber;
+        }
+        else if (type <= TextureType::Toroid && type >= TextureType::Garuzakato)
+        {
+            return SpriteName::AirEnemy_SmallSprite;
+        }
+        else if (type == TextureType::Bacura)
+        {
+            return SpriteName::AirEnemy_MiddleSprite;
+        }
+        else if (type <= TextureType::Barra && type >= TextureType::Sol ||
+            type <= TextureType::Boss && type >= TextureType::Spflag)
+        {
+            return SpriteName::GroundEnemy_SmallSprite;
+        }
+        else if (type == TextureType::Garubarra || type == TextureType::Garuderota)
+        {
+            return SpriteName::GroundEnemy_LargeSprite;
+        }
+    }
+
+
 }
 
 bool TextureManager::LoadTextureBase(TextureBaseName name, const wchar_t* textureFilePath, ComPtr<ID3D11Device1> device, ComPtr<ID3D11DeviceContext1> deviceContext) {
@@ -63,45 +104,47 @@ bool TextureManager::LoadTextureBase(TextureBaseName name, const wchar_t* textur
 
 bool TextureManager::SplitTexture(SpriteName name, ComPtr<ID3D11DeviceContext1> deviceContext)
 {
-    TextureConfig typeconfig = SpritesConfigs::Configs.at(name);
+    SpritesConfig config = SpritesConfigs::Configs.at(name);
 
-    // 元のテクスチャを取得
-    auto& it = basetexture.at(util::GetTextureType_From_SpriteName(name));
+    // ベーステクスチャを取得
+    auto& baseTexture = basetexture.at(util::GetTextureBaseName_From_SpriteName(name));
+    ComPtr<ID3D11ShaderResourceView> originalSRV = baseTexture->SRV;
 
-    // 返り値として使うベクター
+    // 分割したテクスチャを格納するベクター
     std::vector<std::unique_ptr<Textures>> slicedTextures;
 
-    // 元のテクスチャのSRVを取得
-    ComPtr<ID3D11ShaderResourceView> originalSRV = it.SRV;
-    auto spriteBatch = std::make_unique<SpriteBatch>(deviceContext);
-
-    // 行列の分割に従ってテクスチャをスライス
-    for (int row = 0; row < typeconfig.rows; ++row) {
-        for (int col = 0; col < typeconfig.columns; ++col) {
-            int currentIndex = row * typeconfig.columns + col;
-            // startindexとindexcountに基づいてテクスチャのスライスを選択
-            if (currentIndex < typeconfig.startindex || currentIndex >= typeconfig.startindex + typeconfig.indexcount) {
-                continue;
-            }
-
-            // 新しい Textures インスタンスを生成
+    // 分割してslicedTexturesに格納
+    for (int row = 0; row < config.rows; ++row) {
+        for (int col = 0; col < config.columns; ++col) {
             auto sliceTexture = std::make_unique<Textures>();
             sliceTexture->SRV = originalSRV;
             sliceTexture->Sprite = std::make_unique<SpriteBatch>(deviceContext);
 
-            // スライスの範囲を計算
             RECT sliceRect;
-            sliceRect.left = col * typeconfig.width;
-            sliceRect.top = row * typeconfig.height;
-            sliceRect.right = sliceRect.left + typeconfig.width;
-            sliceRect.bottom = sliceRect.top + typeconfig.height;
+            sliceRect.left = col * config.width;
+            sliceRect.top = row * config.height;
+            sliceRect.right = sliceRect.left + config.width;
+            sliceRect.bottom = sliceRect.top + config.height;
 
-            // スライスされた Textures オブジェクトをベクターに追加
             slicedTextures.push_back(std::move(sliceTexture));
         }
     }
 
+    // spriteTexturesに格納
+    sprites[name] = std::move(slicedTextures);
+
     return false;
+}
+
+inline const Textures* TextureManager::GetSprite(TextureType type, int index) const {
+    const auto& textures = sprites.at(util::GetSpriteName_From_TextureType(type));
+
+    if (index >= 0 && index < textures.size()) {
+        int startindex = TextureConfigs::Configs.at(type).startindex;       //タイプごとに初期で設定されているindex番号を取得
+
+        return textures[startindex + index].get(); // `unique_ptr` の所有権を移さずにポインタを返す
+    }
+    return nullptr; // 無効なインデックスの場合は `nullptr`
 }
 
 //=======================================================================================
